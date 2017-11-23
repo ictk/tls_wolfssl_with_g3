@@ -1,0 +1,616 @@
+@@@@@@@@@@START@@@@@@@@@@
+wolfSSL Entering wolfSSL_Init
+wolfSSL Entering wolfCrypt_Init
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering EVP_get_cipherbyname
+wolfSSL Entering WOLFSSL_CTX_new_ex
+wolfSSL Entering wolfSSL_CertManagerNew
+wolfSSL Leaving WOLFSSL_CTX_new, return 0
+wolfSSL Entering wolfSSL_CTX_set_cipher_list
+wolfSSL Entering SSL_CTX_set_default_passwd_cb
+wolfSSL Entering wolfSSL_CTX_use_certificate_chain_file
+wolfSSL Entering PemToDer
+Checking cert signature type
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+ECDSA cert signature
+wolfSSL Entering wolfSSL_CTX_use_PrivateKey_file
+wolfSSL Entering PemToDer
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_import_private_key_ex
+HEXDUMP BEGIN
+	priv (size:32):
+		B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
+HEXDUMP END
+HEXDUMP BEGIN
+	pub (size:65):
+		044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_size
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+wolfSSL Entering wolfSSL_CTX_load_verify_locations
+Processing CA PEM file
+wolfSSL Entering PemToDer
+Adding a CA
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+Parsed Past Key
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+	Parsed new CA
+	Freeing Parsed CA
+	Freeing der CA
+		OK Freeing der CA
+wolfSSL Leaving AddCA, return 0
+   Processed a CA
+Processed at least one valid CA. Other stuff OK
+wolfSSL Entering wolfSSL_CTX_load_verify_locations
+Getting dynamic buffer
+Processing CA PEM file
+wolfSSL Entering PemToDer
+Adding a CA
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+Parsed Past Key
+wolfSSL Entering DecodeCertExtensions
+wolfSSL Entering GetObjectId()
+wolfSSL Entering DecodeBasicCaConstraint
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+wolfSSL Entering DecodeSubjKeyId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering DecodeAuthKeyId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering DecodeKeyUsage
+wolfSSL Entering GetObjectId()
+wolfSSL Entering DecodeExtKeyUsage
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+	Parsed new CA
+	Freeing Parsed CA
+	Freeing der CA
+		OK Freeing der CA
+wolfSSL Leaving AddCA, return 0
+   Processed a CA
+Processed at least one valid CA. Other stuff OK
+wolfSSL Entering SSL_new
+wolfSSL Leaving SSL_new, return 0
+wolfSSL Entering SSL_set_fd
+wolfSSL Entering SSL_set_read_fd
+wolfSSL Leaving SSL_set_read_fd, return 1
+wolfSSL Entering SSL_set_write_fd
+wolfSSL Leaving SSL_set_write_fd, return 1
+wolfSSL Entering SSL_connect()
+Adding signature algorithms extension
+growing output buffer
+
+Signature Algorithms extension to write
+Shrinking output buffer
+
+connect state: CLIENT_HELLO_SENT
+growing input buffer
+
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing server hello
+wolfSSL Entering VerifyClientSuite
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+growing input buffer
+
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing certificate
+wolfSSL Entering ProcessPeerCerts
+Loading peer's cert chain
+	Put another cert into chain
+	Put another cert into chain
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+Parsed Past Key
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+Parsed Past Key
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+About to verify certificate signature
+wolfSSL Entering ConfirmSignature
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash
+HEXDUMP BEGIN
+	sig (size:71):
+		304502204D36CE61516691750219285EDF5E852E6D4E44A200267580D4A6FB40D5238FA3022100C25463689E4B089C97F906B19B18C247849241EEDBD99924E2C65C7A7D6130C9
+HEXDUMP END
+HEXDUMP BEGIN
+	hash (size:32):
+		6196EC50AC09E26AA8358BD3D8C8FEB583EC4F74FFDB9C3D912E3B87C2C4C53E
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+wolfSSL Leaving ConfirmSignature, return 0
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+Chain cert is not a CA, not adding as one
+Verifying Peer's cert
+wolfSSL Entering GetExplicitVersion
+wolfSSL Entering GetSerialNumber
+Got Cert Header
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+Got Algo ID
+Getting Cert Name
+Getting Cert Name
+Got Subject Name
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+Got Key
+Parsed Past Key
+wolfSSL Entering GetAlgoId
+wolfSSL Entering GetObjectId()
+About to verify certificate signature
+wolfSSL Entering ConfirmSignature
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash
+HEXDUMP BEGIN
+	sig (size:71):
+		304502210093D1701F821C31C7254624AA6077409A19BD96ED5C6D7352BBE1B3809408C6A502204AC498F4C55FB400C18171C3FE72D5E3C417B3718EAA270877367F697AC914A2
+HEXDUMP END
+HEXDUMP BEGIN
+	hash (size:32):
+		D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+wolfSSL Leaving ConfirmSignature, return 0
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+Verified Peer's cert
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		04557C3311C1CAB0782A690E8DEA04FD7504CEE338666D8942192A41E06A77035D7DB3704B0353C38A8EAA7D3CD0AB0E629A662EDA06B3BB8E11B4221ADE24FA5A
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_size
+wolfSSL Leaving ProcessPeerCerts, return 0
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing server key exchange
+wolfSSL Entering DoServerKeyExchange
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		046BE9A6D06A00883F3EA5AE790A0B87A57798319817A6EE83BBEB0A7CA78DB7E0313502D222AF7E599D87E0BBAE0D9B3A78419C70177E42F9BD227DB411BF727E
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+wolfSSL Entering EccVerify
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash
+HEXDUMP BEGIN
+	sig (size:71):
+		30450220733E286A0E1F5F376A42D92BB7F1394AC0C684E51E6327F7F9D73367B7037C8C022100D6DC1D65604477EEC7E65FA763DE0C640C87F6837490E9A3D2AD3B1C010CC2BE
+HEXDUMP END
+HEXDUMP BEGIN
+	hash (size:32):
+		6CE4D50BFE7ACC39E436522CDC5B12751B5042EBFE1E502DF5551F926BD21923
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_verify_hash_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+wolfSSL Leaving EccVerify, return 0
+wolfSSL Leaving DoServerKeyExchange, return 0
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing certificate request
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+More messages in record
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing server hello done
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+connect state: HELLO_AGAIN
+connect state: HELLO_AGAIN_REPLY
+connect state: FIRST_REPLY_DONE
+growing output buffer
+
+Shrinking output buffer
+
+sent: certificate
+connect state: FIRST_REPLY_FIRST
+wolfSSL Entering SendClientKeyExchange
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+wolfSSL Entering EccMakeKey
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_make_key_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+wolfSSL Leaving EccMakeKey, return 0
+####NEO_WOLFSSL_TITLE:wc_ecc_export_x963
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+HEXDUMP BEGIN
+	wc_ecc_export_x963 out (size:65):
+		04D50E0AE8F0F44D36DDB017D7AACFEE2797C5BEF2CA0477B75DE824D54EFF65159D86F79FB3A349FBC592858E7121970FD758B260349AF68F16817449D4FDEF0E
+HEXDUMP END
+wolfSSL Entering EccSharedSecret
+####NEO_WOLFSSL_TITLE:wc_ecc_shared_secret
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_shared_secret_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_shared_secret_gen
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+HEXDUMP BEGIN
+	wc_ecc_shared_secret OUT (size:32):
+		053ADE31E6510FF6DB4EE233B059669EF6EBF4A0425E2282DA8B6B35E3EBA1BB
+HEXDUMP END
+wolfSSL Leaving EccSharedSecret, return 0
+growing output buffer
+
+Shrinking output buffer
+
+####NEO_WOLFSSL_TITLE:PRF
+HEXDUMP BEGIN
+	secret (size:32):
+		053ADE31E6510FF6DB4EE233B059669EF6EBF4A0425E2282DA8B6B35E3EBA1BB
+HEXDUMP END
+label : master secret
+HEXDUMP BEGIN
+	label (size:13):
+		6D617374657220736563726574
+HEXDUMP END
+HEXDUMP BEGIN
+	seed (size:64):
+		E5796244414643AD3394FB328BAF764DA616D520CCE45339F01A3899A755F8C6887F04458396C5750D6232F6EE98D4F832B91849A5295BDFC76E66B26D60F720
+HEXDUMP END
+HEXDUMP BEGIN
+	digest (size:48):
+		841CC6D3F9FD29B96B24721435E672907489D8D400059ED11C2CB80C58BDA26175195236DCF60CB9063D7408C2B12AA3
+HEXDUMP END
+HEXDUMP BEGIN
+	masterSecret (size:48):
+		841CC6D3F9FD29B96B24721435E672907489D8D400059ED11C2CB80C58BDA26175195236DCF60CB9063D7408C2B12AA3
+HEXDUMP END
+HEXDUMP BEGIN
+	preMasterSecret (size:32):
+		053ADE31E6510FF6DB4EE233B059669EF6EBF4A0425E2282DA8B6B35E3EBA1BB
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:PRF
+HEXDUMP BEGIN
+	secret (size:48):
+		841CC6D3F9FD29B96B24721435E672907489D8D400059ED11C2CB80C58BDA26175195236DCF60CB9063D7408C2B12AA3
+HEXDUMP END
+label : key expansion
+HEXDUMP BEGIN
+	label (size:13):
+		6B657920657870616E73696F6E
+HEXDUMP END
+HEXDUMP BEGIN
+	seed (size:64):
+		887F04458396C5750D6232F6EE98D4F832B91849A5295BDFC76E66B26D60F720E5796244414643AD3394FB328BAF764DA616D520CCE45339F01A3899A755F8C6
+HEXDUMP END
+HEXDUMP BEGIN
+	digest (size:128):
+		60035312D126981DD49036C58242F653A7191F02C4C1EA660207BC92EE3895861A812F628B97BA213D8F5219B2774E92A6651AEFB4F169452CF04FE469923392A6A8661EA1EFB01B7C185C949C84D009E620D674BEEEC06E025451EAE894773AB655BEB0148C943CEBD79918236ACA8DEBF1395D9A530DAF2FEF73792CE23AEC
+HEXDUMP END
+HEXDUMP BEGIN
+	key_dig (size:128):
+		60035312D126981DD49036C58242F653A7191F02C4C1EA660207BC92EE3895861A812F628B97BA213D8F5219B2774E92A6651AEFB4F169452CF04FE469923392A6A8661EA1EFB01B7C185C949C84D009E620D674BEEEC06E025451EAE894773AB655BEB0148C943CEBD79918236ACA8DEBF1395D9A530DAF2FEF73792CE23AEC
+HEXDUMP END
+wolfSSL Leaving SendClientKeyExchange, return 0
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+sent: client key exchange
+connect state: FIRST_REPLY_SECOND
+wolfSSL Entering SendCertificateVerify
+growing output buffer
+
+Trying RSA private key
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+Trying ECC private key, RSA didn't work
+wolfSSL Entering GetObjectId()
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_import_private_key_ex
+HEXDUMP BEGIN
+	priv (size:32):
+		B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
+HEXDUMP END
+HEXDUMP BEGIN
+	pub (size:65):
+		044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_import_x963_ex
+HEXDUMP BEGIN
+	wc_ecc_import_x963_ex in (size:65):
+		044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+Using ECC private key
+####NEO_WOLFSSL_TITLE:wc_ecc_size
+####NEO_WOLFSSL_TITLE:wc_ecc_sig_size
+####NEO_WOLFSSL_TITLE:wc_ecc_size
+wolfSSL Entering EccSign
+####NEO_WOLFSSL_TITLE:wc_ecc_sign_hash
+HEXDUMP BEGIN
+	in (size:32):
+		E7EA66400FCFBDFAF5402B8FAAF393CD4AB378C796F8971D32FC21203BE5495E
+HEXDUMP END
+####NEO_WOLFSSL_TITLE:wc_ecc_sign_hash_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_is_valid_idx
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_init_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_make_key_ex
+####NEO_WOLFSSL_TITLE:wc_ecc_set_curve
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_load
+####NEO_WOLFSSL_TITLE:wc_ecc_mulmod_ex
+####NEO_WOLFSSL_TITLE:ecc_map
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+####NEO_WOLFSSL_TITLE:wc_ecc_curve_free
+####NEO_WOLFSSL_TITLE:_wc_ecc_curve_free
+HEXDUMP BEGIN
+	r (size:48):
+		40A8FD05262ECB0AE1FB9B05A9E15207FA513D0496EC1F010A61610C37AFC403CD84020F000000000000000000000000
+HEXDUMP END
+HEXDUMP BEGIN
+	s (size:84):
+		ABFA1809EB865C0B263BA20DCC5E2101F8AA0B081879D60FBA29DF0BFAA4E3091D7E8605050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+HEXDUMP END
+HEXDUMP BEGIN
+	out (size:70):
+		304402200F0284CD3C4AF37C61610A11FEC9643D51FA752E1A959BFBE1ACB2E265FDA840022055867E1D9E3A4FABDF29BAFD6791880BAAF81215ECCDA23B26B5C86EB918FAAB
+HEXDUMP END
+wolfSSL Leaving EccSign, return 0
+Shrinking output buffer
+
+wolfSSL Leaving SendCertificateVerify, return 0
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+sent: certificate verify
+connect state: FIRST_REPLY_THIRD
+growing output buffer
+
+Shrinking output buffer
+
+sent: change cipher spec
+connect state: FIRST_REPLY_FOURTH
+growing output buffer
+
+####NEO_WOLFSSL_TITLE:PRF
+HEXDUMP BEGIN
+	secret (size:48):
+		841CC6D3F9FD29B96B24721435E672907489D8D400059ED11C2CB80C58BDA26175195236DCF60CB9063D7408C2B12AA3
+HEXDUMP END
+label : client finished
+HEXDUMP BEGIN
+	label (size:15):
+		636C69656E742066696E6973686564
+HEXDUMP END
+HEXDUMP BEGIN
+	seed (size:32):
+		4D12708B1AD7325A71AAD15BFDF95ED9B15E11DD322257C1C31B236A57AE482D
+HEXDUMP END
+HEXDUMP BEGIN
+	digest (size:12):
+		F3D1A3C86E255638AADE567C
+HEXDUMP END
+wolfSSL Entering BuildMessage
+wolfSSL Leaving BuildMessage, return 0
+wolfSSL Entering get_locked_session_stats
+wolfSSL Leaving get_locked_session_stats, return 1
+Shrinking output buffer
+
+sent: finished
+connect state: FINISHED_DONE
+received record layer msg
+got CHANGE CIPHER SPEC
+####NEO_WOLFSSL_TITLE:PRF
+HEXDUMP BEGIN
+	secret (size:48):
+		841CC6D3F9FD29B96B24721435E672907489D8D400059ED11C2CB80C58BDA26175195236DCF60CB9063D7408C2B12AA3
+HEXDUMP END
+label : server finished
+HEXDUMP BEGIN
+	label (size:15):
+		7365727665722066696E6973686564
+HEXDUMP END
+HEXDUMP BEGIN
+	seed (size:32):
+		214EE36A8F5B0F02CCA5A5F85C5C0EF5CCA3301DEAB422167D3519D7DAC9381F
+HEXDUMP END
+HEXDUMP BEGIN
+	digest (size:12):
+		BE0DC5131C49BDD9276A61D1
+HEXDUMP END
+received record layer msg
+wolfSSL Entering DoHandShakeMsg()
+wolfSSL Entering DoHandShakeMsgType
+processing finished
+wolfSSL Leaving DoHandShakeMsgType(), return 0
+wolfSSL Leaving DoHandShakeMsg(), return 0
+connect state: SECOND_REPLY_DONE
+Shrinking input buffer
+
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+####NEO_WOLFSSL_TITLE:wc_ecc_free
+wolfSSL Leaving SSL_connect(), return 1
+wolfSSL Entering SSL_get_peer_certificate
+wolfSSL Entering X509_get_issuer_name
+wolfSSL Entering wolfSSL_X509_NAME_oneline
+wolfSSL Entering wolfSSL_X509_get_subject_name
+wolfSSL Entering wolfSSL_X509_NAME_oneline
+wolfSSL Entering wolfSSL_X509_get_next_altname
+wolfSSL Entering wolfSSL_X509_get_serial_number
+wolfSSL Entering wolfSSL_FreeX509
+wolfSSL Entering ExternalFreeX509
+free called on non dynamic object, not freeing
+wolfSSL Entering SSL_get_version
+wolfSSL Entering SSL_get_current_cipher
+wolfSSL Entering SSL_CIPHER_get_name
+wolfSSL Entering wolfSSL_get_cipher_name_from_suite
+####NEO_WOLFSSL_TITLE:wc_ecc_get_oid
+####NEO_WOLFSSL_TITLE:wc_ecc_get_name
+####NEO_WOLFSSL_TITLE:wc_ecc_get_curve_idx
+wolfSSL Entering SSL_write()
+growing output buffer
+
+wolfSSL Entering BuildMessage
+wolfSSL Leaving BuildMessage, return 0
+Shrinking output buffer
+
+wolfSSL Leaving SSL_write(), return 14
+wolfSSL Entering wolfSSL_read()
+wolfSSL Entering wolfSSL_read_internal()
+wolfSSL Entering ReceiveData()
+growing input buffer
+
+received record layer msg
+got ALERT!
+Got alert
+	close notify
+wolfSSL error occurred, error = 0 line:11502 file:d:\project\giant_3\src\wolfssl-3.12.2\wolfssl-3.12.2\src\internal.c
+wolfSSL error occurred, error = 343 line:13946 file:d:\project\giant_3\src\wolfssl-3.12.2\wolfssl-3.12.2\src\internal.c
+Zero return, no more data coming
+wolfSSL Leaving wolfSSL_read_internal(), return 0
+wolfSSL Entering SSL_get_error
+wolfSSL Leaving SSL_get_error, return -343
+wolfSSL Entering ERR_error_string
