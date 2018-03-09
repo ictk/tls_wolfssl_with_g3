@@ -3089,30 +3089,37 @@ int StoreKeys(WOLFSSL* ssl, const byte* keyData, int side)
         sz = ssl->specs.hash_size;
         if (side & PROVISION_CLIENT) {
             XMEMCPY(keys->client_write_MAC_secret,&keyData[i], sz);
+			print_bin("client_write_MAC_secret", &keyData[i], sz);
             i += sz;
         }
         if (side & PROVISION_SERVER) {
             XMEMCPY(keys->server_write_MAC_secret,&keyData[i], sz);
+			print_bin("server_write_MAC_secret", &keyData[i], sz);
             i += sz;
         }
     }
     sz = ssl->specs.key_size;
     if (side & PROVISION_CLIENT) {
         XMEMCPY(keys->client_write_key, &keyData[i], sz);
+		print_bin("client_write_key", &keyData[i], sz);
         i += sz;
     }
     if (side & PROVISION_SERVER) {
         XMEMCPY(keys->server_write_key, &keyData[i], sz);
+		print_bin("server_write_key", &keyData[i], sz);
         i += sz;
     }
 
     sz = ssl->specs.iv_size;
-    if (side & PROVISION_CLIENT) {
-        XMEMCPY(keys->client_write_IV, &keyData[i], sz);
-        i += sz;
-    }
-    if (side & PROVISION_SERVER)
-        XMEMCPY(keys->server_write_IV, &keyData[i], sz);
+	if (side & PROVISION_CLIENT) {
+		XMEMCPY(keys->client_write_IV, &keyData[i], sz);
+		print_bin("client_write_IV", &keyData[i], sz);
+		i += sz;
+	}
+	if (side & PROVISION_SERVER){
+		XMEMCPY(keys->server_write_IV, &keyData[i], sz);
+		print_bin("server_write_IV", &keyData[i], sz);
+	}
 
 #ifdef HAVE_AEAD
     if (ssl->specs.cipher_type == aead) {

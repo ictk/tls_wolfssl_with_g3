@@ -2882,11 +2882,18 @@ int wc_AesSetIV(Aes* aes, const byte* iv)
             return 0;
         }
     #endif
-
+		print_bin("enc iv", aes->reg, AES_BLOCK_SIZE);
         while (blocks--) {
+			//print_bin("enc unit in ", in, AES_BLOCK_SIZE);
+			
             xorbuf((byte*)aes->reg, in, AES_BLOCK_SIZE);
+			//print_bin("enc unit reg 1", aes->reg, AES_BLOCK_SIZE);
             wc_AesEncrypt(aes, (byte*)aes->reg, (byte*)aes->reg);
             XMEMCPY(out, aes->reg, AES_BLOCK_SIZE);
+			
+			//print_bin("enc unit out ",out, AES_BLOCK_SIZE);
+			//print_msg("", "");
+			
 
             out += AES_BLOCK_SIZE;
             in  += AES_BLOCK_SIZE;
@@ -2959,6 +2966,7 @@ int wc_AesSetIV(Aes* aes, const byte* iv)
     #endif
 
         blocks = sz / AES_BLOCK_SIZE;
+		print_bin("Decrypt iv", aes->reg, AES_BLOCK_SIZE);
         while (blocks--) {
             XMEMCPY(aes->tmp, in, AES_BLOCK_SIZE);
             wc_AesDecrypt(aes, (byte*)aes->tmp, out);

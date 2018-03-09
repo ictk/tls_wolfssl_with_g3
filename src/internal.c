@@ -11359,7 +11359,9 @@ static int TimingPadVerify(WOLFSSL* ssl, const byte* input, int padLen, int t,
     }
 
     PadCheck(dummy, (byte)padLen, MAX_PAD_SIZE - padLen - 1);
+	print_bin("hmac verify in ", input, pLen - padLen - 1 - t);
     ret = ssl->hmac(ssl, verify, input, pLen - padLen - 1 - t, content, 1);
+	print_bin("hmac verify", verify, MAX_DIGEST_SIZE);
 
     CompressRounds(ssl, GetRounds(pLen, padLen, t), dummy);
 
@@ -11853,10 +11855,12 @@ int ProcessReply(WOLFSSL* ssl)
                 }
                 else {
                     if (!ssl->options.tls1_3) {
+						print_bin("Decrypt in", in->buffer + in->idx, ssl->curSize);
                         ret = Decrypt(ssl,
                                       in->buffer + in->idx,
                                       in->buffer + in->idx,
                                       ssl->curSize);
+						print_bin("Decrypt out", in->buffer + in->idx, ssl->curSize);
                     }
                     else {
                     #ifdef WOLFSSL_TLS13
@@ -11924,6 +11928,9 @@ int ProcessReply(WOLFSSL* ssl)
 
             if (IsEncryptionOn(ssl, 0) && ssl->keys.decryptedCur == 0) {
                 if (!atomicUser) {
+					print_bin("VerifyMac", ssl->buffers.inputBuffer.buffer +
+						ssl->buffers.inputBuffer.idx, ssl->curSize);
+
                     ret = VerifyMac(ssl, ssl->buffers.inputBuffer.buffer +
                                     ssl->buffers.inputBuffer.idx,
                                     ssl->curSize, ssl->curRL.type,
@@ -12701,6 +12708,7 @@ int BuildMessage(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
 
             /* write to output */
             if (args->ivSz) {
+				print_bin("ext iv", args->iv, min(args->ivSz, sizeof(args->iv)));
                 XMEMCPY(output + args->idx, args->iv,
                                         min(args->ivSz, sizeof(args->iv)));
                 args->idx += args->ivSz;
@@ -12769,8 +12777,13 @@ int BuildMessage(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
             }
             else
         #endif
-                ret = ssl->hmac(ssl, output + args->idx, output + args->headerSz + args->ivSz,
+
+			print_bin("hmac in", output + args->headerSz + args->ivSz, inSz);
+
+            ret = ssl->hmac(ssl, output + args->idx, output + args->headerSz + args->ivSz,
                                                                 inSz, type, 0);
+			print_bin("hmac out", output + args->idx,inSz);
+
             #ifdef WOLFSSL_DTLS
                 if (ssl->options.dtls)
                     DtlsSEQIncrement(ssl, CUR_ORDER);
@@ -12784,8 +12797,10 @@ int BuildMessage(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
         FALL_THROUGH;
         case BUILD_MSG_ENCRYPT:
         {
+			print_bin("Encrypt in", output + args->headerSz, args->size);
             ret = Encrypt(ssl, output + args->headerSz, output + args->headerSz, args->size,
                 asyncOkay);
+			print_bin("Encrypt out", output + args->headerSz, args->size);
             break;
         }
     }
@@ -13859,6 +13874,8 @@ int SendData(WOLFSSL* ssl, const void* data, int sz)
         #endif
             return BUILD_MSG_ERROR;
         }
+		print_bin("send_buffer",out, outputSz);
+
 
         ssl->buffers.outputBuffer.length += sendSz;
 

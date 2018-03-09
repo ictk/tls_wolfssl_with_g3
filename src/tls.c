@@ -845,10 +845,13 @@ int TLS_hmac(WOLFSSL* ssl, byte* digest, const byte* in, word32 sz,
 #endif
 
     wolfSSL_SetTlsHmacInner(ssl, myInner, sz, content, verify);
+	print_bin("myInner", myInner, sizeof(myInner));
 
     ret = wc_HmacInit(&hmac, ssl->heap, ssl->devId);
     if (ret != 0)
         return ret;
+	//print_bin("hmac key clent",wolfSSL_GetMacSecret(ssl, 0), ssl->specs.hash_size);
+	//print_bin("hmac key server", wolfSSL_GetMacSecret(ssl, 1), ssl->specs.hash_size);
 
     ret = wc_HmacSetKey(&hmac, wolfSSL_GetHmacType(ssl),
                      wolfSSL_GetMacSecret(ssl, verify), ssl->specs.hash_size);

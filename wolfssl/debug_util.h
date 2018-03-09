@@ -16,6 +16,7 @@ extern "C" {
 	void print_hexdumpbin(const char * title, const unsigned char * buff, int size);
 	void print_title(const char * title);
 	void print_msg(const char * title, const char * msg);
+	void print_intarray(const char * title, const unsigned int * buff, int size);
 
 #ifdef __cplusplus
 }   /* extern "C" */

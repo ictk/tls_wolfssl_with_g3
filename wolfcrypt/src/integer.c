@@ -59,6 +59,7 @@
         #define WOLFSSL_SMALL_STACK
     #endif
 #endif
+#include "wolfssl/debug_util.h"
 
 #ifdef SHOW_GEN
     #if defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
@@ -290,6 +291,7 @@ int mp_to_unsigned_bin_at_pos(int x, mp_int *t, unsigned char *b)
 #else
       b[x++] = (unsigned char) (t->dp[0] | ((t->dp[1] & 0x01) << 7));
 #endif
+	  //fprintf(stderr, "0x%x,0x%x\n", t->dp[0] & 255, t->dp[0]);
     if ((res = mp_div_2d (t, 8, t, NULL)) != MP_OKAY) {
       return res;
     }
@@ -307,14 +309,17 @@ int mp_to_unsigned_bin (mp_int * a, unsigned char *b)
   if ((res = mp_init_copy (&t, a)) != MP_OKAY) {
     return res;
   }
+  //print_intarray("t",t.dp,t.used);
 
   x = mp_to_unsigned_bin_at_pos(0, &t, b);
+  //print_hexdumpbin("b ", b, 32);
   if (x < 0) {
     mp_clear(&t);
     return x;
   }
 
   bn_reverse (b, x);
+  //print_hexdumpbin("b ", b, 32);
   mp_clear (&t);
   return res;
 }

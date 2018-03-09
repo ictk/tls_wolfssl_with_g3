@@ -789,7 +789,8 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
     WOLFSSL_SESSION* session = 0;
 
 #ifndef WOLFSSL_ALT_TEST_STRINGS
-    char msg[32] = "hello wolfssl!";   /* GET may make bigger */
+    //char msg[] = "hello!!!! neo!0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789";   /* GET may make bigger */
+	char msg[] = "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF01";   /* GET may make bigger */
     char resumeMsg[32] = "resuming wolfssl!";
 #else
     char msg[32] = "hello wolfssl!\n";
@@ -2075,9 +2076,17 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
         wolfSSL_update_keys(ssl);
 #endif
 
-    ClientWrite(ssl, msg, msgSz);
+	//while (1)
+	{
 
-    ClientRead(ssl, reply, sizeof(reply)-1, 1);
+		ClientWrite(ssl, msg, msgSz);
+
+		ClientRead(ssl, reply, sizeof(reply)-1, 1);
+		Sleep(500);
+
+	}
+
+    
 
 #if defined(WOLFSSL_TLS13) && defined(WOLFSSL_POST_HANDSHAKE_AUTH)
     if (postHandAuth)
