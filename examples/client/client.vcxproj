@@ -119,8 +119,8 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>D:\PROJECT\toolrnd\BASE\lib\win32;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\PROJECT\toolrnd\BASE\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\win32;D:\PROJECT\GIANT_3\SRC\g3_api\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\PROJECT\toolrnd\BASE\include;D:\PROJECT\GIANT_3\SRC\g3_api\console_g3_api;D:\PROJECT\GIANT_3\SRC\g3_api\g3_api_library\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -170,7 +170,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Ws2_32.lib;neoCoreStaticLibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>neoCoreStaticLibd.lib;Ws2_32.lib;g3_api_library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -323,6 +323,9 @@
   <ItemGroup>
     <ClCompile Include="client.c" />
     <ClCompile Include="ecc_test.cpp" />
+    <ClCompile Include="io_sample_cdc.cpp" />
+    <ClCompile Include="user_ecc_handling.cpp" />
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\wolfssl.vcxproj">

@@ -5850,6 +5850,7 @@ int HashOutput(WOLFSSL* ssl, const byte* output, int sz, int ivSz)
 {
     int ret = 0;
     const byte* adj;
+	//print_bin("HashOutput", output, sz);
 
     adj = output + RECORD_HEADER_SZ + ivSz;
     sz -= RECORD_HEADER_SZ;
@@ -5874,6 +5875,7 @@ int HashOutput(WOLFSSL* ssl, const byte* output, int sz, int ivSz)
 #endif
 
     if (IsAtLeastTLSv1_2(ssl)) {
+		print_bin("handshake hash input", adj, sz);
 #ifndef NO_SHA256
         ret = wc_Sha256Update(&ssl->hsHashes->hashSha256, adj, sz);
         if (ret != 0)
@@ -5900,7 +5902,7 @@ int HashInput(WOLFSSL* ssl, const byte* input, int sz)
 {
     int ret = 0;
     const byte* adj;
-
+	//print_bin("HashInput", input, sz);
     adj = input - HANDSHAKE_HEADER_SZ;
     sz += HANDSHAKE_HEADER_SZ;
 
@@ -5928,6 +5930,7 @@ int HashInput(WOLFSSL* ssl, const byte* input, int sz)
 
     if (IsAtLeastTLSv1_2(ssl)) {
 #ifndef NO_SHA256
+		print_bin("handshake hash input", adj, sz);
         ret = wc_Sha256Update(&ssl->hsHashes->hashSha256, adj, sz);
         if (ret != 0)
             return ret;
@@ -9208,6 +9211,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case hello_request:
+			print_tls_title("hello_request");
             if (ssl->msgsReceived.got_hello_request) {
                 WOLFSSL_MSG("Duplicate HelloRequest received");
                 return DUPLICATE_MSG_E;
@@ -9219,6 +9223,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_SERVER
         case client_hello:
+			print_tls_title("client_hello");
             if (ssl->msgsReceived.got_client_hello) {
                 WOLFSSL_MSG("Duplicate ClientHello received");
                 return DUPLICATE_MSG_E;
@@ -9230,6 +9235,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case server_hello:
+			print_tls_title("server_hello");
             if (ssl->msgsReceived.got_server_hello) {
                 WOLFSSL_MSG("Duplicate ServerHello received");
                 return DUPLICATE_MSG_E;
@@ -9241,6 +9247,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case hello_verify_request:
+			print_tls_title("hello_verify_request");
             if (ssl->msgsReceived.got_hello_verify_request) {
                 WOLFSSL_MSG("Duplicate HelloVerifyRequest received");
                 return DUPLICATE_MSG_E;
@@ -9252,6 +9259,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case session_ticket:
+			print_tls_title("session_ticket");
             if (ssl->msgsReceived.got_session_ticket) {
                 WOLFSSL_MSG("Duplicate SessionTicket received");
                 return DUPLICATE_MSG_E;
@@ -9262,6 +9270,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 #endif
 
         case certificate:
+			print_tls_title("certificate");
             if (ssl->msgsReceived.got_certificate) {
                 WOLFSSL_MSG("Duplicate Certificate received");
                 return DUPLICATE_MSG_E;
@@ -9288,6 +9297,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case certificate_status:
+			print_tls_title("certificate_status");
             if (ssl->msgsReceived.got_certificate_status) {
                 WOLFSSL_MSG("Duplicate CertificateSatatus received");
                 return DUPLICATE_MSG_E;
@@ -9308,6 +9318,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case server_key_exchange:
+			print_tls_title("server_key_exchange");
             if (ssl->msgsReceived.got_server_key_exchange) {
                 WOLFSSL_MSG("Duplicate ServerKeyExchange received");
                 return DUPLICATE_MSG_E;
@@ -9344,6 +9355,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case certificate_request:
+			print_tls_title("certificate_request");
             if (ssl->msgsReceived.got_certificate_request) {
                 WOLFSSL_MSG("Duplicate CertificateRequest received");
                 return DUPLICATE_MSG_E;
@@ -9355,6 +9367,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_CLIENT
         case server_hello_done:
+			print_tls_title("server_hello_done");
             if (ssl->msgsReceived.got_server_hello_done) {
                 WOLFSSL_MSG("Duplicate ServerHelloDone received");
                 return DUPLICATE_MSG_E;
@@ -9395,6 +9408,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_SERVER
         case certificate_verify:
+			print_tls_title("certificate_verify");
             if (ssl->msgsReceived.got_certificate_verify) {
                 WOLFSSL_MSG("Duplicate CertificateVerify received");
                 return DUPLICATE_MSG_E;
@@ -9410,6 +9424,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 
 #ifndef NO_WOLFSSL_SERVER
         case client_key_exchange:
+			print_tls_title("client_key_exchange");
             if (ssl->msgsReceived.got_client_key_exchange) {
                 WOLFSSL_MSG("Duplicate ClientKeyExchange received");
                 return DUPLICATE_MSG_E;
@@ -9424,6 +9439,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
 #endif
 
         case finished:
+			print_tls_title("finished");
             if (ssl->msgsReceived.got_finished) {
                 WOLFSSL_MSG("Duplicate Finished received");
                 return DUPLICATE_MSG_E;
@@ -9437,6 +9453,7 @@ static int SanityCheckMsgReceived(WOLFSSL* ssl, byte type)
             break;
 
         case change_cipher_hs:
+			print_tls_title("change_cipher_hs");
             if (ssl->msgsReceived.got_change_cipher) {
                 WOLFSSL_MSG("Duplicate ChangeCipher received");
                 return DUPLICATE_MSG_E;
@@ -11683,7 +11700,7 @@ int ProcessReply(WOLFSSL* ssl)
         /* in the WOLFSSL_SERVER case, get the first byte for detecting
          * old client hello */
         case doProcessInit:
-
+			WOLFSSL_MSG("!!!!!!!!!doProcessInit");
             readSz = RECORD_HEADER_SZ;
 
         #ifdef WOLFSSL_DTLS
@@ -11783,6 +11800,7 @@ int ProcessReply(WOLFSSL* ssl)
 
         /* get the record layer header */
         case getRecordLayerHeader:
+			WOLFSSL_MSG("!!!!!!!!!getRecordLayerHeader");
 
             ret = GetRecordHeader(ssl, ssl->buffers.inputBuffer.buffer,
                                        &ssl->buffers.inputBuffer.idx,
@@ -11814,6 +11832,7 @@ int ProcessReply(WOLFSSL* ssl)
 
         /* retrieve record layer data */
         case getData:
+			WOLFSSL_MSG("!!!!!!!!!getData");
 
             /* get sz bytes or return error */
             if (!ssl->options.dtls) {
@@ -11836,7 +11855,7 @@ int ProcessReply(WOLFSSL* ssl)
 
         /* decrypt message */
         case decryptMessage:
-
+			WOLFSSL_MSG("!!!!!!!!!decryptMessage");
             if (IsEncryptionOn(ssl, 0) && ssl->keys.decryptedCur == 0) {
                 bufferStatic* in = &ssl->buffers.inputBuffer;
 
@@ -11925,7 +11944,7 @@ int ProcessReply(WOLFSSL* ssl)
 
         /* verify digest of message */
         case verifyMessage:
-
+			WOLFSSL_MSG("!!!!!!!!!verifyMessage");
             if (IsEncryptionOn(ssl, 0) && ssl->keys.decryptedCur == 0) {
                 if (!atomicUser) {
 					print_bin("VerifyMac", ssl->buffers.inputBuffer.buffer +
@@ -11975,7 +11994,7 @@ int ProcessReply(WOLFSSL* ssl)
 
         /* the record layer is here */
         case runProcessingOneMessage:
-
+			WOLFSSL_MSG("!!!!!!runProcessingOneMessage");
         #ifdef WOLFSSL_DTLS
             if (IsDtlsNotSctpMode(ssl)) {
                 DtlsUpdateWindow(ssl);
@@ -11986,6 +12005,7 @@ int ProcessReply(WOLFSSL* ssl)
 
             switch (ssl->curRL.type) {
                 case handshake :
+					//print_tls_title("handshake");
                     /* debugging in DoHandShakeMsg */
                     if (ssl->options.dtls) {
 #ifdef WOLFSSL_DTLS
@@ -12027,6 +12047,7 @@ int ProcessReply(WOLFSSL* ssl)
                     break;
 
                 case change_cipher_spec:
+					print_tls_title("change_cipher_spec");
                     WOLFSSL_MSG("got CHANGE CIPHER SPEC");
                     #ifdef WOLFSSL_CALLBACKS
                         if (ssl->hsInfoOn)
@@ -12128,6 +12149,7 @@ int ProcessReply(WOLFSSL* ssl)
                     break;
 
                 case application_data:
+					print_tls_title("application_data");
                     WOLFSSL_MSG("got app DATA");
                     #ifdef WOLFSSL_DTLS
                         if (ssl->options.dtls && ssl->options.dtlsHsRetain) {
@@ -12151,6 +12173,7 @@ int ProcessReply(WOLFSSL* ssl)
                     break;
 
                 case alert:
+					print_tls_title("alert");
                     WOLFSSL_MSG("got ALERT!");
                     ret = DoAlert(ssl, ssl->buffers.inputBuffer.buffer,
                                   &ssl->buffers.inputBuffer.idx, &type,
@@ -12508,6 +12531,8 @@ int BuildCertHashes(WOLFSSL* ssl, Hashes* hashes)
     #endif
         if (IsAtLeastTLSv1_2(ssl)) {
             #ifndef NO_SHA256
+
+				//print_bin("wc_Sha256GetHash",ssl->hsHashes->hashSha256.buffer, ssl->hsHashes->hashSha256.buffLen);
                 ret = wc_Sha256GetHash(&ssl->hsHashes->hashSha256,
                                        hashes->sha256);
                 if (ret != 0)
@@ -16526,6 +16551,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
     static int DoHelloVerifyRequest(WOLFSSL* ssl, const byte* input,
                                     word32* inOutIdx, word32 size)
     {
+		//print_tls_title("DoHelloVerifyRequest");
         ProtocolVersion pv;
         byte            cookieSz;
         word32          begin = *inOutIdx;
@@ -16604,6 +16630,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
      */
     int CheckVersion(WOLFSSL *ssl, ProtocolVersion pv)
     {
+
 #ifdef WOLFSSL_TLS13
         /* TODO: [TLS13] Remove this.
          * Translate the draft TLS v1.3 version to final version.
@@ -16714,7 +16741,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
         word32          i = *inOutIdx;
         word32          begin = i;
         int             ret;
-
+		//print_tls_title("DoServerHello");
 #ifdef WOLFSSL_CALLBACKS
         if (ssl->hsInfoOn) AddPacketName("ServerHello", &ssl->handShakeInfo);
         if (ssl->toInfoOn) AddLateName("ServerHello", &ssl->timeoutInfo);
@@ -16968,6 +16995,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
     /* Make sure client setup is valid for this suite, true on success */
     int VerifyClientSuite(WOLFSSL* ssl)
     {
+		//print_tls_title("VerifyClientSuite");
         int  havePSK = 0;
         byte first   = ssl->options.cipherSuite0;
         byte second  = ssl->options.cipherSuite;
@@ -17082,6 +17110,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
 
     static int CheckCurveId(int tlsCurveId)
     {
+		//print_tls_title("CheckCurveId");
         int ret = ECC_CURVE_ERROR;
 
         switch (tlsCurveId) {
@@ -17186,6 +17215,7 @@ static void FreeDskeArgs(WOLFSSL* ssl, void* pArgs)
 static int DoServerKeyExchange(WOLFSSL* ssl, const byte* input,
                                word32* inOutIdx, word32 size)
 {
+	//print_tls_title("DoServerKeyExchange");
     int ret = 0;
 #ifdef WOLFSSL_ASYNC_CRYPT
     DskeArgs* args = (DskeArgs*)ssl->async.args;

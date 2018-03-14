@@ -127,7 +127,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\obj\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\PROJECT\toolrnd\BASE\include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\PROJECT\toolrnd\BASE\include;D:\PROJECT\GIANT_3\SRC\g3_api\g3_api_library\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -300,6 +300,7 @@
     <ClCompile Include="wolfcrypt\src\des3.c" />
     <ClCompile Include="wolfcrypt\src\dh.c" />
     <ClCompile Include="wolfcrypt\src\dsa.c" />
+    <ClCompile Include="wolfcrypt\src\ecc.cpp" />
     <ClCompile Include="wolfcrypt\src\ecc_org.c" />
     <ClCompile Include="wolfcrypt\src\ed25519.c" />
     <ClCompile Include="wolfcrypt\src\error.c" />

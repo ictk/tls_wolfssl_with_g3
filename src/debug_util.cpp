@@ -7,19 +7,37 @@ void set_filepoint(FILE *fp){
 }
 void print_title(const char * title)
 {
-	fprintf(_fpout, "####NEO_WOLFSSL_TITLE:%s\n", title);
+	fprintf(_fpout, "####NEO_API:%s\n", title);
+}
+void print_title_ext(const char * fmt,const char * title)
+{
+	fprintf(_fpout, fmt, title);
 }
 
+void print_pointer(const char * title,void * pt)
+{
+	fprintf(_fpout, "\n\n%s: 0x%x \n", title, pt);
+}
+
+void print_tls_title(const char * title)
+{
+	print_title_ext("\n\n\n\n!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:%s\n", title);
+	//fprintf(_fpout, "!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:%s\n", title);
+}
 
 void print_bin(const char * title, const unsigned char * buff, int size)
 {
 	string retaaa = NCL::BytetoHexStr(buff, size);
 	fprintf(_fpout, "\n*%s (size:%d):\n%s\n", title, size, retaaa.c_str());
 }
+void print_bin_ext(const char * fmt,const char * title, const unsigned char * buff, int size)
+{
+	string retaaa = NCL::BytetoHexStr(buff, size);
+	fprintf(_fpout, fmt, title, size, retaaa.c_str());
+}
 
 void print_hexdumpbin(const char * title, const unsigned char * buff, int size)
-{
-	print_bin(title,  buff,  size);
+{	print_bin(title,  buff,  size);
 
 	return;
 	unsigned char * pbuff = (unsigned char *)buff;

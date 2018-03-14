@@ -104,7 +104,7 @@ HAVE_ECC_KOBLITZ
 #endif
 
 	void test_ecc();
-
+	
 static int NonBlockingSSL_Connect(WOLFSSL* ssl)
 {
     int ret;
@@ -807,6 +807,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
                                           because can't tell if we're really
                                           going there to detect old chacha-poly
                                        */
+	const char * uart_port = "\\\\.\\COM10";
     int    ch;
     int    version = CLIENT_INVALID_VERSION;
     int    usePsk   = 0;
@@ -964,8 +965,9 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
                 break;
 
             case 'u' :
-                doDTLS = 1;
-                dtlsUDP = 1;
+      /*          doDTLS = 1;
+                dtlsUDP = 1;*/
+				uart_port = myoptarg;
                 break;
 
             case 'G' :
@@ -1002,6 +1004,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
                 break;
 
             case 'U' :
+
             #ifdef ATOMIC_USER
                 atomicUser = 1;
             #endif
@@ -1283,7 +1286,8 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 				return 0;
 				break;
 
-
+			/*case 'u':
+				break;*/
 
             default:
                 Usage();
@@ -1439,7 +1443,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 
     if (method == NULL)
         err_sys("unable to get method");
-
+	init_user_ecc(uart_port);
     ctx = wolfSSL_CTX_new(method);
     if (ctx == NULL)
         err_sys("unable to get ctx");
@@ -2441,19 +2445,16 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 
 #endif /* !NO_WOLFSSL_CLIENT */
 
-
-
+//void test_g3_api();
+//void init_user_ecc(const char * st_com);
 /* so overall tests can pull in test function */
 #ifndef NO_MAIN_DRIVER
 
     int main(int argc, char** argv)
     {
         func_args args;
+		//test_g3_api();
 	
-
-
-
-		//
 	
 		FILE *fp = freopen("out.txt", "wb", stderr);
 

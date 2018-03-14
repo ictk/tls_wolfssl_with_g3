@@ -489,6 +489,8 @@ int wc_Sha224Hash(const byte* data, word32 len, byte* hash)
 #if !defined(NO_SHA256)
     int wc_Sha256Hash(const byte* data, word32 len, byte* hash)
     {
+		print_bin("wc_Sha256Hash in", data, len);
+
         int ret = 0;
     #ifdef WOLFSSL_SMALL_STACK
         wc_Sha256* sha256;
@@ -516,7 +518,7 @@ int wc_Sha224Hash(const byte* data, word32 len, byte* hash)
     #ifdef WOLFSSL_SMALL_STACK
         XFREE(sha256, NULL, DYNAMIC_TYPE_TMP_BUFFER);
     #endif
-
+		print_bin("wc_Sha256Hash hash", hash, 32);
         return ret;
     }
 #endif /* !NO_SHA256 */

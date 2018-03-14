@@ -1,9 +1,14 @@
-#include <wolfssl/wolfcrypt/ecc.h>
+
 #include <wolfssl/wolfcrypt/random.h>
 #include <string>
+#include <wolfssl/wolfcrypt/ecc.h>
 #include "neoDebug.h"
 #include "neoCoLib.h"
 #include "wolfssl/debug_util.h"
+#include "wolfssl/user_ecc.h"
+#include "sample_def.h"
+#include"g3_api.h"
+
 //#include "wolfssl/bn.h"
 using namespace std;
 WC_RNG rng;
@@ -15,6 +20,7 @@ byte secret[1024]; // can hold 1024 byte shared secret pub
 word32 secretSz = sizeof(secret);
 byte secret2[1024]; // can hold 1024 byte shared secret pub
 word32 secretSz2 = sizeof(secret2);
+
 
 void test_verify(){
 	

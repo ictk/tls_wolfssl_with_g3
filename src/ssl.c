@@ -8778,6 +8778,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
 
         case CONNECT_BEGIN :
             /* always send client hello first */
+			print_tls_title("SendClientHello");
             if ( (ssl->error = SendClientHello(ssl)) != 0) {
                 WOLFSSL_ERROR(ssl->error);
                 return WOLFSSL_FATAL_ERROR;
@@ -8874,6 +8875,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
             #endif
             #ifndef NO_CERTS
                 if (ssl->options.sendVerify) {
+					print_tls_title("SendCertificate");
                     if ( (ssl->error = SendCertificate(ssl)) != 0) {
                         WOLFSSL_ERROR(ssl->error);
                         return WOLFSSL_FATAL_ERROR;
@@ -8892,6 +8894,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
                 return wolfSSL_connect_TLSv13(ssl);
         #endif
             if (!ssl->options.resuming) {
+				print_tls_title("SendClientKeyExchange");
                 if ( (ssl->error = SendClientKeyExchange(ssl)) != 0) {
                     WOLFSSL_ERROR(ssl->error);
                     return WOLFSSL_FATAL_ERROR;
@@ -8906,6 +8909,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
         case FIRST_REPLY_SECOND :
             #ifndef NO_CERTS
                 if (ssl->options.sendVerify) {
+					print_tls_title("SendCertificateVerify");
                     if ( (ssl->error = SendCertificateVerify(ssl)) != 0) {
                         WOLFSSL_ERROR(ssl->error);
                         return WOLFSSL_FATAL_ERROR;
@@ -8918,6 +8922,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
             FALL_THROUGH;
 
         case FIRST_REPLY_THIRD :
+			print_tls_title("SendChangeCipher");
             if ( (ssl->error = SendChangeCipher(ssl)) != 0) {
                 WOLFSSL_ERROR(ssl->error);
                 return WOLFSSL_FATAL_ERROR;
@@ -8928,6 +8933,7 @@ int wolfSSL_DTLS_SetCookieSecret(WOLFSSL* ssl,
             FALL_THROUGH;
 
         case FIRST_REPLY_FOURTH :
+			print_tls_title("SendFinished");
             if ( (ssl->error = SendFinished(ssl)) != 0) {
                 WOLFSSL_ERROR(ssl->error);
                 return WOLFSSL_FATAL_ERROR;

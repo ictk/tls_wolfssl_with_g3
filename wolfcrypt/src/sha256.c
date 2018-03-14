@@ -625,6 +625,12 @@ static INLINE void AddLength(wc_Sha256* sha256, word32 len)
         if (sha256 == NULL || (data == NULL && len > 0)) {
             return BAD_FUNC_ARG;
         }
+		if (data[0] == 1){
+			int asd = 0;
+		}
+
+		//print_pointer("wc_Sha256*", sha256);
+		//print_bin("Sha256Update", data, len);
 
     #if defined(WOLFSSL_ASYNC_CRYPT) && defined(WC_ASYNC_ENABLE_SHA256)
         if (sha256->asyncDev.marker == WOLFSSL_ASYNC_MARKER_SHA256) {
@@ -760,7 +766,7 @@ static INLINE void AddLength(wc_Sha256* sha256, word32 len)
     int wc_Sha256Final(wc_Sha256* sha256, byte* hash)
     {
         int ret;
-
+		
         if (sha256 == NULL || hash == NULL) {
             return BAD_FUNC_ARG;
         }
@@ -775,6 +781,7 @@ static INLINE void AddLength(wc_Sha256* sha256, word32 len)
     #endif /* WOLFSSL_ASYNC_CRYPT */
 
         ret = Sha256Final(sha256);
+		
         if (ret != 0)
             return ret;
 
@@ -782,7 +789,9 @@ static INLINE void AddLength(wc_Sha256* sha256, word32 len)
         ByteReverseWords(sha256->digest, sha256->digest, WC_SHA256_DIGEST_SIZE);
     #endif
         XMEMCPY(hash, sha256->digest, WC_SHA256_DIGEST_SIZE);
-
+		//print_pointer("wc_Sha256*", sha256);
+		
+		
         return InitSha256(sha256);  /* reset state */
     }
 
@@ -2293,6 +2302,9 @@ static int Transform_AVX2(wc_Sha256* sha256)
 
 int wc_InitSha256(wc_Sha256* sha256)
 {
+	//print_pointer("wc_Sha256*", sha256);
+	//print_bin("wc_InitSha256",NULL,0);
+	
     return wc_InitSha256_ex(sha256, NULL, INVALID_DEVID);
 }
 
@@ -2346,15 +2358,19 @@ void wc_Sha256Free(wc_Sha256* sha256)
 int wc_Sha256GetHash(wc_Sha256* sha256, byte* hash)
 {
     int ret;
+
     wc_Sha256 tmpSha256;
+
+	//print_bin("wc_Sha256GetHash in",);
 
     if (sha256 == NULL || hash == NULL)
         return BAD_FUNC_ARG;
-
+	//print_pointer("wc_Sha256GetHash*", sha256);
     ret = wc_Sha256Copy(sha256, &tmpSha256);
     if (ret == 0) {
         ret = wc_Sha256Final(&tmpSha256, hash);
     }
+	print_bin("wc_Sha256GetHash", hash, 32);
     return ret;
 }
 int wc_Sha256Copy(wc_Sha256* src, wc_Sha256* dst)
