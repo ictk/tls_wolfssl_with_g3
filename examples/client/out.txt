@@ -15,8 +15,11 @@ wolfSSL Entering EVP_get_cipherbyname
 wolfSSL Entering EVP_get_cipherbyname
 wolfSSL Entering EVP_get_cipherbyname
 
-*g3api_get_chellange (size:0):
+*g3api_get_chellange (size:32):
+37E5CDC0493A2E5E63DB1699AA35108722ACBE4F835E7CBEF93E324136176E7D
 
+*g3api_get_chellange dword reverse (size:32):
+C0CDE5375E2E3A499916DB63871035AA4FBEAC22BE7C5E8341323EF97D6E1736
 wolfSSL Entering WOLFSSL_CTX_new_ex
 wolfSSL Entering wolfSSL_CertManagerNew
 wolfSSL Leaving WOLFSSL_CTX_new, return 0
@@ -37,24 +40,18 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 ECDSA cert signature
 wolfSSL Entering wolfSSL_CTX_use_PrivateKey_file
 wolfSSL Entering PemToDer
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
+####NEO_API:wc_ecc_init_ex
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_private_key_ex===================================>
+####NEO_API:wc_ecc_get_oid
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_import_private_key_ex
 
 *TAG_ECC:priv (size:32):
 B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
@@ -72,7 +69,7 @@ B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
 
 *wc_ecc_import_x963_ex_org in (size:65):
 044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
-####NEO_API:wc_ecc_set_curve_org
+####NEO_API:wc_ecc_set_curve
 HEXDUMP BEGIN
 	key->k (size:10):
 		0x1f29a2b
@@ -86,13 +83,10 @@ HEXDUMP BEGIN
 		0x4083c70
 		0xb
 HEXDUMP END
-<===================================END NEO_ECC_API:wc_ecc_import_private_key_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_size===================================>
-####NEO_API:wc_ecc_size_org
-<===================================END NEO_ECC_API:wc_ecc_size@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
+END NEO_ECC_API:wc_ecc_import_private_key_ex@@@@@@@
+===================================
+####NEO_API:wc_ecc_size
+####NEO_API:wc_ecc_free
 wolfSSL Entering wolfSSL_CTX_load_verify_locations
 Processing CA PEM file
 wolfSSL Entering PemToDer
@@ -109,12 +103,8 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 Parsed Past Key
 wolfSSL Entering GetAlgoId
@@ -143,12 +133,8 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 Parsed Past Key
 wolfSSL Entering DecodeCertExtensions
@@ -192,7 +178,7 @@ growing output buffer
 Signature Algorithms extension to write
 
 *handshake hash input (size:61):
-010000390303EC52158BEDDDA74A073A8B16CA1C14978678749A0F9DD727DEAE0C014A882A65000002C0230100000E000D000600040403020300170000
+0100003903032E2C4FA0F936F3830E1BCFFC47B3347FE4D863D9245C0F6BA05D62BCCC04B75D000002C0230100000E000D000600040403020300170000
 Shrinking output buffer
 
 connect state: CLIENT_HELLO_SENT
@@ -214,7 +200,7 @@ wolfSSL Entering DoHandShakeMsgType
 !@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:server_hello
 
 *handshake hash input (size:74):
-0200004603033FBF71115060ADD8264AAA517E060EED8BB25EEDF1B9B8F4ED4D651812CEA9E8201D3DBF8F2F6ED1087E8BCF340AACB3DD12AA3BF9DEDFF6C32CD81F77D24093E4C02300
+0200004603039CD86CAE15C063DACFA11776D6606374F74CBC5544073A4DFC977AAFC33423CC2018FC2F74B9B4755C3E0EA2A390DA263F73F67BED5F4A65F5D1F03D0C4D7D46DCC02300
 processing server hello
 wolfSSL Entering VerifyClientSuite
 wolfSSL Leaving DoHandShakeMsgType(), return 0
@@ -255,12 +241,8 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 Parsed Past Key
 wolfSSL Entering GetAlgoId
@@ -277,12 +259,8 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 Parsed Past Key
 wolfSSL Entering GetAlgoId
@@ -295,30 +273,46 @@ wolfSSL Entering ConfirmSignature
 
 *wc_Sha256Hash hash (size:32):
 6196EC50AC09E26AA8358BD3D8C8FEB583EC4F74FFDB9C3D912E3B87C2C4C53E
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_x963===================================>
+####NEO_API:wc_ecc_init_ex
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_import_x963
+
+*FUCK pubkey (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
 ####NEO_API:wc_ecc_import_x963_org
 ####NEO_API:wc_ecc_import_x963_ex_org
 
 *wc_ecc_import_x963_ex_org in (size:65):
 04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
-####NEO_API:wc_ecc_set_curve_org
-<===================================END NEO_ECC_API:wc_ecc_import_x963@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_verify_hash===================================>
+####NEO_API:wc_ecc_set_curve
+END NEO_ECC_API:wc_ecc_import_x963@@@@@@@
+===================================
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_verify_hash
 
 *TAG_ECC:sig (size:71):
 304502204D36CE61516691750219285EDF5E852E6D4E44A200267580D4A6FB40D5238FA3022100C25463689E4B089C97F906B19B18C247849241EEDBD99924E2C65C7A7D6130C9
 
 *TAG_ECC:hash (size:32):
 6196EC50AC09E26AA8358BD3D8C8FEB583EC4F74FFDB9C3D912E3B87C2C4C53E
+####NEO_API:wc_ecc_export_x963_org
 
-*FUCK      sig (size:71):
+*wc_ecc_export_x963_org out (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+
+*FUCK sig (size:71):
 304502204D36CE61516691750219285EDF5E852E6D4E44A200267580D4A6FB40D5238FA3022100C25463689E4B089C97F906B19B18C247849241EEDBD99924E2C65C7A7D6130C9
 
-*FUCK      hash (size:32):
+*FUCK hash (size:32):
 6196EC50AC09E26AA8358BD3D8C8FEB583EC4F74FFDB9C3D912E3B87C2C4C53E
+
+*FUCK tmppubkey (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+
+*sign64  (size:64):
+4D36CE61516691750219285EDF5E852E6D4E44A200267580D4A6FB40D5238FA3C25463689E4B089C97F906B19B18C247849241EEDBD99924E2C65C7A7D6130C9
 ####NEO_API:wc_ecc_verify_hash_org
 
 *sig (size:71):
@@ -326,12 +320,11 @@ wolfSSL Entering ConfirmSignature
 
 *hash (size:32):
 6196EC50AC09E26AA8358BD3D8C8FEB583EC4F74FFDB9C3D912E3B87C2C4C53E
-####NEO_API:wc_ecc_verify_hash_ex_org
-<===================================END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+####NEO_API:wc_ecc_verify_hash_ex
+END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+===================================
 wolfSSL Leaving ConfirmSignature, return 0
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
+####NEO_API:wc_ecc_free
 Chain cert is not a CA, not adding as one
 Verifying Peer's cert
 wolfSSL Entering GetExplicitVersion
@@ -346,12 +339,8 @@ Got Subject Name
 wolfSSL Entering GetAlgoId
 wolfSSL Entering GetObjectId()
 wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
+####NEO_API:wc_ecc_get_oid
+####NEO_API:wc_ecc_get_oid
 Got Key
 Parsed Past Key
 wolfSSL Entering GetAlgoId
@@ -364,30 +353,46 @@ wolfSSL Entering ConfirmSignature
 
 *wc_Sha256Hash hash (size:32):
 D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_x963===================================>
+####NEO_API:wc_ecc_init_ex
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_import_x963
+
+*FUCK pubkey (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
 ####NEO_API:wc_ecc_import_x963_org
 ####NEO_API:wc_ecc_import_x963_ex_org
 
 *wc_ecc_import_x963_ex_org in (size:65):
 04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
-####NEO_API:wc_ecc_set_curve_org
-<===================================END NEO_ECC_API:wc_ecc_import_x963@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_verify_hash===================================>
+####NEO_API:wc_ecc_set_curve
+END NEO_ECC_API:wc_ecc_import_x963@@@@@@@
+===================================
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_verify_hash
 
 *TAG_ECC:sig (size:71):
 304502210093D1701F821C31C7254624AA6077409A19BD96ED5C6D7352BBE1B3809408C6A502204AC498F4C55FB400C18171C3FE72D5E3C417B3718EAA270877367F697AC914A2
 
 *TAG_ECC:hash (size:32):
 D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
+####NEO_API:wc_ecc_export_x963_org
 
-*FUCK      sig (size:71):
+*wc_ecc_export_x963_org out (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+
+*FUCK sig (size:71):
 304502210093D1701F821C31C7254624AA6077409A19BD96ED5C6D7352BBE1B3809408C6A502204AC498F4C55FB400C18171C3FE72D5E3C417B3718EAA270877367F697AC914A2
 
-*FUCK      hash (size:32):
+*FUCK hash (size:32):
 D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
+
+*FUCK tmppubkey (size:65):
+04D57CBAB7682AE97681C72FAB34AF2873CDBB49E442F85EFEA4DE55C51ED093EE7E1AD8C3E4025E80F9C4F866B26000D5C8E31C838070D9C0A18FF75AA0EC9B4B
+
+*sign64  (size:64):
+93D1701F821C31C7254624AA6077409A19BD96ED5C6D7352BBE1B3809408C6A54AC498F4C55FB400C18171C3FE72D5E3C417B3718EAA270877367F697AC914A2
 ####NEO_API:wc_ecc_verify_hash_org
 
 *sig (size:71):
@@ -395,20 +400,17 @@ D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
 
 *hash (size:32):
 D69A480D50649F2A08626638AAC64AC4ADBBA15D89C95637B1E05D70F66B9944
-####NEO_API:wc_ecc_verify_hash_ex_org
-<===================================END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+####NEO_API:wc_ecc_verify_hash_ex
+END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+===================================
 wolfSSL Leaving ConfirmSignature, return 0
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
+####NEO_API:wc_ecc_free
 Verified Peer's cert
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_x963_ex===================================>
+####NEO_API:wc_ecc_init_ex
+####NEO_API:wc_ecc_get_oid
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_import_x963_ex
 
 *TAG_ECC:in (size:65):
 04557C3311C1CAB0782A690E8DEA04FD7504CEE338666D8942192A41E06A77035D7DB3704B0353C38A8EAA7D3CD0AB0E629A662EDA06B3BB8E11B4221ADE24FA5A
@@ -416,11 +418,10 @@ Verified Peer's cert
 
 *wc_ecc_import_x963_ex_org in (size:65):
 04557C3311C1CAB0782A690E8DEA04FD7504CEE338666D8942192A41E06A77035D7DB3704B0353C38A8EAA7D3CD0AB0E629A662EDA06B3BB8E11B4221ADE24FA5A
-####NEO_API:wc_ecc_set_curve_org
-<===================================END NEO_ECC_API:wc_ecc_import_x963_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_size===================================>
-####NEO_API:wc_ecc_size_org
-<===================================END NEO_ECC_API:wc_ecc_size@@@@@@@
+####NEO_API:wc_ecc_set_curve
+END NEO_ECC_API:wc_ecc_import_x963_ex@@@@@@@
+===================================
+####NEO_API:wc_ecc_size
 wolfSSL Leaving ProcessPeerCerts, return 0
 wolfSSL Leaving DoHandShakeMsgType(), return 0
 wolfSSL Leaving DoHandShakeMsg(), return 0
@@ -440,54 +441,66 @@ wolfSSL Entering DoHandShakeMsgType
 !@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:server_key_exchange
 
 *handshake hash input (size:148):
-0C0000900300174104220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6040300473045022100B500C284D1E3310CFDEA9E885BB66C7612DFB630DD2DE380FFC37B6C7AC758D3022057DAAE8F740B469664EC196E492503F2B41350D74017F2597F995FD8DAC8219B
+0C00009003001741045C49F3E7773EC962CE1B653F460D8956B4BA46001CF89FB64603BDCDFB29165F96C8D69114ED0F2FB565B825F437FC1EA249B20F55861ABCAFA121B76C724782040300473045022100EB08708CC28CBDB5F153D5E2135A9038117D9FB59DE0C36E8754D177BBF68EF802204D2BD9794835CA915CC71EF91DE527E4A04ED8F03FE8BB1DB2FA7B2EC5C8AEDE
 processing server key exchange
 wolfSSL Entering DoServerKeyExchange
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_x963_ex===================================>
+####NEO_API:wc_ecc_init_ex
+####NEO_API:wc_ecc_get_oid
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_import_x963_ex
 
 *TAG_ECC:in (size:65):
-04220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
+045C49F3E7773EC962CE1B653F460D8956B4BA46001CF89FB64603BDCDFB29165F96C8D69114ED0F2FB565B825F437FC1EA249B20F55861ABCAFA121B76C724782
 ####NEO_API:wc_ecc_import_x963_ex_org
 
 *wc_ecc_import_x963_ex_org in (size:65):
-04220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
-####NEO_API:wc_ecc_set_curve_org
-<===================================END NEO_ECC_API:wc_ecc_import_x963_ex@@@@@@@
+045C49F3E7773EC962CE1B653F460D8956B4BA46001CF89FB64603BDCDFB29165F96C8D69114ED0F2FB565B825F437FC1EA249B20F55861ABCAFA121B76C724782
+####NEO_API:wc_ecc_set_curve
+END NEO_ECC_API:wc_ecc_import_x963_ex@@@@@@@
+===================================
 
 *wc_Sha256Hash in (size:133):
-EC52158BEDDDA74A073A8B16CA1C14978678749A0F9DD727DEAE0C014A882A653FBF71115060ADD8264AAA517E060EED8BB25EEDF1B9B8F4ED4D651812CEA9E80300174104220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
+2E2C4FA0F936F3830E1BCFFC47B3347FE4D863D9245C0F6BA05D62BCCC04B75D9CD86CAE15C063DACFA11776D6606374F74CBC5544073A4DFC977AAFC33423CC03001741045C49F3E7773EC962CE1B653F460D8956B4BA46001CF89FB64603BDCDFB29165F96C8D69114ED0F2FB565B825F437FC1EA249B20F55861ABCAFA121B76C724782
 
 *wc_Sha256Hash hash (size:32):
-E491A3BB906EC9445511114F295F9350759C0F7938EAF548B289BF789540713A
+332A1997E819ECCEAB7C8DBFA771CCD238A189A05995A3BD354A70D25C8A0DA6
 wolfSSL Entering EccVerify
-@@@@@@@NEO_ECC_API:wc_ecc_verify_hash===================================>
+
+===================================
+@@@@@@@NEO_ECC_API:wc_ecc_verify_hash
 
 *TAG_ECC:sig (size:71):
-3045022100B500C284D1E3310CFDEA9E885BB66C7612DFB630DD2DE380FFC37B6C7AC758D3022057DAAE8F740B469664EC196E492503F2B41350D74017F2597F995FD8DAC8219B
+3045022100EB08708CC28CBDB5F153D5E2135A9038117D9FB59DE0C36E8754D177BBF68EF802204D2BD9794835CA915CC71EF91DE527E4A04ED8F03FE8BB1DB2FA7B2EC5C8AEDE
 
 *TAG_ECC:hash (size:32):
-E491A3BB906EC9445511114F295F9350759C0F7938EAF548B289BF789540713A
+332A1997E819ECCEAB7C8DBFA771CCD238A189A05995A3BD354A70D25C8A0DA6
+####NEO_API:wc_ecc_export_x963_org
 
-*FUCK      sig (size:71):
-3045022100B500C284D1E3310CFDEA9E885BB66C7612DFB630DD2DE380FFC37B6C7AC758D3022057DAAE8F740B469664EC196E492503F2B41350D74017F2597F995FD8DAC8219B
+*wc_ecc_export_x963_org out (size:65):
+04557C3311C1CAB0782A690E8DEA04FD7504CEE338666D8942192A41E06A77035D7DB3704B0353C38A8EAA7D3CD0AB0E629A662EDA06B3BB8E11B4221ADE24FA5A
 
-*FUCK      hash (size:32):
-E491A3BB906EC9445511114F295F9350759C0F7938EAF548B289BF789540713A
+*FUCK sig (size:71):
+3045022100EB08708CC28CBDB5F153D5E2135A9038117D9FB59DE0C36E8754D177BBF68EF802204D2BD9794835CA915CC71EF91DE527E4A04ED8F03FE8BB1DB2FA7B2EC5C8AEDE
+
+*FUCK hash (size:32):
+332A1997E819ECCEAB7C8DBFA771CCD238A189A05995A3BD354A70D25C8A0DA6
+
+*FUCK tmppubkey (size:65):
+04557C3311C1CAB0782A690E8DEA04FD7504CEE338666D8942192A41E06A77035D7DB3704B0353C38A8EAA7D3CD0AB0E629A662EDA06B3BB8E11B4221ADE24FA5A
+
+*sign64  (size:64):
+EB08708CC28CBDB5F153D5E2135A9038117D9FB59DE0C36E8754D177BBF68EF84D2BD9794835CA915CC71EF91DE527E4A04ED8F03FE8BB1DB2FA7B2EC5C8AEDE
 ####NEO_API:wc_ecc_verify_hash_org
 
 *sig (size:71):
-3045022100B500C284D1E3310CFDEA9E885BB66C7612DFB630DD2DE380FFC37B6C7AC758D3022057DAAE8F740B469664EC196E492503F2B41350D74017F2597F995FD8DAC8219B
+3045022100EB08708CC28CBDB5F153D5E2135A9038117D9FB59DE0C36E8754D177BBF68EF802204D2BD9794835CA915CC71EF91DE527E4A04ED8F03FE8BB1DB2FA7B2EC5C8AEDE
 
 *hash (size:32):
-E491A3BB906EC9445511114F295F9350759C0F7938EAF548B289BF789540713A
-####NEO_API:wc_ecc_verify_hash_ex_org
-<===================================END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+332A1997E819ECCEAB7C8DBFA771CCD238A189A05995A3BD354A70D25C8A0DA6
+####NEO_API:wc_ecc_verify_hash_ex
+END NEO_ECC_API:wc_ecc_verify_hash@@@@@@@
+===================================
 wolfSSL Leaving EccVerify, return 0
 wolfSSL Leaving DoServerKeyExchange, return 0
 wolfSSL Leaving DoHandShakeMsgType(), return 0
@@ -540,582 +553,4 @@ growing output buffer
 
 Shrinking output buffer
 
-sent: certificate
-connect state: FIRST_REPLY_FIRST
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:SendClientKeyExchange
-wolfSSL Entering SendClientKeyExchange
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-wolfSSL Entering EccMakeKey
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_make_key_ex===================================>
-####NEO_API:wc_ecc_make_key_ex_org
-####NEO_API:wc_ecc_set_curve_org
-<===================================END NEO_ECC_API:wc_ecc_make_key_ex@@@@@@@
-wolfSSL Leaving EccMakeKey, return 0
-@@@@@@@NEO_ECC_API:wc_ecc_export_x963===================================>
-####NEO_API:wc_ecc_export_x963_org
-
-*wc_ecc_export_x963_org out (size:65):
-046A4558587FDEC12AF8DFBF3172BC3EE576F24972DBE29E96C023A7ED71B7E94FF8120F126D9A14C0D8DBFE6D40F94B95DB0E0E2B6E4CB0029431086002390D97
-<===================================END NEO_ECC_API:wc_ecc_export_x963@@@@@@@
-wolfSSL Entering EccSharedSecret
-@@@@@@@NEO_ECC_API:wc_ecc_shared_secret===================================>
-####NEO_API:wc_ecc_shared_secret_org
-HEXDUMP BEGIN
-	private_key (size:10):
-		0xe9e8ce3
-		0x3ff44a4
-		0x4ef05e1
-		0x923e7fe
-		0x3cbf9b5
-		0xb685736
-		0x850612a
-		0xca8f45a
-		0x13b372d
-		0xa
-HEXDUMP END
-HEXDUMP BEGIN
-	public_key X (size:10):
-		0xc530175
-		0x76940e1
-		0x7587728
-		0x228cbb
-		0x308fc3b
-		0xe6faebb
-		0x16639fd
-		0x7db612a
-		0x20eae00
-		0x2
-HEXDUMP END
-HEXDUMP BEGIN
-	public_key Y (size:10):
-		0x5e8ebe6
-		0x5bd9f2b
-		0xdc8840a
-		0xacbd7e7
-		0xd75516a
-		0xce44cde
-		0x43738f0
-		0x6936e6f
-		0xcedac03
-		0xa
-HEXDUMP END
-####NEO_API:wc_ecc_export_x963_org
-
-*wc_ecc_export_x963_org out (size:65):
-04220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
-
-*public_key (size:65):
-04220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
-
-*private_key (size:32):
-A13B372DCA8F45A850612AB6857363CBF9B5923E7FE4EF05E13FF44A4E9E8CE3
-
-*public_key X (size:32):
-220EAE007DB612A16639FDE6FAEBB308FC3B0228CBB758772876940E1C530175
-
-*public_key Y (size:32):
-ACEDAC036936E6F43738F0CE44CDED75516AACBD7E7DC8840A5BD9F2B5E8EBE6
-####NEO_API:wc_ecc_shared_secret_ex_org
-####NEO_API:wc_ecc_shared_secret_gen_org
-
-*wc_ecc_shared_secret_org OUT (size:32):
-82A5707D06985C9242F4EADFBC34127D422CD50E33E7D52999B5D37F7FBC9D6E
-<===================================END NEO_ECC_API:wc_ecc_shared_secret@@@@@@@
-wolfSSL Leaving EccSharedSecret, return 0
-growing output buffer
-
-
-*handshake hash input (size:70):
-1000004241046A4558587FDEC12AF8DFBF3172BC3EE576F24972DBE29E96C023A7ED71B7E94FF8120F126D9A14C0D8DBFE6D40F94B95DB0E0E2B6E4CB0029431086002390D97
-Shrinking output buffer
-
-####NEO_API:PRF
-
-*secret (size:32):
-82A5707D06985C9242F4EADFBC34127D422CD50E33E7D52999B5D37F7FBC9D6E
-label : master secret
-
-*label (size:13):
-6D617374657220736563726574
-
-*seed (size:64):
-EC52158BEDDDA74A073A8B16CA1C14978678749A0F9DD727DEAE0C014A882A653FBF71115060ADD8264AAA517E060EED8BB25EEDF1B9B8F4ED4D651812CEA9E8
-
-*digest (size:48):
-9B5B7AD44BEBF4F6E83568F67901C544344FA5632B1F5C43B5132DC76F23BD5707EF8E3DBC6944DABB122E9E1B88EBA2
-
-*masterSecret (size:48):
-9B5B7AD44BEBF4F6E83568F67901C544344FA5632B1F5C43B5132DC76F23BD5707EF8E3DBC6944DABB122E9E1B88EBA2
-
-*preMasterSecret (size:32):
-82A5707D06985C9242F4EADFBC34127D422CD50E33E7D52999B5D37F7FBC9D6E
-####NEO_API:PRF
-
-*secret (size:48):
-9B5B7AD44BEBF4F6E83568F67901C544344FA5632B1F5C43B5132DC76F23BD5707EF8E3DBC6944DABB122E9E1B88EBA2
-label : key expansion
-
-*label (size:13):
-6B657920657870616E73696F6E
-
-*seed (size:64):
-3FBF71115060ADD8264AAA517E060EED8BB25EEDF1B9B8F4ED4D651812CEA9E8EC52158BEDDDA74A073A8B16CA1C14978678749A0F9DD727DEAE0C014A882A65
-
-*digest (size:128):
-1C9BF27F9B760DC8D2B1579F7BA386771986857222C91952B384F80AE1D979947F92BA033CC21EB19A06C94051769CE65FB77356DFCB9C62BBB48733A40F710A3AC26BD30C8E923834D51634EBB647AEF072AC983762C6C64DB6D651B7E3E67664E20D885CC381AF6874BC7BB15B2F28C3106ED8C07424223C1A9E6D63ADB2F1
-
-*key_dig (size:128):
-1C9BF27F9B760DC8D2B1579F7BA386771986857222C91952B384F80AE1D979947F92BA033CC21EB19A06C94051769CE65FB77356DFCB9C62BBB48733A40F710A3AC26BD30C8E923834D51634EBB647AEF072AC983762C6C64DB6D651B7E3E67664E20D885CC381AF6874BC7BB15B2F28C3106ED8C07424223C1A9E6D63ADB2F1
-
-*client_write_MAC_secret (size:32):
-1C9BF27F9B760DC8D2B1579F7BA386771986857222C91952B384F80AE1D97994
-
-*server_write_MAC_secret (size:32):
-7F92BA033CC21EB19A06C94051769CE65FB77356DFCB9C62BBB48733A40F710A
-
-*client_write_key (size:16):
-3AC26BD30C8E923834D51634EBB647AE
-
-*server_write_key (size:16):
-F072AC983762C6C64DB6D651B7E3E676
-
-*client_write_IV (size:16):
-64E20D885CC381AF6874BC7BB15B2F28
-
-*server_write_IV (size:16):
-C3106ED8C07424223C1A9E6D63ADB2F1
-wolfSSL Leaving SendClientKeyExchange, return 0
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
-sent: client key exchange
-connect state: FIRST_REPLY_SECOND
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:SendCertificateVerify
-wolfSSL Entering SendCertificateVerify
-growing output buffer
-
-
-*wc_Sha256GetHash (size:32):
-982B3EDDBEC58AE2E7379D6B9236FBEE4FCE1DE3D0C83C89999183D921E9BE8D
-Trying RSA private key
-@@@@@@@NEO_ECC_API:wc_ecc_init_ex===================================>
-####NEO_API:wc_ecc_init_ex_org
-<===================================END NEO_ECC_API:wc_ecc_init_ex@@@@@@@
-Trying ECC private key, RSA didn't work
-wolfSSL Entering GetObjectId()
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_import_private_key_ex===================================>
-
-*TAG_ECC:priv (size:32):
-B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
-
-*TAG_ECC:pub (size:65):
-044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
-####NEO_API:wc_ecc_import_private_key_ex_org
-
-*priv (size:32):
-B4083C7036419F8CB7BA8368313F83F07DEFF63EDC87AEB9C03E8EA211F29A2B
-
-*pub (size:65):
-044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
-####NEO_API:wc_ecc_import_x963_ex_org
-
-*wc_ecc_import_x963_ex_org in (size:65):
-044A5B42C20E614F27DB01E7AC348BE234F9CB0E79BA3C08C7415A22F8C9EA7A3D24B9E008B8C7F37C775BA611C09236A7315C50BB1F5D1A64C8548CFCF5BDF90F
-####NEO_API:wc_ecc_set_curve_org
-HEXDUMP BEGIN
-	key->k (size:10):
-		0x1f29a2b
-		0x3e8ea21
-		0x7aeb9c0
-		0xf63edc8
-		0x3f07def
-		0x68313f8
-		0xcb7ba83
-		0x36419f8
-		0x4083c70
-		0xb
-HEXDUMP END
-<===================================END NEO_ECC_API:wc_ecc_import_private_key_ex@@@@@@@
-Using ECC private key
-@@@@@@@NEO_ECC_API:wc_ecc_size===================================>
-####NEO_API:wc_ecc_size_org
-<===================================END NEO_ECC_API:wc_ecc_size@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_sig_size===================================>
-####NEO_API:wc_ecc_sig_size_org
-####NEO_API:wc_ecc_size_org
-<===================================END NEO_ECC_API:wc_ecc_sig_size@@@@@@@
-wolfSSL Entering EccSign
-@@@@@@@NEO_ECC_API:wc_ecc_sign_hash===================================>
-
-*TAG_ECC:in (size:32):
-982B3EDDBEC58AE2E7379D6B9236FBEE4FCE1DE3D0C83C89999183D921E9BE8D
-####NEO_API:wc_ecc_sign_hash_org
-
-*in (size:32):
-982B3EDDBEC58AE2E7379D6B9236FBEE4FCE1DE3D0C83C89999183D921E9BE8D
-####NEO_API:wc_ecc_sign_hash_ex_org
-####NEO_API:wc_ecc_init_ex_org
-####NEO_API:wc_ecc_make_key_ex_org
-####NEO_API:wc_ecc_set_curve_org
-####NEO_API:wc_ecc_free_org
-
-*r (size:40):
-1C78C601D479CB072BAB3D05298A970A4A3B6D072B084309D297470592FD250DE4867A070E000000
-
-*s (size:40):
-5E8E7E0920B48A0E280F7B066FD5060BB2AEA80D8AA1F20CC7AAC108EEB75D0AB02C90070D000000
-HEXDUMP BEGIN
-	r (size:10):
-		0x1c6781c
-		0x7cb79d4
-		0x53dab2b
-		0xa978a29
-		0x76d3b4a
-		0x943082b
-		0x54797d2
-		0xd25fd92
-		0x77a86e4
-		0xe
-HEXDUMP END
-HEXDUMP BEGIN
-	s (size:10):
-		0x97e8e5e
-		0xe8ab420
-		0x67b0f28
-		0xb06d56f
-		0xda8aeb2
-		0xcf2a18a
-		0x8c1aac7
-		0xa5db7ee
-		0x7902cb0
-		0xd
-HEXDUMP END
-
-*r just hex (size:32):
-E77A86E4D25FD9254797D2943082B76D3B4AA978A2953DAB2B7CB79D41C6781C
-
-*s just hex (size:32):
-D7902CB0A5DB7EE8C1AAC7CF2A18ADA8AEB2B06D56F67B0F28E8AB42097E8E5E
-
-*out (size:72):
-3046022100E77A86E4D25FD9254797D2943082B76D3B4AA978A2953DAB2B7CB79D41C6781C022100D7902CB0A5DB7EE8C1AAC7CF2A18ADA8AEB2B06D56F67B0F28E8AB42097E8E5E
-
-*TAG_ECC:out (size:72):
-3046022100E77A86E4D25FD9254797D2943082B76D3B4AA978A2953DAB2B7CB79D41C6781C022100D7902CB0A5DB7EE8C1AAC7CF2A18ADA8AEB2B06D56F67B0F28E8AB42097E8E5E
-<===================================END NEO_ECC_API:wc_ecc_sign_hash@@@@@@@
-wolfSSL Leaving EccSign, return 0
-
-*handshake hash input (size:80):
-0F00004C040300483046022100E77A86E4D25FD9254797D2943082B76D3B4AA978A2953DAB2B7CB79D41C6781C022100D7902CB0A5DB7EE8C1AAC7CF2A18ADA8AEB2B06D56F67B0F28E8AB42097E8E5E
-Shrinking output buffer
-
-wolfSSL Leaving SendCertificateVerify, return 0
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
-sent: certificate verify
-connect state: FIRST_REPLY_THIRD
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:SendChangeCipher
-growing output buffer
-
-Shrinking output buffer
-
-sent: change cipher spec
-connect state: FIRST_REPLY_FOURTH
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:SendFinished
-growing output buffer
-
-
-*wc_Sha256GetHash (size:32):
-DF91C8F986E53C40E82E0CFA80C315468BCB87D6D5EC3F02AE4D78E51D750659
-####NEO_API:PRF
-
-*secret (size:48):
-9B5B7AD44BEBF4F6E83568F67901C544344FA5632B1F5C43B5132DC76F23BD5707EF8E3DBC6944DABB122E9E1B88EBA2
-label : client finished
-
-*label (size:15):
-636C69656E742066696E6973686564
-
-*seed (size:32):
-DF91C8F986E53C40E82E0CFA80C315468BCB87D6D5EC3F02AE4D78E51D750659
-
-*digest (size:12):
-7EA9AEFA378C4ECC8611A00D
-wolfSSL Entering BuildMessage
-
-*ext iv (size:16):
-E157434769418193F51D3027460F8545
-
-*handshake hash input (size:16):
-1400000C7EA9AEFA378C4ECC8611A00D
-
-*hmac in (size:16):
-1400000C7EA9AEFA378C4ECC8611A00D
-
-*myInner (size:13):
-00000000000000001603030010
-
-*hmac out (size:16):
-3BDFCFF11FCE5F70BC931A04BEB4BA48
-
-*Encrypt in (size:80):
-E157434769418193F51D3027460F85451400000C7EA9AEFA378C4ECC8611A00D3BDFCFF11FCE5F70BC931A04BEB4BA48E113E8AD7BFBB772DFDC3901BD6FC5EF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F
-
-*enc iv (size:16):
-64E20D885CC381AF6874BC7BB15B2F28
-
-*Encrypt out (size:80):
-A96683DD1EC101F2DAC7EA612F66E8026793745F81B83FC8410F3BD48DFFA2DBD89208A4AD03939C217C14B716A1E03E6AEB30DDD7CE8C4B11E537F92171499F2082495274CE5F98426D7BCA2C3BA629
-wolfSSL Leaving BuildMessage, return 0
-wolfSSL Entering get_locked_session_stats
-wolfSSL Leaving get_locked_session_stats, return 1
-Shrinking output buffer
-
-sent: finished
-connect state: FINISHED_DONE
-!!!!!!!!!doProcessInit
-!!!!!!!!!getRecordLayerHeader
-!!!!!!!!!getData
-!!!!!!!!!decryptMessage
-!!!!!!!!!verifyMessage
-!!!!!!runProcessingOneMessage
-received record layer msg
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:change_cipher_spec
-got CHANGE CIPHER SPEC
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:change_cipher_hs
-
-*wc_Sha256GetHash (size:32):
-2A7E5FDC87D699245420B349E30F64E596C384855DD8CA7E1C37B92C93C5C5F7
-####NEO_API:PRF
-
-*secret (size:48):
-9B5B7AD44BEBF4F6E83568F67901C544344FA5632B1F5C43B5132DC76F23BD5707EF8E3DBC6944DABB122E9E1B88EBA2
-label : server finished
-
-*label (size:15):
-7365727665722066696E6973686564
-
-*seed (size:32):
-2A7E5FDC87D699245420B349E30F64E596C384855DD8CA7E1C37B92C93C5C5F7
-
-*digest (size:12):
-4B6A33ED30D525ABDF840EFC
-!!!!!!!!!doProcessInit
-!!!!!!!!!getRecordLayerHeader
-!!!!!!!!!getData
-!!!!!!!!!decryptMessage
-
-*Decrypt in (size:80):
-F7F87D46FE2C837E12FDE373C6CA43EBEA22D441D29048B95CEABAE5B42CE749D7E27EBDE64E32867E829C36A4D1283D7FD95076939703C1D831007F9FAC8F8233FCEFBA94F52BE2AA13306DE82023CD
-
-*Decrypt iv (size:16):
-C3106ED8C07424223C1A9E6D63ADB2F1
-
-*Decrypt out (size:80):
-D7D6338BFC26DED412AA0D491ECA4B9F1400000C4B6A33ED30D525ABDF840EFC4F7FC3329F19FBB297C10665A03D4193D6B49E4201269CC51B46CD9632950DDF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F
-!!!!!!!!!verifyMessage
-
-*VerifyMac (size:80):
-1400000C4B6A33ED30D525ABDF840EFC4F7FC3329F19FBB297C10665A03D4193D6B49E4201269CC51B46CD9632950DDF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F2100B500C284D1E3310CFDEA9E885BB6
-
-*hmac verify in  (size:16):
-1400000C4B6A33ED30D525ABDF840EFC
-
-*myInner (size:13):
-00000000000000001603030010
-
-*hmac verify (size:32):
-4F7FC3329F19FBB297C10665A03D4193D6B49E4201269CC51B46CD9632950DDF
-!!!!!!runProcessingOneMessage
-received record layer msg
-wolfSSL Entering DoHandShakeMsg()
-wolfSSL Entering DoHandShakeMsgType
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:finished
-
-*handshake hash input (size:16):
-1400000C4B6A33ED30D525ABDF840EFC
-processing finished
-wolfSSL Leaving DoHandShakeMsgType(), return 0
-wolfSSL Leaving DoHandShakeMsg(), return 0
-connect state: SECOND_REPLY_DONE
-Shrinking input buffer
-
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_free===================================>
-####NEO_API:wc_ecc_free_org
-<===================================END NEO_ECC_API:wc_ecc_free@@@@@@@
-wolfSSL Leaving SSL_connect(), return 1
-wolfSSL Entering SSL_get_peer_certificate
-wolfSSL Entering X509_get_issuer_name
-wolfSSL Entering wolfSSL_X509_NAME_oneline
-wolfSSL Entering wolfSSL_X509_get_subject_name
-wolfSSL Entering wolfSSL_X509_NAME_oneline
-wolfSSL Entering wolfSSL_X509_get_next_altname
-wolfSSL Entering wolfSSL_X509_get_serial_number
-wolfSSL Entering wolfSSL_FreeX509
-wolfSSL Entering ExternalFreeX509
-free called on non dynamic object, not freeing
-wolfSSL Entering SSL_get_version
-wolfSSL Entering SSL_get_current_cipher
-wolfSSL Entering SSL_CIPHER_get_name
-wolfSSL Entering wolfSSL_get_cipher_name_from_suite
-@@@@@@@NEO_ECC_API:wc_ecc_get_oid===================================>
-####NEO_API:wc_ecc_get_oid_org
-<===================================END NEO_ECC_API:wc_ecc_get_oid@@@@@@@
-@@@@@@@NEO_ECC_API:wc_ecc_get_name===================================>
-####NEO_API:wc_ecc_get_name_org
-####NEO_API:wc_ecc_get_curve_idx_org
-<===================================END NEO_ECC_API:wc_ecc_get_name@@@@@@@
-wolfSSL Entering SSL_write()
-growing output buffer
-
-wolfSSL Entering BuildMessage
-
-*ext iv (size:16):
-CD38894B781575F58E092E1C04F8B857
-
-*hmac in (size:50):
-3031323334353637383941424344454630313233343536373839414243444546303132333435363738394142434445463031
-
-*myInner (size:13):
-00000000000000011703030032
-
-*hmac out (size:50):
-691E272C5C0F124ACB6CC724F408B7D04F3E2A82976FDF03B5315723BC35406E0D0D0D0D0D0D0D0D0D0D0D0D0D0DCDCDCDCD
-
-*Encrypt in (size:112):
-CD38894B781575F58E092E1C04F8B8573031323334353637383941424344454630313233343536373839414243444546303132333435363738394142434445463031691E272C5C0F124ACB6CC724F408B7D04F3E2A82976FDF03B5315723BC35406E0D0D0D0D0D0D0D0D0D0D0D0D0D0D
-
-*enc iv (size:16):
-2082495274CE5F98426D7BCA2C3BA629
-
-*Encrypt out (size:112):
-C7525674B7F2D1A7A8F53D69F91A7A9FBEFD4E0BFA3A810A73F8CD82695221C6BBB518C9AD86BF034F57CD2177C7526A52093D7E9B22FAD243344978856475C215E50CD421196C6545B216E88F56C210B68D3CCCBECF5F156B2D6A1BA6F2DA8B5B876F76839779241315864436953BD5
-wolfSSL Leaving BuildMessage, return 0
-
-*send_buffer (size:120):
-1703030070C7525674B7F2D1A7A8F53D69F91A7A9FBEFD4E0BFA3A810A73F8CD82695221C6BBB518C9AD86BF034F57CD2177C7526A52093D7E9B22FAD243344978856475C215E50CD421196C6545B216E88F56C210B68D3CCCBECF5F156B2D6A1BA6F2DA8B5B876F76839779241315864436953BD5CDCDCD
-Shrinking output buffer
-
-wolfSSL Leaving SSL_write(), return 50
-wolfSSL Entering wolfSSL_read()
-wolfSSL Entering wolfSSL_read_internal()
-wolfSSL Entering ReceiveData()
-!!!!!!!!!doProcessInit
-!!!!!!!!!getRecordLayerHeader
-!!!!!!!!!getData
-growing input buffer
-
-!!!!!!!!!decryptMessage
-
-*Decrypt in (size:208):
-D7C608AF9D18DFA68030267C1A4FB7495DA36FFCD47AEF7ACCC999C3E1EB63DECF687208DE66C036169B4EEA655D106B9C373E9AE68722475F0B229DF6DEA3497AE0C0CED4202E28CFF534C654E9689CA7FDD43981FEA2159EF8B177ABD275FE41CAD39899519E98739814DBE745C635DEFD174DD79A7ADA9C1AC22289EB731B0C3CD22A37C34682CE090668E45AB5B59505D24C5959CFB78072A0C0F9A3FDDF717450E23E6D433CC17A07FABCCA3EAA124220BA2819E931145B7D9D53A94C97A8BB1A3A86B8A210A982DB0B34192E8B
-
-*Decrypt iv (size:16):
-33FCEFBA94F52BE2AA13306DE82023CD
-
-*Decrypt out (size:208):
-324EDABA621C6D94D3613168E213F4DF5748415420544845204655434B20415245205520444F4E473F303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738391C25A9B83CF2F9883154AB4217D9BAE1F4A4C64A9B6519279E59EE52CF99C9F00404040404
-!!!!!!!!!verifyMessage
-
-*VerifyMac (size:208):
-5748415420544845204655434B20415245205520444F4E473F303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738391C25A9B83CF2F9883154AB4217D9BAE1F4A4C64A9B6519279E59EE52CF99C9F00404040404FDFDFDFDDDDDDDDD2A67DB61EE830000
-
-*hmac verify in  (size:155):
-5748415420544845204655434B20415245205520444F4E473F30313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839
-
-*myInner (size:13):
-0000000000000001170303009B
-
-*hmac verify (size:32):
-1C25A9B83CF2F9883154AB4217D9BAE1F4A4C64A9B6519279E59EE52CF99C9F0
-!!!!!!runProcessingOneMessage
-received record layer msg
-
-
-
-
-!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:application_data
-got app DATA
-wolfSSL Leaving ReceiveData(), return 79
-wolfSSL Leaving wolfSSL_read_internal(), return 79
-wolfSSL Entering SSL_shutdown()
-growing output buffer
-
-wolfSSL Entering BuildMessage
-
-*ext iv (size:16):
-920A82BA8CED73602AB4F0E22BD66D54
-
-*hmac in (size:2):
-0100
-
-*myInner (size:13):
-00000000000000021503030002
-
-*hmac out (size:2):
-0EEF
-
-*Encrypt in (size:64):
-920A82BA8CED73602AB4F0E22BD66D5401000EEFDD42743E1730C4933FCDDBCA191933695F304E93FF55147671B03905A1E00D0D0D0D0D0D0D0D0D0D0D0D0D0D
-
-*enc iv (size:16):
-5B876F76839779241315864436953BD5
-
-*Encrypt out (size:64):
-9DDD2B44CEB96614D5DB608A6559F08C3FE7C803B3B2AC358DCE85D808783E69B7E3DB2841522BA4418369C37F0D06D70E016BB1AB68297E42A4A2FD56566E90
-wolfSSL Leaving BuildMessage, return 0
-Shrinking output buffer
-
-wolfSSL Leaving SSL_shutdown(), return 2
-wolfSSL Entering SSL_free
-CTX ref count not 0 yet, no free
-Shrinking input buffer
-
-wolfSSL Entering wolfSSL_BIO_free
-wolfSSL Leaving SSL_free, return 0
-wolfSSL Entering SSL_CTX_free
-CTX ref count down to 0, doing full free
-wolfSSL Entering wolfSSL_CertManagerFree
-wolfSSL Leaving SSL_CTX_free, return 0
-wolfSSL Entering wolfSSL_Cleanup
-wolfSSL Entering wolfCrypt_Cleanup
+sent: c

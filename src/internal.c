@@ -10731,8 +10731,7 @@ static INLINE int EncryptDo(WOLFSSL* ssl, byte* out, const byte* input,
     return ret;
 }
 
-static INLINE int Encrypt(WOLFSSL* ssl, byte* out, const byte* input, word16 sz,
-    int asyncOkay)
+static INLINE int Encrypt(WOLFSSL* ssl, byte* out, const byte* input, word16 sz,  int asyncOkay)
 {
     int ret = 0;
 

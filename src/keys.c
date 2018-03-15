@@ -2487,6 +2487,7 @@ static int SetKeys(Ciphers* enc, Ciphers* dec, Keys* keys, CipherSpecs* specs,
 
         if (side == WOLFSSL_CLIENT_END) {
             if (enc) {
+				print_hexdumpbin("wc_AesSetKey keys",keys->client_write_key, specs->key_size);
                 aesRet = wc_AesSetKey(enc->aes, keys->client_write_key,
                                    specs->key_size, keys->client_write_IV,
                                    AES_ENCRYPTION);

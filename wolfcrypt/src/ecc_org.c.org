@@ -980,62 +980,6 @@ int mp_jacobi(mp_int* a, mp_int* n, int* c);
 int mp_sqrtmod_prime(mp_int* n, mp_int* prime, mp_int* ret);
 
 //START ECC_ORG_DEC
-const char*  wc_ecc_get_name_org(int curve_id);
-int ecc_map_org();
-int ecc_projective_add_point_org(ecc_point*  P,ecc_point*  Q,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp);
-int ecc_projective_dbl_point_org(ecc_point*  P,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp);
-int wc_ecc_make_key_org(WC_RNG*  rng,int keysize,ecc_key*  key);
-int wc_ecc_make_key_ex_org(WC_RNG*  rng,int keysize,ecc_key*  key,int curve_id);
-int wc_ecc_make_pub_org(ecc_key*  key,ecc_point*  pubOut);
-int wc_ecc_check_key_org(ecc_key*  key);
-int wc_ecc_is_point_org(ecc_point*  ecp,mp_int*  a,mp_int*  b,mp_int*  prime);
-int wc_ecc_shared_secret_org(ecc_key*  private_key,ecc_key*  public_key,byte*  out,word32*  outlen);
-int wc_ecc_shared_secret_gen_org(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen);
-int wc_ecc_shared_secret_ex_org(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen);
-int wc_ecc_sign_hash_org(const byte*  in,word32 inlen,byte*  out,word32 * outlen,WC_RNG*  rng,ecc_key*  key);
-int wc_ecc_sign_hash_ex_org(const byte*  in,word32 inlen,WC_RNG*  rng,ecc_key*  key,mp_int * r,mp_int * s);
-int wc_ecc_verify_hash_org(const byte*  sig,word32 siglen,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key);
-int wc_ecc_verify_hash_ex_org(mp_int * r,mp_int * s,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key);
-int wc_ecc_init_org(ecc_key*  key);
-int wc_ecc_init_ex_org(ecc_key*  key,void*  heap,int devId);
-void wc_ecc_free_org(ecc_key*  key);
-int wc_ecc_set_flags_org(ecc_key*  key,word32 flags);
-int wc_ecc_set_curve_org(ecc_key*  key,int keysize,int curve_id);
-int wc_ecc_is_valid_idx_org(int n);
-int wc_ecc_get_curve_idx_org(int curve_id);
-int wc_ecc_get_curve_id_org(int curve_idx);
-int wc_ecc_get_curve_size_from_id_org(int curve_id);
-int wc_ecc_get_curve_idx_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_size_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_id_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_id_from_params_org(int fieldSize,const byte*  prime,word32 primeSz,const byte*  Af,word32 AfSz,const byte*  Bf,word32 BfSz,const byte*  order,word32 orderSz,const byte*  Gx,word32 GxSz,const byte*  Gy,word32 GySz,int cofactor);
-ecc_point*  wc_ecc_new_point_org();
-ecc_point*  wc_ecc_new_point_h_org(void*  h);
-void wc_ecc_del_point_org(ecc_point*  p);
-void wc_ecc_del_point_h_org(ecc_point*  p,void*  h);
-int wc_ecc_copy_point_org(ecc_point*  p,ecc_point * r);
-int wc_ecc_cmp_point_org(ecc_point*  a,ecc_point * b);
-int wc_ecc_point_is_at_infinity_org(ecc_point * p);
-int wc_ecc_mulmod_org(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map);
-int wc_ecc_mulmod_ex_org(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map,void*  heap);
-int wc_ecc_export_x963_org(ecc_key*  key,byte*  out,word32*  outLen);
-int wc_ecc_export_x963_ex_org(ecc_key*  key,byte*  out,word32*  outLen,int compressed);
-int wc_ecc_import_x963_org(const byte*  in,word32 inLen,ecc_key*  key);
-int wc_ecc_import_x963_ex_org(const byte*  in,word32 inLen,ecc_key*  key,int curve_id);
-int wc_ecc_import_private_key_org(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key);
-int wc_ecc_import_private_key_ex_org(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key,int curve_id);
-int wc_ecc_rs_to_sig_org(const char*  r,const char*  s,byte*  out,word32*  outlen);
-int wc_ecc_sig_to_rs_org(const byte*  sig,word32 sigLen,byte*  r,word32*  rLen,byte*  s,word32*  sLen);
-int wc_ecc_import_raw_org(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,const char*  curveName);
-int wc_ecc_import_raw_ex_org(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,int curve_id);
-int wc_ecc_export_private_only_org(ecc_key*  key,byte*  out,word32*  outLen);
-int wc_ecc_export_public_raw_org(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen);
-int wc_ecc_export_private_raw_org(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen,byte*  d,word32*  dLen);
-int wc_ecc_export_point_der_org(const int curve_idx,ecc_point*  point,byte*  out,word32*  outLen);
-int wc_ecc_import_point_der_org(byte*  in,word32 inLen,const int curve_idx,ecc_point*  point);
-int wc_ecc_size_org(ecc_key*  key);
-int wc_ecc_sig_size_org(ecc_key*  key);
-int wc_ecc_get_oid_org(word32 oidSum,const byte* *  oid,word32*  oidSz);
 //END ECC_ORG_DEC
 
 
@@ -1184,7 +1128,7 @@ static int wc_ecc_curve_load(const ecc_set_type* dp, ecc_curve_spec** pCurve,
         return BAD_FUNC_ARG;
 
 #ifdef ECC_CACHE_CURVE
-    x = wc_ecc_get_curve_idx_org(dp->id);
+    x = wc_ecc_get_curve_idx(dp->id);
     if (x == ECC_CURVE_INVALID)
         return ECC_BAD_ARG_E;
 
@@ -1309,19 +1253,19 @@ void wc_ecc_curve_cache_free(void)
  * returns the name stored from the curve if available, otherwise NULL.
  */
 
-const char* wc_ecc_get_name_org(int curve_id)
+const char* wc_ecc_get_name(int curve_id)
 {
-	print_title("wc_ecc_get_name_org");
+	print_title("wc_ecc_get_name");
 	
-    int curve_idx = wc_ecc_get_curve_idx_org(curve_id);
+    int curve_idx = wc_ecc_get_curve_idx(curve_id);
     if (curve_idx == ECC_CURVE_INVALID)
         return NULL;
     return ecc_sets[curve_idx].name;
 }
 
-int wc_ecc_set_curve_org(ecc_key* key, int keysize, int curve_id)
+int wc_ecc_set_curve(ecc_key* key, int keysize, int curve_id)
 {
-	print_title("wc_ecc_set_curve_org");
+	print_title("wc_ecc_set_curve");
 
     if (keysize <= 0 && curve_id < 0) {
         return BAD_FUNC_ARG;
@@ -1373,10 +1317,10 @@ int wc_ecc_set_curve_org(ecc_key* key, int keysize, int curve_id)
    mp       The "b" value from montgomery_setup()
    return   MP_OKAY on success
 */
-int ecc_projective_add_point_org(ecc_point* P, ecc_point* Q, ecc_point* R,
+int ecc_projective_add_point(ecc_point* P, ecc_point* Q, ecc_point* R,
                              mp_int* a, mp_int* modulus, mp_digit mp)
 {
-	//print_title("ecc_projective_add_point_org");
+	//print_title("ecc_projective_add_point");
 
    mp_int t1, t2;
 #ifdef ALT_ECC_SIZE
@@ -1409,7 +1353,7 @@ int ecc_projective_add_point_org(ecc_point* P, ecc_point* Q, ecc_point* R,
             (mp_cmp(P->y, Q->y) == MP_EQ || mp_cmp(P->y, &t1) == MP_EQ)) {
            mp_clear(&t1);
            mp_clear(&t2);
-          return ecc_projective_dbl_point_org(P, R, a, modulus, mp);
+          return ecc_projective_dbl_point(P, R, a, modulus, mp);
        }
    }
 
@@ -1669,10 +1613,10 @@ done:
    mp       The "b" value from montgomery_setup()
    return   MP_OKAY on success
 */
-int ecc_projective_dbl_point_org(ecc_point *P, ecc_point *R, mp_int* a,
+int ecc_projective_dbl_point(ecc_point *P, ecc_point *R, mp_int* a,
                                        mp_int* modulus, mp_digit mp)
 {
-	//print_title("ecc_projective_dbl_point_org");
+	//print_title("ecc_projective_dbl_point");
 
    mp_int t1, t2;
 #ifdef ALT_ECC_SIZE
@@ -1920,9 +1864,9 @@ int ecc_projective_dbl_point_org(ecc_point *P, ecc_point *R, mp_int* a,
   mp       The "b" value from montgomery_setup()
   return   MP_OKAY on success
 */
-int ecc_map_org(ecc_point* P, mp_int* modulus, mp_digit mp)
+int ecc_map(ecc_point* P, mp_int* modulus, mp_digit mp)
 {
-	//print_title("ecc_map_org");
+	//print_title("ecc_map");
 
    mp_int t1, t2;
 #ifdef ALT_ECC_SIZE
@@ -2042,12 +1986,12 @@ static int normal_ecc_mulmod(mp_int* k, ecc_point *G, ecc_point *R,
                   mp_int* a, mp_int* modulus, int map,
                   void* heap)
 #else
-int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
+int wc_ecc_mulmod_ex(mp_int* k, ecc_point *G, ecc_point *R,
                   mp_int* a, mp_int* modulus, int map,
                   void* heap)
 #endif
 {
-	//print_title("wc_ecc_mulmod_ex_org");
+	//print_title("wc_ecc_mulmod_ex");
 
 #ifndef ECC_TIMING_RESISTANT
    /* size of sliding window, don't change this! */
@@ -2088,7 +2032,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
 
   /* alloc ram for window temps */
   for (i = 0; i < M_POINTS; i++) {
-      M[i] = wc_ecc_new_point_h_org(heap);
+      M[i] = wc_ecc_new_point_h(heap);
       if (M[i] == NULL) {
          mp_clear(&mu);
          err = MEMORY_E; goto exit;
@@ -2096,7 +2040,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
   }
 
    /* make a copy of G in case R==G */
-   tG = wc_ecc_new_point_h_org(heap);
+   tG = wc_ecc_new_point_h(heap);
    if (tG == NULL)
        err = MEMORY_E;
 
@@ -2125,16 +2069,16 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
    /* calc the M tab, which holds kG for k==8..15 */
    /* M[0] == 8G */
    if (err == MP_OKAY)
-       err = ecc_projective_dbl_point_org(tG, M[0], a, modulus, mp);
+       err = ecc_projective_dbl_point(tG, M[0], a, modulus, mp);
    if (err == MP_OKAY)
-       err = ecc_projective_dbl_point_org(M[0], M[0], a, modulus, mp);
+       err = ecc_projective_dbl_point(M[0], M[0], a, modulus, mp);
    if (err == MP_OKAY)
-       err = ecc_projective_dbl_point_org(M[0], M[0], a, modulus, mp);
+       err = ecc_projective_dbl_point(M[0], M[0], a, modulus, mp);
 
    /* now find (8+k)G for k=1..7 */
    if (err == MP_OKAY)
        for (j = 9; j < 16; j++) {
-           err = ecc_projective_add_point_org(M[j-9], tG, M[j-M_POINTS], a,
+           err = ecc_projective_add_point(M[j-9], tG, M[j-M_POINTS], a,
                                                                 modulus, mp);
            if (err != MP_OKAY) break;
        }
@@ -2170,7 +2114,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
 
            /* if the bit is zero and mode == 1 then we double */
            if (mode == 1 && i == 0) {
-               err = ecc_projective_dbl_point_org(R, R, a, modulus, mp);
+               err = ecc_projective_dbl_point(R, R, a, modulus, mp);
                if (err != MP_OKAY) break;
                continue;
            }
@@ -2196,13 +2140,13 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
                    /* ok window is filled so double as required and add  */
                    /* double first */
                    for (j = 0; j < WINSIZE; j++) {
-                       err = ecc_projective_dbl_point_org(R, R, a, modulus, mp);
+                       err = ecc_projective_dbl_point(R, R, a, modulus, mp);
                        if (err != MP_OKAY) break;
                    }
                    if (err != MP_OKAY) break;  /* out of first for(;;) */
 
                    /* then add, bitbuf will be 8..15 [8..2^WINSIZE] guaranteed */
-                   err = ecc_projective_add_point_org(R, M[bitbuf-M_POINTS], R, a,
+                   err = ecc_projective_add_point(R, M[bitbuf-M_POINTS], R, a,
                                                                modulus, mp);
                }
                if (err != MP_OKAY) break;
@@ -2220,7 +2164,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
            for (j = 0; j < bitcpy; j++) {
                /* only double if we have had at least one add first */
                if (first == 0) {
-                   err = ecc_projective_dbl_point_org(R, R, a, modulus, mp);
+                   err = ecc_projective_dbl_point(R, R, a, modulus, mp);
                    if (err != MP_OKAY) break;
                }
 
@@ -2239,7 +2183,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
                        first = 0;
                    } else {
                        /* then add */
-                       err = ecc_projective_add_point_org(R, tG, R, a, modulus,
+                       err = ecc_projective_add_point(R, tG, R, a, modulus,
                                                                        mp);
                        if (err != MP_OKAY) break;
                    }
@@ -2263,7 +2207,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
 
    /* M[1] == 2G */
    if (err == MP_OKAY)
-       err = ecc_projective_dbl_point_org(tG, M[1], a, modulus, mp);
+       err = ecc_projective_dbl_point(tG, M[1], a, modulus, mp);
 
    /* setup sliding window */
    mode   = 0;
@@ -2291,10 +2235,10 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
            if (mode == 0 && i == 0) {
                /* timing resistant - dummy operations */
                if (err == MP_OKAY)
-                   err = ecc_projective_add_point_org(M[0], M[1], M[2], a, modulus,
+                   err = ecc_projective_add_point(M[0], M[1], M[2], a, modulus,
                                                   mp);
                if (err == MP_OKAY)
-                   err = ecc_projective_dbl_point_org(M[1], M[2], a, modulus, mp);
+                   err = ecc_projective_dbl_point(M[1], M[2], a, modulus, mp);
                if (err == MP_OKAY)
                    continue;
            }
@@ -2303,20 +2247,20 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
                mode = 1;
                /* timing resistant - dummy operations */
                if (err == MP_OKAY)
-                   err = ecc_projective_add_point_org(M[0], M[1], M[2], a, modulus,
+                   err = ecc_projective_add_point(M[0], M[1], M[2], a, modulus,
                                                   mp);
                if (err == MP_OKAY)
-                   err = ecc_projective_dbl_point_org(M[1], M[2], a, modulus, mp);
+                   err = ecc_projective_dbl_point(M[1], M[2], a, modulus, mp);
                if (err == MP_OKAY)
                    continue;
            }
 
            if (err == MP_OKAY)
-               err = ecc_projective_add_point_org(M[0], M[1], M[i^1], a, modulus,
+               err = ecc_projective_add_point(M[0], M[1], M[i^1], a, modulus,
                                                                        mp);
 #ifdef WC_NO_CACHE_RESISTANT
            if (err == MP_OKAY)
-               err = ecc_projective_dbl_point_org(M[i], M[i], a, modulus, mp);
+               err = ecc_projective_dbl_point(M[i], M[i], a, modulus, mp);
 #else
             /* instead of using M[i] for double, which leaks key bit to cache
              * monitor, use M[2] as temp, make sure address calc is constant,
@@ -2337,7 +2281,7 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
                                ((wolfssl_word)M[1]->z & wc_off_on_addr[i])),
                              M[2]->z);
            if (err == MP_OKAY)
-               err = ecc_projective_dbl_point_org(M[2], M[2], a, modulus, mp);
+               err = ecc_projective_dbl_point(M[2], M[2], a, modulus, mp);
            /* copy M[2] back to M[i] */
            if (err == MP_OKAY)
                err = mp_copy(M[2]->x,
@@ -2372,14 +2316,14 @@ int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R,
 
    /* map R back from projective space */
    if (err == MP_OKAY && map)
-       err = ecc_map_org(R, modulus, mp);
+       err = ecc_map(R, modulus, mp);
 
 exit:
 
    /* done */
-   wc_ecc_del_point_h_org(tG, heap);
+   wc_ecc_del_point_h(tG, heap);
    for (i = 0; i < M_POINTS; i++) {
-       wc_ecc_del_point_h_org(M[i], heap);
+       wc_ecc_del_point_h(M[i], heap);
    }
 
    return err;
@@ -2397,12 +2341,12 @@ exit:
              otherwise it's left in jacobian-montgomery form
     return MP_OKAY if successful
 */
-int wc_ecc_mulmod_org(mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
+int wc_ecc_mulmod(mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
                   mp_int* modulus, int map)
 {
-	//print_title("wc_ecc_mulmod_org");
+	//print_title("wc_ecc_mulmod");
 
-    return wc_ecc_mulmod_ex_org(k, G, R, a, modulus, map, NULL);
+    return wc_ecc_mulmod_ex(k, G, R, a, modulus, map, NULL);
 }
 
 
@@ -2421,9 +2365,9 @@ static void alt_fp_init(fp_int* a)
  * use a heap hint when creating new ecc_point
  * return an allocated point on success or NULL on failure
  */
-ecc_point* wc_ecc_new_point_h_org(void* heap)
+ecc_point* wc_ecc_new_point_h(void* heap)
 {
-	//print_title("wc_ecc_new_point_h_org");
+	//print_title("wc_ecc_new_point_h");
 
    ecc_point* p;
 
@@ -2455,17 +2399,17 @@ ecc_point* wc_ecc_new_point_h_org(void* heap)
    Allocate a new ECC point
    return A newly allocated point or NULL on error
 */
-ecc_point* wc_ecc_new_point_org(void)
+ecc_point* wc_ecc_new_point(void)
 {
-	print_title("wc_ecc_new_point_org");
+	print_title("wc_ecc_new_point");
 
-  return wc_ecc_new_point_h_org(NULL);
+  return wc_ecc_new_point_h(NULL);
 }
 
 
-void wc_ecc_del_point_h_org(ecc_point* p, void* heap)
+void wc_ecc_del_point_h(ecc_point* p, void* heap)
 {
-	//print_title("wc_ecc_del_point_h_org");
+	//print_title("wc_ecc_del_point_h");
 
    /* prevents free'ing null arguments */
    if (p != NULL) {
@@ -2481,11 +2425,11 @@ void wc_ecc_del_point_h_org(ecc_point* p, void* heap)
 /** Free an ECC point from memory
   p   The point to free
 */
-void wc_ecc_del_point_org(ecc_point* p)
+void wc_ecc_del_point(ecc_point* p)
 {
-	//print_title("wc_ecc_del_point_org");
+	//print_title("wc_ecc_del_point");
 
-    wc_ecc_del_point_h_org(p, NULL);
+    wc_ecc_del_point_h(p, NULL);
 }
 
 
@@ -2493,9 +2437,9 @@ void wc_ecc_del_point_org(ecc_point* p)
   p    The point to copy
   r    The created point
 */
-int wc_ecc_copy_point_org(ecc_point* p, ecc_point *r)
+int wc_ecc_copy_point(ecc_point* p, ecc_point *r)
 {
-	print_title("wc_ecc_copy_point_org");
+	print_title("wc_ecc_copy_point");
 
     int ret;
 
@@ -2522,9 +2466,9 @@ int wc_ecc_copy_point_org(ecc_point* p, ecc_point *r)
 
  return MP_EQ if equal, MP_LT/MP_GT if not, < 0 in case of error
  */
-int wc_ecc_cmp_point_org(ecc_point* a, ecc_point *b)
+int wc_ecc_cmp_point(ecc_point* a, ecc_point *b)
 {
-	print_title("wc_ecc_cmp_point_org");
+	print_title("wc_ecc_cmp_point");
 
     int ret;
 
@@ -2552,9 +2496,9 @@ int wc_ecc_cmp_point_org(ecc_point* a, ecc_point *b)
   n      The idx number to check
   return 1 if valid, 0 if not
 */
-int wc_ecc_is_valid_idx_org(int n)
+int wc_ecc_is_valid_idx(int n)
 {
-	//print_title("wc_ecc_is_valid_idx_org");
+	//print_title("wc_ecc_is_valid_idx");
 	   int x;
 
    for (x = 0; ecc_sets[x].size != 0; x++)
@@ -2568,9 +2512,9 @@ int wc_ecc_is_valid_idx_org(int n)
    return 0;
 }
 
-int wc_ecc_get_curve_idx_org(int curve_id)
+int wc_ecc_get_curve_idx(int curve_id)
 {
-	print_title("wc_ecc_get_curve_idx_org");
+	print_title("wc_ecc_get_curve_idx");
 	    int curve_idx;
     for (curve_idx = 0; ecc_sets[curve_idx].size != 0; curve_idx++) {
         if (curve_id == ecc_sets[curve_idx].id)
@@ -2582,10 +2526,10 @@ int wc_ecc_get_curve_idx_org(int curve_id)
     return curve_idx;
 }
 
-int wc_ecc_get_curve_id_org(int curve_idx)
+int wc_ecc_get_curve_id(int curve_idx)
 {
-	print_title("wc_ecc_get_curve_id_org");
-	    if (wc_ecc_is_valid_idx_org(curve_idx)) {
+	print_title("wc_ecc_get_curve_id");
+	    if (wc_ecc_is_valid_idx(curve_idx)) {
         return ecc_sets[curve_idx].id;
     }
     return ECC_CURVE_INVALID;
@@ -2596,10 +2540,10 @@ int wc_ecc_get_curve_id_org(int curve_idx)
  * id      curve id, from ecc_curve_id enum in ecc.h
  * return  curve size, from ecc_sets[] on success, negative on error
  */
-int wc_ecc_get_curve_size_from_id_org(int curve_id)
+int wc_ecc_get_curve_size_from_id(int curve_id)
 {
-	//print_title("wc_ecc_get_curve_size_from_id_org");
-	    int curve_idx = wc_ecc_get_curve_idx_org(curve_id);
+	//print_title("wc_ecc_get_curve_size_from_id");
+	    int curve_idx = wc_ecc_get_curve_idx(curve_id);
     if (curve_idx == ECC_CURVE_INVALID)
         return ECC_BAD_ARG_E;
     return ecc_sets[curve_idx].size;
@@ -2611,9 +2555,9 @@ int wc_ecc_get_curve_size_from_id_org(int curve_id)
  * name    curve name, from ecc_sets[].name in ecc.c
  * return  curve index in ecc_sets[] on success, negative on error
  */
-int wc_ecc_get_curve_idx_from_name_org(const char* curveName)
+int wc_ecc_get_curve_idx_from_name(const char* curveName)
 {
-	//print_title("wc_ecc_get_curve_idx_from_name_org");
+	//print_title("wc_ecc_get_curve_idx_from_name");
 	    int curve_idx;
     word32 len;
 
@@ -2641,15 +2585,15 @@ int wc_ecc_get_curve_idx_from_name_org(const char* curveName)
  * name    curve name, from ecc_sets[].name in ecc.c
  * return  curve size, from ecc_sets[] on success, negative on error
  */
-int wc_ecc_get_curve_size_from_name_org(const char* curveName)
+int wc_ecc_get_curve_size_from_name(const char* curveName)
 {
-	print_title("wc_ecc_get_curve_size_from_name_org");
+	print_title("wc_ecc_get_curve_size_from_name");
 	    int curve_idx;
 
     if (curveName == NULL)
         return BAD_FUNC_ARG;
 
-    curve_idx = wc_ecc_get_curve_idx_from_name_org(curveName);
+    curve_idx = wc_ecc_get_curve_idx_from_name(curveName);
     if (curve_idx < 0)
         return curve_idx;
 
@@ -2662,15 +2606,15 @@ int wc_ecc_get_curve_size_from_name_org(const char* curveName)
  * name   curve name, from ecc_sets[].name in ecc.c
  * return curve id, from ecc_sets[] on success, negative on error
  */
-int wc_ecc_get_curve_id_from_name_org(const char* curveName)
+int wc_ecc_get_curve_id_from_name(const char* curveName)
 {
-	print_title("wc_ecc_get_curve_id_from_name_org");
+	print_title("wc_ecc_get_curve_id_from_name");
 	    int curve_idx;
 
     if (curveName == NULL)
         return BAD_FUNC_ARG;
 
-    curve_idx = wc_ecc_get_curve_idx_from_name_org(curveName);
+    curve_idx = wc_ecc_get_curve_idx_from_name(curveName);
     if (curve_idx < 0)
         return curve_idx;
 
@@ -2733,12 +2677,12 @@ static int wc_ecc_cmp_param(const char* curveParam,
  *
  * return curve id, from ecc_sets[] on success, negative on error
  */
-int wc_ecc_get_curve_id_from_params_org(int fieldSize,
+int wc_ecc_get_curve_id_from_params(int fieldSize,
         const byte* prime, word32 primeSz, const byte* Af, word32 AfSz,
         const byte* Bf, word32 BfSz, const byte* order, word32 orderSz,
         const byte* Gx, word32 GxSz, const byte* Gy, word32 GySz, int cofactor)
 {
-	print_title("wc_ecc_get_curve_id_from_params_org");
+	print_title("wc_ecc_get_curve_id_from_params");
 	    int idx;
     int curveSz;
 
@@ -2781,10 +2725,10 @@ int wc_ecc_get_curve_id_from_params_org(int fieldSize,
   outlen           [in/out] The max size and resulting size of the shared secret
   return           MP_OKAY if successful
 */
-int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* out,
+int wc_ecc_shared_secret(ecc_key* private_key, ecc_key* public_key, byte* out,
                       word32* outlen)
 {
-	print_title("wc_ecc_shared_secret_org");
+	print_title("wc_ecc_shared_secret");
 	   int err;
 
    if (private_key == NULL || public_key == NULL || out == NULL ||
@@ -2799,8 +2743,8 @@ int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* ou
    }
 
    /* Verify domain params supplied */
-   if (wc_ecc_is_valid_idx_org(private_key->idx) == 0 ||
-       wc_ecc_is_valid_idx_org(public_key->idx)  == 0) {
+   if (wc_ecc_is_valid_idx(private_key->idx) == 0 ||
+       wc_ecc_is_valid_idx(public_key->idx)  == 0) {
       return ECC_BAD_ARG_E;
    }
 
@@ -2813,7 +2757,7 @@ int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* ou
    print_intarray("public_key Y", public_key->pubkey.y->dp, public_key->pubkey.y->used);
    byte tmppubkey[65];
    int tmppubkey_size = 65;
-   wc_ecc_export_x963_org(public_key, tmppubkey, &tmppubkey_size);
+   wc_ecc_export_x963(public_key, tmppubkey, &tmppubkey_size);
    print_hexdumpbin("public_key", tmppubkey, tmppubkey_size);
 
    tmppubkey_size = mp_unsigned_bin_size(&private_key->k);
@@ -2840,9 +2784,9 @@ int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* ou
    *outlen = private_key->dp->size;
 #else
 
-   err = wc_ecc_shared_secret_ex_org(private_key, &public_key->pubkey, out, outlen);
+   err = wc_ecc_shared_secret_ex(private_key, &public_key->pubkey, out, outlen);
 #endif /* WOLFSSL_ATECC508A */
-   print_hexdumpbin("wc_ecc_shared_secret_org OUT", out,*outlen);
+   print_hexdumpbin("wc_ecc_shared_secret OUT", out,*outlen);
    return err;
 }
 
@@ -2888,7 +2832,7 @@ static int wc_ecc_shared_secret_gen_sync(ecc_key* private_key, ecc_point* point,
 #endif
     {
         /* make new point */
-        result = wc_ecc_new_point_h_org(private_key->heap);
+        result = wc_ecc_new_point_h(private_key->heap);
         if (result == NULL) {
 #ifdef HAVE_ECC_CDH
             if (k == &k_lcl)
@@ -2897,7 +2841,7 @@ static int wc_ecc_shared_secret_gen_sync(ecc_key* private_key, ecc_point* point,
             return MEMORY_E;
         }
 
-        err = wc_ecc_mulmod_ex_org(k, point, result, curve->Af, curve->prime, 1,
+        err = wc_ecc_mulmod_ex(k, point, result, curve->Af, curve->prime, 1,
                                                              private_key->heap);
         if (err == MP_OKAY) {
             x = mp_unsigned_bin_size(curve->prime);
@@ -2913,7 +2857,7 @@ static int wc_ecc_shared_secret_gen_sync(ecc_key* private_key, ecc_point* point,
         }
         *outlen = x;
 
-        wc_ecc_del_point_h_org(result, private_key->heap);
+        wc_ecc_del_point_h(result, private_key->heap);
     }
 #ifdef HAVE_ECC_CDH
     if (k == &k_lcl)
@@ -2965,10 +2909,10 @@ static int wc_ecc_shared_secret_gen_async(ecc_key* private_key,
 }
 #endif /* WOLFSSL_ASYNC_CRYPT */
 
-int wc_ecc_shared_secret_gen_org(ecc_key* private_key, ecc_point* point,
+int wc_ecc_shared_secret_gen(ecc_key* private_key, ecc_point* point,
                                                     byte* out, word32 *outlen)
 {
-	print_title("wc_ecc_shared_secret_gen_org");
+	print_title("wc_ecc_shared_secret_gen");
 	    int err;
     DECLARE_CURVE_SPECS(2)
 
@@ -3009,10 +2953,10 @@ int wc_ecc_shared_secret_gen_org(ecc_key* private_key, ecc_point* point,
  outlen           [in/out] The max size and resulting size of the shared secret
  return           MP_OKAY if successful
 */
-int wc_ecc_shared_secret_ex_org(ecc_key* private_key, ecc_point* point,
+int wc_ecc_shared_secret_ex(ecc_key* private_key, ecc_point* point,
                             byte* out, word32 *outlen)
 {
-	print_title("wc_ecc_shared_secret_ex_org");
+	print_title("wc_ecc_shared_secret_ex");
 	    int err;
 
     if (private_key == NULL || point == NULL || out == NULL ||
@@ -3027,7 +2971,7 @@ int wc_ecc_shared_secret_ex_org(ecc_key* private_key, ecc_point* point,
     }
 
     /* Verify domain params supplied */
-    if (wc_ecc_is_valid_idx_org(private_key->idx) == 0)
+    if (wc_ecc_is_valid_idx(private_key->idx) == 0)
         return ECC_BAD_ARG_E;
 
     switch(private_key->state) {
@@ -3035,7 +2979,7 @@ int wc_ecc_shared_secret_ex_org(ecc_key* private_key, ecc_point* point,
         case ECC_STATE_SHARED_SEC_GEN:
             private_key->state = ECC_STATE_SHARED_SEC_GEN;
 
-            err = wc_ecc_shared_secret_gen_org(private_key, point, out, outlen);
+            err = wc_ecc_shared_secret_gen(private_key, point, out, outlen);
             if (err < 0) {
                 break;
             }
@@ -3066,9 +3010,9 @@ int wc_ecc_shared_secret_ex_org(ecc_key* private_key, ecc_point* point,
 
 #ifndef WOLFSSL_ATECC508A
 /* return 1 if point is at infinity, 0 if not, < 0 on error */
-int wc_ecc_point_is_at_infinity_org(ecc_point* p)
+int wc_ecc_point_is_at_infinity(ecc_point* p)
 {
-	print_title("wc_ecc_point_is_at_infinity_org");
+	print_title("wc_ecc_point_is_at_infinity");
 	    if (p == NULL)
         return BAD_FUNC_ARG;
 
@@ -3143,7 +3087,7 @@ static INLINE void wc_ecc_reset(ecc_key* key)
  *
  * Note this function is local to the file because of the argument type
  *      ecc_curve_spec. Having this argument allows for not having to load the
- *      curve type multiple times when generating a key with wc_ecc_make_key_org().
+ *      curve type multiple times when generating a key with wc_ecc_make_key().
  *
  * returns MP_OKAY on success
  */
@@ -3208,7 +3152,7 @@ static int wc_ecc_make_pub_ex(ecc_key* key, ecc_curve_spec* curveIn,
 #endif
     {
         if (err == MP_OKAY) {
-            base = wc_ecc_new_point_h_org(key->heap);
+            base = wc_ecc_new_point_h(key->heap);
             if (base == NULL)
                 err = MEMORY_E;
         }
@@ -3222,11 +3166,11 @@ static int wc_ecc_make_pub_ex(ecc_key* key, ecc_curve_spec* curveIn,
 
         /* make the public key */
         if (err == MP_OKAY) {
-            err = wc_ecc_mulmod_ex_org(&key->k, base, pub, curve->Af, curve->prime,
+            err = wc_ecc_mulmod_ex(&key->k, base, pub, curve->Af, curve->prime,
                                                                   1, key->heap);
         }
 
-        wc_ecc_del_point_h_org(base, key->heap);
+        wc_ecc_del_point_h(base, key->heap);
     }
 
 #ifdef WOLFSSL_VALIDATE_ECC_KEYGEN
@@ -3270,18 +3214,18 @@ static int wc_ecc_make_pub_ex(ecc_key* key, ecc_curve_spec* curveIn,
  *
  * returns MP_OKAY on success
  */
-int wc_ecc_make_pub_org(ecc_key* key, ecc_point* pubOut)
+int wc_ecc_make_pub(ecc_key* key, ecc_point* pubOut)
 {
-	print_title("wc_ecc_make_pub_org");
-	    WOLFSSL_ENTER("wc_ecc_make_pub_org");
+	print_title("wc_ecc_make_pub");
+	    WOLFSSL_ENTER("wc_ecc_make_pub");
 
     return wc_ecc_make_pub_ex(key, NULL, pubOut);
 }
 
 
-int wc_ecc_make_key_ex_org(WC_RNG* rng, int keysize, ecc_key* key, int curve_id)
+int wc_ecc_make_key_ex(WC_RNG* rng, int keysize, ecc_key* key, int curve_id)
 {
-	print_title("wc_ecc_make_key_ex_org");
+	print_title("wc_ecc_make_key_ex");
 	    int            err;
 #ifndef WOLFSSL_ATECC508A
     DECLARE_CURVE_SPECS(ECC_CURVE_FIELD_COUNT)
@@ -3294,7 +3238,7 @@ int wc_ecc_make_key_ex_org(WC_RNG* rng, int keysize, ecc_key* key, int curve_id)
     /* make sure required variables are reset */
     wc_ecc_reset(key);
 
-    err = wc_ecc_set_curve_org(key, keysize, curve_id);
+    err = wc_ecc_set_curve(key, keysize, curve_id);
     if (err != 0) {
         return err;
     }
@@ -3434,10 +3378,10 @@ static void wc_ecc_dump_oids(void)
  return       MP_OKAY if successful,
  upon error all allocated memory will be freed
  */
-int wc_ecc_make_key_org(WC_RNG* rng, int keysize, ecc_key* key)
+int wc_ecc_make_key(WC_RNG* rng, int keysize, ecc_key* key)
 {
-	print_title("wc_ecc_make_key_org");
-	    return wc_ecc_make_key_ex_org(rng, keysize, key, ECC_CURVE_DEF);
+	print_title("wc_ecc_make_key");
+	    return wc_ecc_make_key_ex(rng, keysize, key, ECC_CURVE_DEF);
 }
 
 static INLINE int wc_ecc_alloc_rs(ecc_key* key, mp_int** r, mp_int** s)
@@ -3501,9 +3445,9 @@ static INLINE void wc_ecc_free_rs(ecc_key* key, mp_int** r, mp_int** s)
 }
 
 /* Setup dynamic pointers if using normal math for proper freeing */
-int wc_ecc_init_ex_org(ecc_key* key, void* heap, int devId)
+int wc_ecc_init_ex(ecc_key* key, void* heap, int devId)
 {
-	print_title("wc_ecc_init_ex_org");
+	print_title("wc_ecc_init_ex");
 	    int ret = 0;
 
     if (key == NULL) {
@@ -3557,15 +3501,15 @@ int wc_ecc_init_ex_org(ecc_key* key, void* heap, int devId)
     return ret;
 }
 
-int wc_ecc_init_org(ecc_key* key)
+int wc_ecc_init(ecc_key* key)
 {
-	print_title("wc_ecc_init_org");
-	    return wc_ecc_init_ex_org(key, NULL, INVALID_DEVID);
+	print_title("wc_ecc_init");
+	    return wc_ecc_init_ex(key, NULL, INVALID_DEVID);
 }
 
-int wc_ecc_set_flags_org(ecc_key* key, word32 flags)
+int wc_ecc_set_flags(ecc_key* key, word32 flags)
 {
-	print_title("wc_ecc_set_flags_org");
+	print_title("wc_ecc_set_flags");
 	    if (key == NULL) {
         return BAD_FUNC_ARG;
     }
@@ -3585,10 +3529,10 @@ int wc_ecc_set_flags_org(ecc_key* key, word32 flags)
  key       A private ECC key
  return    MP_OKAY if successful
  */
-int wc_ecc_sign_hash_org(const byte* in, word32 inlen, byte* out, word32 *outlen,
+int wc_ecc_sign_hash(const byte* in, word32 inlen, byte* out, word32 *outlen,
                      WC_RNG* rng, ecc_key* key)
 {
-	print_title("wc_ecc_sign_hash_org");
+	print_title("wc_ecc_sign_hash");
 	print_hexdumpbin("in",in,inlen);
 	
 	    int err;
@@ -3646,7 +3590,7 @@ int wc_ecc_sign_hash_org(const byte* in, word32 inlen, byte* out, word32 *outlen
 
         #else
 
-            err = wc_ecc_sign_hash_ex_org(in, inlen, rng, key, r, s);
+            err = wc_ecc_sign_hash_ex(in, inlen, rng, key, r, s);
             if (err < 0) {
                 break;
             }
@@ -3725,10 +3669,10 @@ int wc_ecc_sign_hash_org(const byte* in, word32 inlen, byte* out, word32 *outlen
   s         [out] The destination for s component of the signature
   return    MP_OKAY if successful
 */
-int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
+int wc_ecc_sign_hash_ex(const byte* in, word32 inlen, WC_RNG* rng,
                      ecc_key* key, mp_int *r, mp_int *s)
 {
-	print_title("wc_ecc_sign_hash_ex_org");
+	print_title("wc_ecc_sign_hash_ex");
 	   int    err;
    mp_int e;
    DECLARE_CURVE_SPECS(1)
@@ -3742,7 +3686,7 @@ int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
    }
 
    /* is the IDX valid ?  */
-   if (wc_ecc_is_valid_idx_org(key->idx) != 1) {
+   if (wc_ecc_is_valid_idx(key->idx) != 1) {
       return ECC_BAD_ARG_E;
    }
 
@@ -3844,7 +3788,7 @@ int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
    #endif /* WOLFSSL_ASYNC_CRYPT */
 
        /* don't use async for key, since we don't support async return here */
-       if (wc_ecc_init_ex_org(&pubkey, key->heap, INVALID_DEVID) == MP_OKAY) {
+       if (wc_ecc_init_ex(&pubkey, key->heap, INVALID_DEVID) == MP_OKAY) {
        #ifdef WOLFSSL_CUSTOM_CURVES
            /* if custom curve, apply params to pubkey */
            if (key->idx == ECC_CUSTOM_IDX) {
@@ -3857,7 +3801,7 @@ int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
                     err = RNG_FAILURE_E;
                     break;
                }
-               err = wc_ecc_make_key_ex_org(rng, key->dp->size, &pubkey,
+               err = wc_ecc_make_key_ex(rng, key->dp->size, &pubkey,
                                                               key->dp->id);
                if (err != MP_OKAY) break;
 
@@ -3897,7 +3841,7 @@ int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
                        break;
                 }
            }
-           wc_ecc_free_org(&pubkey);
+           wc_ecc_free(&pubkey);
        }
    }
 
@@ -3913,9 +3857,9 @@ int wc_ecc_sign_hash_ex_org(const byte* in, word32 inlen, WC_RNG* rng,
   Free an ECC key from memory
   key   The key you wish to free
 */
-void wc_ecc_free_org(ecc_key* key)
+void wc_ecc_free(ecc_key* key)
 {
-	print_title("wc_ecc_free_org");
+	print_title("wc_ecc_free");
 	    if (key == NULL) {
         return;
     }
@@ -4012,7 +3956,7 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
     /* allocate the table */
     if (err == MP_OKAY) {
         for (x = 0; x < 16; x++) {
-            precomp[x] = wc_ecc_new_point_h_org(heap);
+            precomp[x] = wc_ecc_new_point_h(heap);
             if (precomp[x] == NULL) {
                 err = GEN_MEM_ERR;
                 break;
@@ -4054,17 +3998,17 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
 
   if (err == MP_OKAY)
     /* precomp [i,0](A + B) table */
-    err = ecc_projective_dbl_point_org(precomp[1], precomp[2], a, modulus, mp);
+    err = ecc_projective_dbl_point(precomp[1], precomp[2], a, modulus, mp);
 
   if (err == MP_OKAY)
-    err = ecc_projective_add_point_org(precomp[1], precomp[2], precomp[3],
+    err = ecc_projective_add_point(precomp[1], precomp[2], precomp[3],
                                    a, modulus, mp);
   if (err == MP_OKAY)
     /* precomp [0,i](A + B) table */
-    err = ecc_projective_dbl_point_org(precomp[1<<2], precomp[2<<2], a, modulus, mp);
+    err = ecc_projective_dbl_point(precomp[1<<2], precomp[2<<2], a, modulus, mp);
 
   if (err == MP_OKAY)
-    err = ecc_projective_add_point_org(precomp[1<<2], precomp[2<<2], precomp[3<<2],
+    err = ecc_projective_add_point(precomp[1<<2], precomp[2<<2], precomp[3<<2],
                                    a, modulus, mp);
 
   if (err == MP_OKAY) {
@@ -4072,7 +4016,7 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
     for (x = 1; x < 4; x++) {
         for (y = 1; y < 4; y++) {
             if (err == MP_OKAY)
-                err = ecc_projective_add_point_org(precomp[x], precomp[(y<<2)],
+                err = ecc_projective_add_point(precomp[x], precomp[(y<<2)],
                                                precomp[x+(y<<2)], a, modulus, mp);
         }
     }
@@ -4110,9 +4054,9 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
         if (first == 0) {
             /* double twice */
             if (err == MP_OKAY)
-                err = ecc_projective_dbl_point_org(C, C, a, modulus, mp);
+                err = ecc_projective_dbl_point(C, C, a, modulus, mp);
             if (err == MP_OKAY)
-                err = ecc_projective_dbl_point_org(C, C, a, modulus, mp);
+                err = ecc_projective_dbl_point(C, C, a, modulus, mp);
             else
                 break;
         }
@@ -4135,7 +4079,7 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
             } else {
                 /* if not first, add from table */
                 if (err == MP_OKAY)
-                    err = ecc_projective_add_point_org(C, precomp[nA + (nB<<2)], C,
+                    err = ecc_projective_add_point(C, precomp[nA + (nB<<2)], C,
                                                    a, modulus, mp);
                 else
                     break;
@@ -4146,11 +4090,11 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
 
   /* reduce to affine */
   if (err == MP_OKAY)
-    err = ecc_map_org(C, modulus, mp);
+    err = ecc_map(C, modulus, mp);
 
   /* clean up */
   for (x = 0; x < 16; x++) {
-     wc_ecc_del_point_h_org(precomp[x], heap);
+     wc_ecc_del_point_h(precomp[x], heap);
   }
 
   ForceZero(tA, ECC_BUFSIZE);
@@ -4186,10 +4130,10 @@ static int ecc_mul2add(ecc_point* A, mp_int* kA,
  key         The corresponding public ECC key
  return      MP_OKAY if successful (even if the signature is not valid)
  */
-int wc_ecc_verify_hash_org(const byte* sig, word32 siglen, const byte* hash,
+int wc_ecc_verify_hash(const byte* sig, word32 siglen, const byte* hash,
                        word32 hashlen, int* res, ecc_key* key)
 {
-	print_title("wc_ecc_verify_hash_org");
+	print_title("wc_ecc_verify_hash");
 	print_hexdumpbin("sig", sig, siglen);
 	print_hexdumpbin("hash", hash, hashlen);
 
@@ -4233,7 +4177,7 @@ int wc_ecc_verify_hash_org(const byte* sig, word32 siglen, const byte* hash,
         case ECC_STATE_VERIFY_DO:
             key->state = ECC_STATE_VERIFY_DO;
 
-            err = wc_ecc_verify_hash_ex_org(r, s, hash, hashlen, res, key);
+            err = wc_ecc_verify_hash_ex(r, s, hash, hashlen, res, key);
 
             if (err < 0) {
                 break;
@@ -4284,10 +4228,10 @@ int wc_ecc_verify_hash_org(const byte* sig, word32 siglen, const byte* hash,
    key         The corresponding public ECC key
    return      MP_OKAY if successful (even if the signature is not valid)
 */
-int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
+int wc_ecc_verify_hash_ex(mp_int *r, mp_int *s, const byte* hash,
                     word32 hashlen, int* res, ecc_key* key)
 {
-	print_title("wc_ecc_verify_hash_ex_org");
+	print_title("wc_ecc_verify_hash_ex");
 	   int           err;
 #ifndef WOLFSSL_ATECC508A
    int          did_init = 0;
@@ -4309,7 +4253,7 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
    *res = 0;
 
    /* is the IDX valid ?  */
-   if (wc_ecc_is_valid_idx_org(key->idx) != 1) {
+   if (wc_ecc_is_valid_idx(key->idx) != 1) {
       return ECC_BAD_ARG_E;
    }
 
@@ -4438,8 +4382,8 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
 
    /* allocate points */
    if (err == MP_OKAY) {
-       mG = wc_ecc_new_point_h_org(key->heap);
-       mQ = wc_ecc_new_point_h_org(key->heap);
+       mG = wc_ecc_new_point_h(key->heap);
+       mQ = wc_ecc_new_point_h(key->heap);
        if (mQ  == NULL || mG == NULL)
           err = MEMORY_E;
    }
@@ -4474,9 +4418,9 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
 #ifdef FREESCALE_LTC_ECC
    /* use PKHA to compute u1*mG + u2*mQ */
    if (err == MP_OKAY)
-       err = wc_ecc_mulmod_ex_org(&u1, mG, mG, curve->Af, curve->prime, 0, key->heap);
+       err = wc_ecc_mulmod_ex(&u1, mG, mG, curve->Af, curve->prime, 0, key->heap);
    if (err == MP_OKAY)
-       err = wc_ecc_mulmod_ex_org(&u2, mQ, mQ, curve->Af, curve->prime, 0, key->heap);
+       err = wc_ecc_mulmod_ex(&u2, mQ, mQ, curve->Af, curve->prime, 0, key->heap);
    if (err == MP_OKAY)
        err = wc_ecc_point_add(mG, mQ, mG, curve->prime);
 #else /* FREESCALE_LTC_ECC */
@@ -4486,11 +4430,11 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
 
         /* compute u1*mG + u2*mQ = mG */
         if (err == MP_OKAY) {
-            err = wc_ecc_mulmod_ex_org(&u1, mG, mG, curve->Af, curve->prime, 0,
+            err = wc_ecc_mulmod_ex(&u1, mG, mG, curve->Af, curve->prime, 0,
                                                                      key->heap);
         }
         if (err == MP_OKAY) {
-            err = wc_ecc_mulmod_ex_org(&u2, mQ, mQ, curve->Af, curve->prime, 0,
+            err = wc_ecc_mulmod_ex(&u2, mQ, mQ, curve->Af, curve->prime, 0,
                                                                      key->heap);
         }
 
@@ -4500,12 +4444,12 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
 
         /* add them */
         if (err == MP_OKAY)
-            err = ecc_projective_add_point_org(mQ, mG, mG, curve->Af,
+            err = ecc_projective_add_point(mQ, mG, mG, curve->Af,
                                                              curve->prime, mp);
 
         /* reduce */
         if (err == MP_OKAY)
-            err = ecc_map_org(mG, curve->prime, mp);
+            err = ecc_map(mG, curve->prime, mp);
     }
 #else
        /* use Shamir's trick to compute u1*mG + u2*mQ using half the doubles */
@@ -4526,8 +4470,8 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
    }
 
    /* cleanup */
-   wc_ecc_del_point_h_org(mG, key->heap);
-   wc_ecc_del_point_h_org(mQ, key->heap);
+   wc_ecc_del_point_h(mG, key->heap);
+   wc_ecc_del_point_h(mQ, key->heap);
 
    mp_clear(&e);
    if (did_init) {
@@ -4548,15 +4492,15 @@ int wc_ecc_verify_hash_ex_org(mp_int *r, mp_int *s, const byte* hash,
 #ifdef HAVE_ECC_KEY_IMPORT
 #ifndef WOLFSSL_ATECC508A
 /* import point from der */
-int wc_ecc_import_point_der_org(byte* in, word32 inLen, const int curve_idx,
+int wc_ecc_import_point_der(byte* in, word32 inLen, const int curve_idx,
                             ecc_point* point)
 {
-	print_title("wc_ecc_import_point_der_org");
+	print_title("wc_ecc_import_point_der");
 	    int err = 0;
     int compressed = 0;
 
     if (in == NULL || point == NULL || (curve_idx < 0) ||
-        (wc_ecc_is_valid_idx_org(curve_idx) == 0))
+        (wc_ecc_is_valid_idx(curve_idx) == 0))
         return ECC_BAD_ARG_E;
 
     /* must be odd */
@@ -4671,10 +4615,10 @@ int wc_ecc_import_point_der_org(byte* in, word32 inLen, const int curve_idx,
 
 #ifdef HAVE_ECC_KEY_EXPORT
 /* export point to der */
-int wc_ecc_export_point_der_org(const int curve_idx, ecc_point* point, byte* out,
+int wc_ecc_export_point_der(const int curve_idx, ecc_point* point, byte* out,
                             word32* outLen)
 {
-	print_title("wc_ecc_export_point_der_org");
+	print_title("wc_ecc_export_point_der");
 	    int    ret = MP_OKAY;
     word32 numlen;
 #ifndef WOLFSSL_ATECC508A
@@ -4685,7 +4629,7 @@ int wc_ecc_export_point_der_org(const int curve_idx, ecc_point* point, byte* out
 #endif
 #endif /* !WOLFSSL_ATECC508A */
 
-    if ((curve_idx < 0) || (wc_ecc_is_valid_idx_org(curve_idx) == 0))
+    if ((curve_idx < 0) || (wc_ecc_is_valid_idx(curve_idx) == 0))
         return ECC_BAD_ARG_E;
 
     /* return length needed only */
@@ -4749,9 +4693,9 @@ done:
 
 
 /* export public ECC key in ANSI X9.63 format */
-int wc_ecc_export_x963_org(ecc_key* key, byte* out, word32* outLen)
+int wc_ecc_export_x963(ecc_key* key, byte* out, word32* outLen)
 {
-	print_title("wc_ecc_export_x963_org");
+	print_title("wc_ecc_export_x963");
 	   int    ret = MP_OKAY;
    word32 numlen;
 #ifndef WOLFSSL_ATECC508A
@@ -4776,7 +4720,7 @@ int wc_ecc_export_x963_org(ecc_key* key, byte* out, word32* outLen)
    if (key->type == ECC_PRIVATEKEY_ONLY)
        return ECC_PRIVATEONLY_E;
 
-   if (wc_ecc_is_valid_idx_org(key->idx) == 0) {
+   if (wc_ecc_is_valid_idx(key->idx) == 0) {
       return ECC_BAD_ARG_E;
    }
    numlen = key->dp->size;
@@ -4831,7 +4775,7 @@ done:
    XFREE(buf, NULL, DYNAMIC_TYPE_ECC_BUFFER);
 #endif
 #endif /* WOLFSSL_ATECC508A */
-   print_hexdumpbin("wc_ecc_export_x963_org out", out, *outLen);
+   print_hexdumpbin("wc_ecc_export_x963 out", out, *outLen);
 
    return ret;
 }
@@ -4839,12 +4783,12 @@ done:
 
 /* export public ECC key in ANSI X9.63 format, extended with
  * compression option */
-int wc_ecc_export_x963_ex_org(ecc_key* key, byte* out, word32* outLen,
+int wc_ecc_export_x963_ex(ecc_key* key, byte* out, word32* outLen,
                           int compressed)
 {
-	print_title("wc_ecc_export_x963_ex_org");
+	print_title("wc_ecc_export_x963_ex");
 	    if (compressed == 0)
-        return wc_ecc_export_x963_org(key, out, outLen);
+        return wc_ecc_export_x963(key, out, outLen);
 #ifdef HAVE_COMP_KEY
     else
         return wc_ecc_export_x963_compressed(key, out, outLen);
@@ -4858,9 +4802,9 @@ int wc_ecc_export_x963_ex_org(ecc_key* key, byte* out, word32* outLen,
 #ifndef WOLFSSL_ATECC508A
 
 /* is ecc point on curve described by dp ? */
-int wc_ecc_is_point_org(ecc_point* ecp, mp_int* a, mp_int* b, mp_int* prime)
+int wc_ecc_is_point(ecc_point* ecp, mp_int* a, mp_int* b, mp_int* prime)
 {
-	print_title("wc_ecc_is_point_org");
+	print_title("wc_ecc_is_point");
 	   int err;
    mp_int t1, t2;
 
@@ -4952,7 +4896,7 @@ static int ecc_check_privkey_gen(ecc_key* key, mp_int* a, mp_int* prime)
     if (key == NULL)
         return BAD_FUNC_ARG;
 
-    res = wc_ecc_new_point_h_org(key->heap);
+    res = wc_ecc_new_point_h(key->heap);
     if (res == NULL)
         err = MEMORY_E;
 
@@ -4966,7 +4910,7 @@ static int ecc_check_privkey_gen(ecc_key* key, mp_int* a, mp_int* prime)
 #endif
 #endif
     {
-        base = wc_ecc_new_point_h_org(key->heap);
+        base = wc_ecc_new_point_h(key->heap);
         if (base == NULL)
             err = MEMORY_E;
 
@@ -4985,7 +4929,7 @@ static int ecc_check_privkey_gen(ecc_key* key, mp_int* a, mp_int* prime)
             err = mp_set(base->z, 1);
 
         if (err == MP_OKAY)
-            err = wc_ecc_mulmod_ex_org(&key->k, base, res, a, prime, 1, key->heap);
+            err = wc_ecc_mulmod_ex(&key->k, base, res, a, prime, 1, key->heap);
     }
 
     if (err == MP_OKAY) {
@@ -4999,8 +4943,8 @@ static int ecc_check_privkey_gen(ecc_key* key, mp_int* a, mp_int* prime)
     }
 
     wc_ecc_curve_free(curve);
-    wc_ecc_del_point_h_org(res, key->heap);
-    wc_ecc_del_point_h_org(base, key->heap);
+    wc_ecc_del_point_h(res, key->heap);
+    wc_ecc_del_point_h(base, key->heap);
 
     return err;
 }
@@ -5051,7 +4995,7 @@ static int ecc_check_pubkey_order(ecc_key* key, ecc_point* pubkey, mp_int* a,
     if (key == NULL)
         return BAD_FUNC_ARG;
 
-    inf = wc_ecc_new_point_h_org(key->heap);
+    inf = wc_ecc_new_point_h(key->heap);
     if (inf == NULL)
         err = MEMORY_E;
     else {
@@ -5064,12 +5008,12 @@ static int ecc_check_pubkey_order(ecc_key* key, ecc_point* pubkey, mp_int* a,
         else
 #endif
 #endif
-            err = wc_ecc_mulmod_ex_org(order, pubkey, inf, a, prime, 1, key->heap);
-        if (err == MP_OKAY && !wc_ecc_point_is_at_infinity_org(inf))
+            err = wc_ecc_mulmod_ex(order, pubkey, inf, a, prime, 1, key->heap);
+        if (err == MP_OKAY && !wc_ecc_point_is_at_infinity(inf))
             err = ECC_INF_E;
     }
 
-    wc_ecc_del_point_h_org(inf, key->heap);
+    wc_ecc_del_point_h(inf, key->heap);
 
     return err;
 }
@@ -5078,9 +5022,9 @@ static int ecc_check_pubkey_order(ecc_key* key, ecc_point* pubkey, mp_int* a,
 
 
 /* perform sanity checks on ecc key validity, 0 on success */
-int wc_ecc_check_key_org(ecc_key* key)
+int wc_ecc_check_key(ecc_key* key)
 {
-	print_title("wc_ecc_check_key_org");
+	print_title("wc_ecc_check_key");
 	    int    err;
 #ifndef WOLFSSL_ATECC508A
     mp_int* b;
@@ -5107,7 +5051,7 @@ int wc_ecc_check_key_org(ecc_key* key)
 #else
 
     /* pubkey point cannot be at infinity */
-    if (wc_ecc_point_is_at_infinity_org(&key->pubkey))
+    if (wc_ecc_point_is_at_infinity(&key->pubkey))
         return ECC_INF_E;
 
     /* load curve info */
@@ -5138,7 +5082,7 @@ int wc_ecc_check_key_org(ecc_key* key)
 
     /* make sure point is actually on curve */
     if (err == MP_OKAY)
-        err = wc_ecc_is_point_org(&key->pubkey, curve->Af, b, curve->prime);
+        err = wc_ecc_is_point(&key->pubkey, curve->Af, b, curve->prime);
 
     /* pubkey * order must be at infinity */
     if (err == MP_OKAY)
@@ -5162,11 +5106,11 @@ int wc_ecc_check_key_org(ecc_key* key)
 
 #ifdef HAVE_ECC_KEY_IMPORT
 /* import public ECC key in ANSI X9.63 format */
-int wc_ecc_import_x963_ex_org(const byte* in, word32 inLen, ecc_key* key,
+int wc_ecc_import_x963_ex(const byte* in, word32 inLen, ecc_key* key,
                           int curve_id)
 {
-	print_title("wc_ecc_import_x963_ex_org");
-	print_hexdumpbin("wc_ecc_import_x963_ex_org in", in, inLen);
+	print_title("wc_ecc_import_x963_ex");
+	print_hexdumpbin("wc_ecc_import_x963_ex in", in, inLen);
 	    int err = MP_OKAY;
 #ifndef WOLFSSL_ATECC508A
     int compressed = 0;
@@ -5228,7 +5172,7 @@ int wc_ecc_import_x963_ex_org(const byte* in, word32 inLen, ecc_key* key,
 
         /* determine key size */
         keysize = ((inLen-1)>>1);
-        err = wc_ecc_set_curve_org(key, keysize, curve_id);
+        err = wc_ecc_set_curve(key, keysize, curve_id);
         key->type = ECC_PUBLICKEY;
     }
 
@@ -5304,7 +5248,7 @@ int wc_ecc_import_x963_ex_org(const byte* in, word32 inLen, ecc_key* key,
 
 #ifdef WOLFSSL_VALIDATE_ECC_IMPORT
     if (err == MP_OKAY)
-        err = wc_ecc_check_key_org(key);
+        err = wc_ecc_check_key(key);
 #endif
 
     if (err != MP_OKAY) {
@@ -5318,19 +5262,19 @@ int wc_ecc_import_x963_ex_org(const byte* in, word32 inLen, ecc_key* key,
     return err;
 }
 
-int wc_ecc_import_x963_org(const byte* in, word32 inLen, ecc_key* key)
+int wc_ecc_import_x963(const byte* in, word32 inLen, ecc_key* key)
 {
-	print_title("wc_ecc_import_x963_org");
-	    return wc_ecc_import_x963_ex_org(in, inLen, key, ECC_CURVE_DEF);
+	print_title("wc_ecc_import_x963");
+	    return wc_ecc_import_x963_ex(in, inLen, key, ECC_CURVE_DEF);
 }
 #endif /* HAVE_ECC_KEY_IMPORT */
 
 #ifdef HAVE_ECC_KEY_EXPORT
 /* export ecc private key only raw, outLen is in/out size
    return MP_OKAY on success */
-int wc_ecc_export_private_only_org(ecc_key* key, byte* out, word32* outLen)
+int wc_ecc_export_private_only(ecc_key* key, byte* out, word32* outLen)
 {
-	print_title("wc_ecc_export_private_only_org");
+	print_title("wc_ecc_export_private_only");
 	    word32 numlen;
 		int ret;
 
@@ -5338,7 +5282,7 @@ int wc_ecc_export_private_only_org(ecc_key* key, byte* out, word32* outLen)
         return BAD_FUNC_ARG;
     }
 
-    if (wc_ecc_is_valid_idx_org(key->idx) == 0) {
+    if (wc_ecc_is_valid_idx(key->idx) == 0) {
         return ECC_BAD_ARG_E;
     }
     numlen = key->dp->size;
@@ -5357,7 +5301,7 @@ int wc_ecc_export_private_only_org(ecc_key* key, byte* out, word32* outLen)
 #else
 	ret = mp_to_unsigned_bin(&key->k, out + (numlen -
 		mp_unsigned_bin_size(&key->k)));
-	print_hexdumpbin("wc_ecc_export_private_only_org out", out, *outLen);
+	print_hexdumpbin("wc_ecc_export_private_only out", out, *outLen);
 	return ret;
 #endif /* WOLFSSL_ATECC508A */
 }
@@ -5381,7 +5325,7 @@ static int wc_ecc_export_raw(ecc_key* key, byte* qx, word32* qxLen,
         return ECC_PRIVATEONLY_E;
     }
 
-    if (wc_ecc_is_valid_idx_org(key->idx) == 0) {
+    if (wc_ecc_is_valid_idx(key->idx) == 0) {
         return ECC_BAD_ARG_E;
     }
     numLen = key->dp->size;
@@ -5456,20 +5400,20 @@ static int wc_ecc_export_raw(ecc_key* key, byte* qx, word32* qxLen,
 
 /* export public key to raw elements including public (Qx,Qy)
  * return MP_OKAY on success, negative on error */
-int wc_ecc_export_public_raw_org(ecc_key* key, byte* qx, word32* qxLen,
+int wc_ecc_export_public_raw(ecc_key* key, byte* qx, word32* qxLen,
                              byte* qy, word32* qyLen)
 {
-	print_title("wc_ecc_export_public_raw_org");
+	print_title("wc_ecc_export_public_raw");
 	    return wc_ecc_export_raw(key, qx, qxLen, qy, qyLen, NULL, NULL);
 }
 
 
 /* export ecc key to raw elements including public (Qx,Qy) and private (d)
  * return MP_OKAY on success, negative on error */
-int wc_ecc_export_private_raw_org(ecc_key* key, byte* qx, word32* qxLen,
+int wc_ecc_export_private_raw(ecc_key* key, byte* qx, word32* qxLen,
                               byte* qy, word32* qyLen, byte* d, word32* dLen)
 {
-	print_title("wc_ecc_export_private_raw_org");
+	print_title("wc_ecc_export_private_raw");
 	    /* sanitize d and dLen, other args are checked later */
     if (d == NULL || dLen == NULL)
         return BAD_FUNC_ARG;
@@ -5481,11 +5425,11 @@ int wc_ecc_export_private_raw_org(ecc_key* key, byte* qx, word32* qxLen,
 
 #ifdef HAVE_ECC_KEY_IMPORT
 /* import private key, public part optional if (pub) passed as NULL */
-int wc_ecc_import_private_key_ex_org(const byte* priv, word32 privSz,
+int wc_ecc_import_private_key_ex(const byte* priv, word32 privSz,
                                  const byte* pub, word32 pubSz, ecc_key* key,
                                  int curve_id)
 {
-	print_title("wc_ecc_import_private_key_ex_org");
+	print_title("wc_ecc_import_private_key_ex");
 
 	print_hexdumpbin("priv", priv, privSz);
 	print_hexdumpbin("pub", pub, pubSz);
@@ -5493,7 +5437,7 @@ int wc_ecc_import_private_key_ex_org(const byte* priv, word32 privSz,
 
     /* public optional, NULL if only importing private */
     if (pub != NULL) {
-        ret = wc_ecc_import_x963_ex_org(pub, pubSz, key, curve_id);
+        ret = wc_ecc_import_x963_ex(pub, pubSz, key, curve_id);
         key->type = ECC_PRIVATEKEY;
     }
     else {
@@ -5504,7 +5448,7 @@ int wc_ecc_import_private_key_ex_org(const byte* priv, word32 privSz,
         wc_ecc_reset(key);
 
         /* set key size */
-        ret = wc_ecc_set_curve_org(key, privSz, curve_id);
+        ret = wc_ecc_set_curve(key, privSz, curve_id);
         key->type = ECC_PRIVATEKEY_ONLY;
     }
 
@@ -5534,11 +5478,11 @@ int wc_ecc_import_private_key_ex_org(const byte* priv, word32 privSz,
 }
 
 /* ecc private key import, public key in ANSI X9.63 format, private raw */
-int wc_ecc_import_private_key_org(const byte* priv, word32 privSz, const byte* pub,
+int wc_ecc_import_private_key(const byte* priv, word32 privSz, const byte* pub,
                            word32 pubSz, ecc_key* key)
 {
-	print_title("wc_ecc_import_private_key_org");
-	    return wc_ecc_import_private_key_ex_org(priv, privSz, pub, pubSz, key,
+	print_title("wc_ecc_import_private_key");
+	    return wc_ecc_import_private_key_ex(priv, privSz, pub, pubSz, key,
                                                                 ECC_CURVE_DEF);
 }
 #endif /* HAVE_ECC_KEY_IMPORT */
@@ -5552,9 +5496,9 @@ int wc_ecc_import_private_key_org(const byte* priv, word32 privSz, const byte* p
    outlen  [in/out] output buffer size, output signature size
    return  MP_OKAY on success
 */
-int wc_ecc_rs_to_sig_org(const char* r, const char* s, byte* out, word32* outlen)
+int wc_ecc_rs_to_sig(const char* r, const char* s, byte* out, word32* outlen)
 {
-	print_title("wc_ecc_rs_to_sig_org");
+	print_title("wc_ecc_rs_to_sig");
 	    int err;
     mp_int rtmp;
     mp_int stmp;
@@ -5596,10 +5540,10 @@ int wc_ecc_rs_to_sig_org(const char* r, const char* s, byte* out, word32* outlen
    sLen    [in/out] output "s" buffer size, output "s" size
    return  MP_OKAY on success, negative on error
 */
-int wc_ecc_sig_to_rs_org(const byte* sig, word32 sigLen, byte* r, word32* rLen,
+int wc_ecc_sig_to_rs(const byte* sig, word32 sigLen, byte* r, word32* rLen,
                      byte* s, word32* sLen)
 {
-	print_title("wc_ecc_sig_to_rs_org");
+	print_title("wc_ecc_sig_to_rs");
 	    int err;
     word32 x = 0;
     mp_int rtmp;
@@ -5656,7 +5600,7 @@ static int wc_ecc_import_raw_private(ecc_key* key, const char* qx,
     wc_ecc_reset(key);
 
     /* set curve type and index */
-    err = wc_ecc_set_curve_org(key, 0, curve_id);
+    err = wc_ecc_set_curve(key, 0, curve_id);
     if (err != 0) {
         return err;
     }
@@ -5706,7 +5650,7 @@ static int wc_ecc_import_raw_private(ecc_key* key, const char* qx,
 
 #ifdef WOLFSSL_VALIDATE_ECC_IMPORT
     if (err == MP_OKAY)
-        err = wc_ecc_check_key_org(key);
+        err = wc_ecc_check_key(key);
 #endif
 
     if (err != MP_OKAY) {
@@ -5730,10 +5674,10 @@ static int wc_ecc_import_raw_private(ecc_key* key, const char* qx,
    dp        Custom ecc_set_type
    return    MP_OKAY on success
 */
-int wc_ecc_import_raw_ex_org(ecc_key* key, const char* qx, const char* qy,
+int wc_ecc_import_raw_ex(ecc_key* key, const char* qx, const char* qy,
                    const char* d, int curve_id)
 {
-	print_title("wc_ecc_import_raw_ex_org");
+	print_title("wc_ecc_import_raw_ex");
 	    return wc_ecc_import_raw_private(key, qx, qy, d, curve_id);
 
 }
@@ -5748,10 +5692,10 @@ int wc_ecc_import_raw_ex_org(ecc_key* key, const char* qx, const char* qy,
    curveName ECC curve name, from ecc_sets[]
    return    MP_OKAY on success
 */
-int wc_ecc_import_raw_org(ecc_key* key, const char* qx, const char* qy,
+int wc_ecc_import_raw(ecc_key* key, const char* qx, const char* qy,
                    const char* d, const char* curveName)
 {
-	print_title("wc_ecc_import_raw_org");
+	print_title("wc_ecc_import_raw");
 	    int err, x;
 
     /* if d is NULL, only import as public key using Qx,Qy */
@@ -5779,21 +5723,21 @@ int wc_ecc_import_raw_org(ecc_key* key, const char* qx, const char* qy,
 #endif /* HAVE_ECC_KEY_IMPORT */
 
 /* key size in octets */
-int wc_ecc_size_org(ecc_key* key)
+int wc_ecc_size(ecc_key* key)
 {
-	print_title("wc_ecc_size_org");
+	print_title("wc_ecc_size");
 	    if (key == NULL) return 0;
 
     return key->dp->size;
 }
 
 
-/* worst case estimate, check actual return from wc_ecc_sign_hash_org for actual
+/* worst case estimate, check actual return from wc_ecc_sign_hash for actual
    value of signature size in octets */
-int wc_ecc_sig_size_org(ecc_key* key)
+int wc_ecc_sig_size(ecc_key* key)
 {
-	print_title("wc_ecc_sig_size_org");
-	    int sz = wc_ecc_size_org(key);
+	print_title("wc_ecc_sig_size");
+	    int sz = wc_ecc_size(key);
     if (sz <= 0)
         return sz;
 
@@ -6396,10 +6340,10 @@ static int find_hole(void)
    /* free entry z */
    if (z >= 0 && fp_cache[z].g) {
       mp_clear(&fp_cache[z].mu);
-      wc_ecc_del_point_org(fp_cache[z].g);
+      wc_ecc_del_point(fp_cache[z].g);
       fp_cache[z].g  = NULL;
       for (x = 0; x < (1U<<FP_LUT); x++) {
-         wc_ecc_del_point_org(fp_cache[z].LUT[x]);
+         wc_ecc_del_point(fp_cache[z].LUT[x]);
          fp_cache[z].LUT[x] = NULL;
       }
       fp_cache[z].lru_count = 0;
@@ -6431,7 +6375,7 @@ static int add_entry(int idx, ecc_point *g)
    unsigned x, y;
 
    /* allocate base and LUT */
-   fp_cache[idx].g = wc_ecc_new_point_org();
+   fp_cache[idx].g = wc_ecc_new_point();
    if (fp_cache[idx].g == NULL) {
       return GEN_MEM_ERR;
    }
@@ -6440,19 +6384,19 @@ static int add_entry(int idx, ecc_point *g)
    if ((mp_copy(g->x, fp_cache[idx].g->x) != MP_OKAY) ||
        (mp_copy(g->y, fp_cache[idx].g->y) != MP_OKAY) ||
        (mp_copy(g->z, fp_cache[idx].g->z) != MP_OKAY)) {
-      wc_ecc_del_point_org(fp_cache[idx].g);
+      wc_ecc_del_point(fp_cache[idx].g);
       fp_cache[idx].g = NULL;
       return GEN_MEM_ERR;
    }
 
    for (x = 0; x < (1U<<FP_LUT); x++) {
-      fp_cache[idx].LUT[x] = wc_ecc_new_point_org();
+      fp_cache[idx].LUT[x] = wc_ecc_new_point();
       if (fp_cache[idx].LUT[x] == NULL) {
          for (y = 0; y < x; y++) {
-            wc_ecc_del_point_org(fp_cache[idx].LUT[y]);
+            wc_ecc_del_point(fp_cache[idx].LUT[y]);
             fp_cache[idx].LUT[y] = NULL;
          }
-         wc_ecc_del_point_org(fp_cache[idx].g);
+         wc_ecc_del_point(fp_cache[idx].g);
          fp_cache[idx].g         = NULL;
          fp_cache[idx].lru_count = 0;
          return GEN_MEM_ERR;
@@ -6525,7 +6469,7 @@ static int build_lut(int idx, mp_int* a, mp_int* modulus, mp_digit mp,
 
          /* now double it bitlen/FP_LUT times */
          for (y = 0; y < lut_gap; y++) {
-             if ((err = ecc_projective_dbl_point_org(fp_cache[idx].LUT[1<<x],
+             if ((err = ecc_projective_dbl_point(fp_cache[idx].LUT[1<<x],
                             fp_cache[idx].LUT[1<<x], a, modulus, mp)) != MP_OKAY) {
                  break;
              }
@@ -6541,7 +6485,7 @@ static int build_lut(int idx, mp_int* a, mp_int* modulus, mp_digit mp,
            if (lut_orders[y].ham != (int)x) continue;
 
            /* perform the add */
-           if ((err = ecc_projective_add_point_org(
+           if ((err = ecc_projective_add_point(
                            fp_cache[idx].LUT[lut_orders[y].terma],
                            fp_cache[idx].LUT[lut_orders[y].termb],
                            fp_cache[idx].LUT[y], a, modulus, mp)) != MP_OKAY) {
@@ -6593,10 +6537,10 @@ static int build_lut(int idx, mp_int* a, mp_int* modulus, mp_digit mp,
 
    /* err cleanup */
    for (y = 0; y < (1U<<FP_LUT); y++) {
-      wc_ecc_del_point_org(fp_cache[idx].LUT[y]);
+      wc_ecc_del_point(fp_cache[idx].LUT[y]);
       fp_cache[idx].LUT[y] = NULL;
    }
-   wc_ecc_del_point_org(fp_cache[idx].g);
+   wc_ecc_del_point(fp_cache[idx].g);
    fp_cache[idx].g         = NULL;
    fp_cache[idx].lru_count = 0;
    mp_clear(&fp_cache[idx].mu);
@@ -6702,7 +6646,7 @@ static int accel_fp_mul(int idx, mp_int* k, ecc_point *R, mp_int* a,
 
           /* double if not first */
           if (!first) {
-             if ((err = ecc_projective_dbl_point_org(R, R, a, modulus,
+             if ((err = ecc_projective_dbl_point(R, R, a, modulus,
                                                              mp)) != MP_OKAY) {
                 break;
              }
@@ -6710,7 +6654,7 @@ static int accel_fp_mul(int idx, mp_int* k, ecc_point *R, mp_int* a,
 
           /* add if not first, otherwise copy */
           if (!first && z) {
-             if ((err = ecc_projective_add_point_org(R, fp_cache[idx].LUT[z], R,
+             if ((err = ecc_projective_add_point(R, fp_cache[idx].LUT[z], R,
                                                  a, modulus, mp)) != MP_OKAY) {
                 break;
              }
@@ -6732,7 +6676,7 @@ static int accel_fp_mul(int idx, mp_int* k, ecc_point *R, mp_int* a,
 
       /* map R back from projective space */
       if (map) {
-         err = ecc_map_org(R, modulus, mp);
+         err = ecc_map(R, modulus, mp);
       } else {
          err = MP_OKAY;
       }
@@ -6910,7 +6854,7 @@ static int accel_fp_mul2add(int idx1, int idx2,
 
           /* double if not first */
           if (!first) {
-             if ((err = ecc_projective_dbl_point_org(R, R, a, modulus,
+             if ((err = ecc_projective_dbl_point(R, R, a, modulus,
                                                               mp)) != MP_OKAY) {
                 break;
              }
@@ -6919,13 +6863,13 @@ static int accel_fp_mul2add(int idx1, int idx2,
           /* add if not first, otherwise copy */
           if (!first) {
              if (zA) {
-                if ((err = ecc_projective_add_point_org(R, fp_cache[idx1].LUT[zA],
+                if ((err = ecc_projective_add_point(R, fp_cache[idx1].LUT[zA],
                                                   R, a, modulus, mp)) != MP_OKAY) {
                    break;
                 }
              }
              if (zB) {
-                if ((err = ecc_projective_add_point_org(R, fp_cache[idx2].LUT[zB],
+                if ((err = ecc_projective_add_point(R, fp_cache[idx2].LUT[zB],
                                                   R, a, modulus, mp)) != MP_OKAY) {
                    break;
                 }
@@ -6942,7 +6886,7 @@ static int accel_fp_mul2add(int idx1, int idx2,
              }
              if (zB && first == 0) {
                 if (zB) {
-                   if ((err = ecc_projective_add_point_org(R,
+                   if ((err = ecc_projective_add_point(R,
                            fp_cache[idx2].LUT[zB], R, a, modulus, mp)) != MP_OKAY){
                       break;
                    }
@@ -6985,7 +6929,7 @@ done:
     if (err != MP_OKAY)
         return err;
 
-   return ecc_map_org(R, modulus, mp);
+   return ecc_map(R, modulus, mp);
 }
 
 
@@ -7123,7 +7067,7 @@ int ecc_mul2add(ecc_point* A, mp_int* kA,
              otherwise it's left in jacobian-montgomery form
     return MP_OKAY if successful
 */
-int wc_ecc_mulmod_ex_org(mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
+int wc_ecc_mulmod_ex(mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
     mp_int* modulus, int map, void* heap)
 {
    int   idx, err = MP_OKAY;
@@ -7208,10 +7152,10 @@ static void wc_ecc_fp_free_cache(void)
    for (x = 0; x < FP_ENTRIES; x++) {
       if (fp_cache[x].g != NULL) {
          for (y = 0; y < (1U<<FP_LUT); y++) {
-            wc_ecc_del_point_org(fp_cache[x].LUT[y]);
+            wc_ecc_del_point(fp_cache[x].LUT[y]);
             fp_cache[x].LUT[y] = NULL;
          }
-         wc_ecc_del_point_org(fp_cache[x].g);
+         wc_ecc_del_point(fp_cache[x].g);
          fp_cache[x].g         = NULL;
          mp_clear(&fp_cache[x].mu);
          fp_cache[x].lru_count = 0;
@@ -7575,7 +7519,7 @@ int wc_ecc_encrypt(ecc_key* privKey, ecc_key* pubKey, const byte* msg,
         if (ret != 0)
             break;
     #endif
-        ret = wc_ecc_shared_secret_org(privKey, pubKey, sharedSecret, &sharedSz);
+        ret = wc_ecc_shared_secret(privKey, pubKey, sharedSecret, &sharedSz);
     } while (ret == WC_PENDING_E);
     if (ret == 0) {
        switch (ctx->kdfAlgo) {
@@ -7737,7 +7681,7 @@ int wc_ecc_decrypt(ecc_key* privKey, ecc_key* pubKey, const byte* msg,
         if (ret != 0)
             break;
     #endif
-        ret = wc_ecc_shared_secret_org(privKey, pubKey, sharedSecret, &sharedSz);
+        ret = wc_ecc_shared_secret(privKey, pubKey, sharedSecret, &sharedSz);
     } while (ret == WC_PENDING_E);
     if (ret == 0) {
        switch (ctx->kdfAlgo) {
@@ -8145,7 +8089,7 @@ static int wc_ecc_export_x963_compressed(ecc_key* key, byte* out, word32* outLen
    if (key == NULL || out == NULL || outLen == NULL)
        return BAD_FUNC_ARG;
 
-   if (wc_ecc_is_valid_idx_org(key->idx) == 0) {
+   if (wc_ecc_is_valid_idx(key->idx) == 0) {
       return ECC_BAD_ARG_E;
    }
    numlen = key->dp->size;
@@ -8181,9 +8125,9 @@ static int wc_ecc_export_x963_compressed(ecc_key* key, byte* out, word32* outLen
 #endif /* HAVE_COMP_KEY */
 
 
-int wc_ecc_get_oid_org(word32 oidSum, const byte** oid, word32* oidSz)
+int wc_ecc_get_oid(word32 oidSum, const byte** oid, word32* oidSz)
 {
-	print_title("wc_ecc_get_oid_org");
+	print_title("wc_ecc_get_oid");
 	    int x;
 
     if (oidSum == 0) {

@@ -5,7 +5,7 @@
 #include "neoDebug.h"
 #include "neoCoLib.h"
 #include "wolfssl/debug_util.h"
-#include "wolfssl/user_ecc.h"
+#include "wolfssl/user_bypass.h"
 #include "sample_def.h"
 #include"g3_api.h"
 

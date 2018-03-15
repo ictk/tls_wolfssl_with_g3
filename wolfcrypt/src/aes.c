@@ -2807,7 +2807,7 @@ int wc_AesSetIV(Aes* aes, const byte* iv)
 
 #else
 
-    int wc_AesCbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
+    int wc_AesCbcEncrypt_org(Aes* aes, byte* out, const byte* in, word32 sz)
     {
         word32 blocks = (sz / AES_BLOCK_SIZE);
 
@@ -2883,6 +2883,12 @@ int wc_AesSetIV(Aes* aes, const byte* iv)
         }
     #endif
 		print_bin("enc iv", aes->reg, AES_BLOCK_SIZE);
+		byte tempkey[16];
+		memcpy(tempkey, aes->key, AES_BLOCK_SIZE);
+		ByteReverseWords(tempkey, tempkey, AES_BLOCK_SIZE);
+		print_bin("enc key", tempkey, AES_BLOCK_SIZE);
+		
+
         while (blocks--) {
 			//print_bin("enc unit in ", in, AES_BLOCK_SIZE);
 			
@@ -2898,12 +2904,12 @@ int wc_AesSetIV(Aes* aes, const byte* iv)
             out += AES_BLOCK_SIZE;
             in  += AES_BLOCK_SIZE;
         }
-
+		
         return 0;
     }
-
+	
     #ifdef HAVE_AES_DECRYPT
-    int wc_AesCbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
+    int wc_AesCbcDecrypt_org(Aes* aes, byte* out, const byte* in, word32 sz)
     {
         word32 blocks;
 
