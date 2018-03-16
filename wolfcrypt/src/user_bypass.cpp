@@ -87,6 +87,9 @@ int wc_ecc_import_private_key_org(const byte*   priv,word32 privSz,const byte*  
 int wc_ecc_import_private_key_ex_org(const byte*   priv,word32 privSz,const byte*   pub,word32 pubSz,ecc_key*   key,int curve_id);
 int wc_AesCbcEncrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
 int wc_AesCbcDecrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
+void neo_api_export_4_key_exchange_org(byte*    out,word32   outLen);
+void neo_set_inner_header_org(const byte*    innerheader,word32   innerheader_size);
+void neo_set_sc_random_org(const byte*    client_random,const byte*    server_random);
 //END ECC_ORG_DEC
 }
 
@@ -103,6 +106,9 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	wc_ecc_import_private_key_ex_org,
 	wc_AesCbcEncrypt_org,
 	wc_AesCbcDecrypt_org,
+	neo_api_export_4_key_exchange_org,
+	neo_set_inner_header_org,
+	neo_set_sc_random_org,
 //END SET_ECC_ORG_DEC
 
 
@@ -246,6 +252,20 @@ void dword_reverse(byte * buff,int byte_size)
 }
 
 
+void neo_api_export_4_key_exchange_org(byte*   out, word32   outLen)
+{
+
+
+
+
+}
+
+
+void neo_set_inner_header_org(const byte*   innerheader, word32   innerheader_size){
+	
+}
+
+
 int wc_ecc_verify_hash(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key)
 {
 	PRT_TITLE prttitle("wc_ecc_verify_hash");
@@ -341,6 +361,24 @@ int wc_AesCbcDecrypt(Aes*  aes,byte*  out,const byte*  in,word32 sz)
 	PRT_TITLE prttitle("wc_AesCbcDecrypt");
 	int ret = _cur_pwc_ecc_functions->pf_wc_AesCbcDecrypt(aes,out,in,sz);
 	return ret;
+}
+
+void neo_api_export_4_key_exchange(byte*    out,word32   outLen)
+{
+	PRT_TITLE prttitle("neo_api_export_4_key_exchange");
+	_cur_pwc_ecc_functions->pf_neo_api_export_4_key_exchange(out,outLen);
+}
+
+void neo_set_inner_header(const byte*    innerheader,word32   innerheader_size)
+{
+	PRT_TITLE prttitle("neo_set_inner_header");
+	_cur_pwc_ecc_functions->pf_neo_set_inner_header(innerheader,innerheader_size);
+}
+
+void neo_set_sc_random(const byte*    client_random,const byte*    server_random)
+{
+	PRT_TITLE prttitle("neo_set_sc_random");
+	_cur_pwc_ecc_functions->pf_neo_set_sc_random(client_random,server_random);
 }
 //END ECC_BYPASS
 

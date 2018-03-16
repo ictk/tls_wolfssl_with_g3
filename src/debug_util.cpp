@@ -25,18 +25,18 @@ void print_tls_title(const char * title)
 	//fprintf(_fpout, "!@#!@#!#!#!NEO_WOLFSSL_TLS_TITLE:%s\n", title);
 }
 
-void print_bin(const char * title, const unsigned char * buff, int size)
+void print_bin(const char * title, const void * buff, int size)
 {
 	string retaaa = NCL::BytetoHexStr(buff, size);
 	fprintf(_fpout, "\n*%s (size:%d):\n%s\n", title, size, retaaa.c_str());
 }
-void print_bin_ext(const char * fmt,const char * title, const unsigned char * buff, int size)
+void print_bin_ext(const char * fmt,const char * title, const void * buff, int size)
 {
 	string retaaa = NCL::BytetoHexStr(buff, size);
 	fprintf(_fpout, fmt, title, size, retaaa.c_str());
 }
 
-void print_hexdumpbin(const char * title, const unsigned char * buff, int size)
+void print_hexdumpbin(const char * title, const void * buff, int size)
 {	print_bin(title,  buff,  size);
 
 	return;

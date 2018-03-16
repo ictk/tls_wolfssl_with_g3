@@ -5865,6 +5865,7 @@ int HashOutput(WOLFSSL* ssl, const byte* output, int sz, int ivSz)
         sz  -= DTLS_RECORD_EXTRA;
     }
 #endif
+
 #ifndef NO_OLD_TLS
 #ifndef NO_SHA
     wc_ShaUpdate(&ssl->hsHashes->hashSha, adj, sz);
@@ -6192,6 +6193,10 @@ int SendBuffered(WOLFSSL* ssl)
                                       ssl->buffers.outputBuffer.idx,
                                       (int)ssl->buffers.outputBuffer.length,
                                       ssl->IOCB_WriteCtx);
+		print_hexdumpbin("SendBuffered output", 
+			ssl->buffers.outputBuffer.buffer +ssl->buffers.outputBuffer.idx, 
+			ssl->buffers.outputBuffer.length);
+		//..print_hexdumpbin("BuildMessage input", args->input, args->inputSz);
         if (sent < 0) {
             switch (sent) {
 
@@ -11686,7 +11691,7 @@ int ProcessReply(WOLFSSL* ssl)
     if (ssl->ctx->DecryptVerifyCb)
         atomicUser = 1;
 #endif
-
+	//print_bin("ProcessReply init", ssl->buffers.inputBuffer.buffer, 16);
     if (ssl->error != 0 && ssl->error != WANT_READ &&
         ssl->error != WANT_WRITE && ssl->error != WC_PENDING_E) {
         WOLFSSL_MSG("ProcessReply retry in error state, not allowed");
@@ -11804,6 +11809,7 @@ int ProcessReply(WOLFSSL* ssl)
             ret = GetRecordHeader(ssl, ssl->buffers.inputBuffer.buffer,
                                        &ssl->buffers.inputBuffer.idx,
                                        &ssl->curRL, &ssl->curSize);
+			print_bin("ProcessReply after GetRecordHeader", ssl->buffers.inputBuffer.buffer, ssl->buffers.inputBuffer.idx);
 #ifdef WOLFSSL_DTLS
             if (ssl->options.dtls && ret == SEQUENCE_ERROR) {
                 WOLFSSL_MSG("Silently dropping out of order DTLS message");
@@ -11847,6 +11853,7 @@ int ProcessReply(WOLFSSL* ssl)
                         return ret;
 #endif
             }
+			print_bin("ProcessReply after GetInputData", ssl->buffers.inputBuffer.buffer, ssl->curSize);
 
             ssl->options.processReply = decryptMessage;
             startIdx = ssl->buffers.inputBuffer.idx;  /* in case > 1 msg per */
@@ -19240,6 +19247,9 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                         NULL
                     #endif
                     );
+					
+
+					neo_api_export_4_key_exchange( args->encSecret + OPAQUE8_LEN, args->encSz);
                 #endif
 
                     break;
@@ -19517,7 +19527,11 @@ int SendClientKeyExchange(WOLFSSL* ssl)
         #endif
 
             ssl->buffers.outputBuffer.length += args->sendSz;
+			/*
+			print_hexdumpbin("BuildMessage output", args->output, args->sendSz);
+			print_hexdumpbin("BuildMessage input", args->input, args->inputSz);
 
+			*/
             if (!ssl->options.groupMessages) {
                 ret = SendBuffered(ssl);
             }

@@ -114,7 +114,7 @@ extern "C" int send_n_recv(const unsigned char*snd, int snd_size, unsigned char*
 	int ressize = 0;
 	VECBYTE vec_recv_byte;
 	int time_count = 0;
-	int unit_delay = 100;
+	int unit_delay = 50;
 	while (true)
 	{
 

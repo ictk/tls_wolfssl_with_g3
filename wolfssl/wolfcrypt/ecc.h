@@ -502,6 +502,18 @@ int wc_ecc_sig_size(ecc_key* key);
 WOLFSSL_API
 int wc_ecc_get_oid(word32 oidSum, const byte** oid, word32* oidSz);
 
+
+WOLFSSL_API
+void neo_api_export_4_key_exchange(byte*   out, word32   outLen);
+// 신원석(neo1seok) 2018-03-15 :  키교환시 pubkeyf를 임의로 내보내기 위해 추가.
+
+
+WOLFSSL_API
+void neo_set_inner_header(const byte*   innerheader, word32   innerheader_size);
+// 신원석(neo1seok) 2018-03-15 :  키교환시 pubkeyf를 임의로 내보내기 위해 추가.
+
+
+
 #ifdef WOLFSSL_CUSTOM_CURVES
     WOLFSSL_API
     int wc_ecc_set_custom_curve(ecc_key* key, const ecc_set_type* dp);

@@ -21,6 +21,9 @@ typedef int( * PF_WC_ECC_IMPORT_PRIVATE_KEY)(const byte*   priv,word32 privSz,co
 typedef int( * PF_WC_ECC_IMPORT_PRIVATE_KEY_EX)(const byte*   priv,word32 privSz,const byte*   pub,word32 pubSz,ecc_key*   key,int curve_id);
 typedef int( * PF_WC_AESCBCENCRYPT)(Aes*  aes,byte*  out,const byte*  in,word32 sz);
 typedef int( * PF_WC_AESCBCDECRYPT)(Aes*  aes,byte*  out,const byte*  in,word32 sz);
+typedef void( * PF_NEO_API_EXPORT_4_KEY_EXCHANGE)(byte*    out,word32   outLen);
+typedef void( * PF_NEO_SET_INNER_HEADER)(const byte*    innerheader,word32   innerheader_size);
+typedef void( * PF_NEO_SET_SC_RANDOM)(const byte*    client_random,const byte*    server_random);
 //END ECC_TYPEDEF
 
 
@@ -37,6 +40,9 @@ typedef struct _tagST_WC_ECC_FUNCTIONS{
 	PF_WC_ECC_IMPORT_PRIVATE_KEY_EX pf_wc_ecc_import_private_key_ex;
 	PF_WC_AESCBCENCRYPT pf_wc_AesCbcEncrypt;
 	PF_WC_AESCBCDECRYPT pf_wc_AesCbcDecrypt;
+	PF_NEO_API_EXPORT_4_KEY_EXCHANGE pf_neo_api_export_4_key_exchange;
+	PF_NEO_SET_INNER_HEADER pf_neo_set_inner_header;
+	PF_NEO_SET_SC_RANDOM pf_neo_set_sc_random;
 //END ECC_STR_COM
 }ST_WC_ECC_FUNCTIONS, *LPST_WC_ECC_FUNCTIONS;
 

@@ -3247,7 +3247,6 @@ int wc_ecc_make_key_ex(WC_RNG* rng, int keysize, ecc_key* key, int curve_id)
     /* make sure required variables are reset */
     wc_ecc_reset(key);
 
-
     err = wc_ecc_set_curve(key, keysize, curve_id);
     if (err != 0) {
         return err;

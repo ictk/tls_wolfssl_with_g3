@@ -27,7 +27,7 @@ int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte
 int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
 int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
 int init_sample_ieb100cdc(void *param);
-
+void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen);
 
 void swap_bytes(void* value, int size)
 {
@@ -67,6 +67,7 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;
 	wc_ecc_functions.pf_wc_AesCbcDecrypt = wc_AesCbcDecrypt_new;
 	wc_ecc_functions.pf_wc_AesCbcEncrypt = wc_AesCbcEncrypt_new;
+	wc_ecc_functions.pf_neo_api_export_4_key_exchange = neo_api_export_4_key_exchange_new;
 	
 	
 	//wc_ecc_shared_secret_new
@@ -167,12 +168,19 @@ int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte
 {
 	byte tmppubkey[65];
 	word32 tmppubkey_size = 65;
+	byte tmpprvkey[32];
+	word32 tmpprvkey_size = 32;
+	ST_ECC_PUBLIC st_ecc_public;
+	ST_ECDH_PRE_MASTER_SECRET st_ecdh_pre_master_secret;
 	ecc_Key_to_public(public_key, tmppubkey);
 	print_bin("wc_ecc_shared_secret_new FUCK public_key", tmppubkey, 64);
-	ecc_Key_to_private(private_key, tmppubkey);
-	print_bin("wc_ecc_shared_secret_new FUCK private_key", tmppubkey, 32);
-
+	ecc_Key_to_private(private_key, tmpprvkey);
+	print_bin("wc_ecc_shared_secret_new FUCK private_key", tmpprvkey, 32);
+	g3api_ecdh(EN_ECDH_MODE::NORMAL_ECDH, &tmppubkey[1], 64, NULL, &st_ecc_public, &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
 	
+	print_bin("st_ecc_public", &st_ecc_public, sizeof(ST_ECC_PUBLIC));
+
+	print_bin("st_ecdh_pre_master_secret", &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
 
 	int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
 	print_bin("wc_ecc_shared_secret_new FUCK out", out, *outlen);
@@ -202,4 +210,18 @@ int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz)
 	print_bin("wc_AesCbcDecrypt_new key", tmppubkey, tmppubkey_size);
 	int ret = _wc_ecc_functions_org.pf_wc_AesCbcDecrypt(aes, out, in, sz);
 	return ret;
+}
+
+
+void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen)
+{
+	byte tmpprvkey[32];
+	word32 tmpprvkey_size = 32;
+	//ecc_Key_to_private(key, tmpprvkey);
+	//print_bin("neo_api_export_4_key_exchange_new FUCK private_key", tmpprvkey, 32);
+	print_bin("neo_api_export_4_key_exchange_new FUCK pub key", out, outLen);
+
+
+
+
 }

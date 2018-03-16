@@ -13,9 +13,9 @@
 extern "C" {
 #endif
 	void print_pointer(const char * title, void * pt);
-	void print_bin(const char * title, const unsigned char * buff, int size);
-	void print_bin_ext(const char * fmt, const char * title, const unsigned char * buff, int size);
-	void print_hexdumpbin(const char * title, const unsigned char * buff, int size);
+	void print_bin(const char * title, const void * buff, int size);
+	void print_bin_ext(const char * fmt, const char * title, const void * buff, int size);
+	void print_hexdumpbin(const char * title, const void * buff, int size);
 	void print_title(const char * title);
 	void print_title_ext(const char * fmt, const char * title);
 	void print_tls_title(const char * title);
