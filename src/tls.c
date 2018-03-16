@@ -846,7 +846,8 @@ int TLS_hmac(WOLFSSL* ssl, byte* digest, const byte* in, word32 sz,
 
     wolfSSL_SetTlsHmacInner(ssl, myInner, sz, content, verify);
 	print_bin("myInner", myInner, sizeof(myInner));
-	neo_set_inner_header(myInner, sizeof(myInner));
+	neo_api_set_inner_header(myInner, sizeof(myInner));
+
     ret = wc_HmacInit(&hmac, ssl->heap, ssl->devId);
     if (ret != 0)
         return ret;

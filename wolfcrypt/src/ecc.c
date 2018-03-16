@@ -2761,17 +2761,19 @@ int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* ou
    if (private_key->dp->id != public_key->dp->id) {
       return ECC_BAD_ARG_E;
    }
-   print_intarray("private_key", private_key->k.dp, private_key->k.used);
-   print_intarray("public_key X", public_key->pubkey.x->dp, public_key->pubkey.x->used);
-   print_intarray("public_key Y", public_key->pubkey.y->dp, public_key->pubkey.y->used);
+   //print_intarray("private_key", private_key->k.dp, private_key->k.used);
+   //print_intarray("public_key X", public_key->pubkey.x->dp, public_key->pubkey.x->used);
+   //print_intarray("public_key Y", public_key->pubkey.y->dp, public_key->pubkey.y->used);
+#if 0
    byte tmppubkey[65];
    int tmppubkey_size = 65;
    wc_ecc_export_x963_org(public_key, tmppubkey, &tmppubkey_size);
-   print_hexdumpbin("public_key", tmppubkey, tmppubkey_size);
+//   print_hexdumpbin("public_key", tmppubkey, tmppubkey_size);
 
+   
    tmppubkey_size = mp_unsigned_bin_size(&private_key->k);
    int ret = mp_to_unsigned_bin(&private_key->k, tmppubkey);
-   print_hexdumpbin("private_key", tmppubkey, tmppubkey_size);
+   //print_hexdumpbin("private_key", tmppubkey, tmppubkey_size);
 
 
 
@@ -2783,7 +2785,7 @@ int wc_ecc_shared_secret_org(ecc_key* private_key, ecc_key* public_key, byte* ou
    tmppubkey_size = mp_unsigned_bin_size(public_key->pubkey.y);
    ret = mp_to_unsigned_bin(public_key->pubkey.y, tmppubkey);
    print_hexdumpbin("public_key Y", tmppubkey, tmppubkey_size);
-
+#endif
    
 #ifdef WOLFSSL_ATECC508A
    err = atcatls_ecdh(private_key->slot, public_key->pubkey, out);

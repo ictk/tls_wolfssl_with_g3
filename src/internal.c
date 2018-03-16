@@ -5051,6 +5051,23 @@ static INLINE void GetSEQIncrement(WOLFSSL* ssl, int verify, word32 seq[2])
     }
 }
 
+// 신원석(neo1seok) 2018-03-15 : 
+static INLINE void GetSEQ(WOLFSSL* ssl, int verify, word32 seq[2])
+{
+	if (verify) {
+		seq[0] = ssl->keys.peer_sequence_number_hi;
+		seq[1] = ssl->keys.peer_sequence_number_lo;
+	
+	}
+	else {
+		seq[0] = ssl->keys.sequence_number_hi;
+		seq[1] = ssl->keys.sequence_number_lo;
+	
+	}
+}
+// 신원석(neo1seok) 2018-03-15 : 
+
+
 
 #ifdef WOLFSSL_DTLS
 static INLINE void DtlsGetSEQ(WOLFSSL* ssl, int order, word32 seq[2])
@@ -10609,7 +10626,7 @@ static INLINE int EncryptDo(WOLFSSL* ssl, byte* out, const byte* input,
             if (ret != 0)
                 break;
         #endif
-
+			
             ret = wc_AesCbcEncrypt(ssl->encrypt.aes, out, input, sz);
         #ifdef WOLFSSL_ASYNC_CRYPT
             if (ret == WC_PENDING_E && asyncOkay) {
@@ -11868,7 +11885,7 @@ int ProcessReply(WOLFSSL* ssl)
                 ret = SanityCheckCipherText(ssl, ssl->curSize);
                 if (ret < 0)
                     return ret;
-
+				
                 if (atomicUser) {
                 #ifdef ATOMIC_USER
                     ret = ssl->ctx->DecryptVerifyCb(ssl,
@@ -11880,6 +11897,7 @@ int ProcessReply(WOLFSSL* ssl)
                 }
                 else {
                     if (!ssl->options.tls1_3) {
+						get_innerHeader(ssl, 0, ssl->curRL, 1);
 						print_bin("Decrypt in", in->buffer + in->idx, ssl->curSize);
                         ret = Decrypt(ssl,
                                       in->buffer + in->idx,
@@ -12599,6 +12617,33 @@ static void FreeBuildMsgArgs(WOLFSSL* ssl, void* pArgs)
     /* no allocations in BuildMessage */
 }
 
+int get_innerHeader(WOLFSSL* ssl,  word32 sz, int content,	int verify)
+{
+
+	byte inner[WOLFSSL_TLS_HMAC_INNER_SZ];
+	
+	if (ssl == NULL )
+		return BAD_FUNC_ARG;
+
+	XMEMSET(inner, 0, WOLFSSL_TLS_HMAC_INNER_SZ);
+
+	word32 seq[2] = { 0, 0 };
+
+	
+	GetSEQ(ssl, verify, seq);
+
+	c32toa(seq[0], inner);
+	c32toa(seq[1], inner + OPAQUE32_LEN);
+
+
+	inner[SEQ_SZ] = (byte)content;
+	inner[SEQ_SZ + ENUM_LEN] = ssl->version.major;
+	inner[SEQ_SZ + ENUM_LEN + ENUM_LEN] = ssl->version.minor;
+	c16toa((word16)sz, inner + SEQ_SZ + ENUM_LEN + VERSION_SZ);
+	neo_api_set_inner_header(inner, WOLFSSL_TLS_HMAC_INNER_SZ);
+	return 0;
+}
+
 /* Build SSL Message, encrypted */
 int BuildMessage(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
              int inSz, int type, int hashOutput, int sizeOnly, int asyncOkay)
@@ -12810,6 +12855,10 @@ int BuildMessage(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
         #endif
 
 			print_bin("hmac in", output + args->headerSz + args->ivSz, inSz);
+			
+			
+			get_innerHeader(ssl, inSz, type, 0);
+			
 
             ret = ssl->hmac(ssl, output + args->idx, output + args->headerSz + args->ivSz,
                                                                 inSz, type, 0);
@@ -19234,6 +19283,8 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                 #ifdef HAVE_ECC
                     peerKey = (ssl->specs.static_ecdh) ?
                               ssl->peerEccDsaKey : ssl->peerEccKey;
+					neo_api_set_sc_random(ssl->arrays->clientRandom, ssl->arrays->serverRandom);
+
 
                     ret = EccSharedSecret(ssl,
                         (ecc_key*)ssl->hsKey, peerKey,
@@ -19248,8 +19299,10 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                     #endif
                     );
 					
+					
 
-					neo_api_export_4_key_exchange( args->encSecret + OPAQUE8_LEN, args->encSz);
+
+					neo_api_change_4_key_exchange(args->encSecret + OPAQUE8_LEN, args->encSz);
                 #endif
 
                     break;
@@ -19540,8 +19593,11 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                 if (tmpRet != 0) {
                     ret = tmpRet;   /* save WANT_WRITE unless more serious */
                 }
+				
+				neo_api_change_iv(ssl->keys.client_write_IV, ssl->keys.server_write_IV);
                 ssl->options.clientState = CLIENT_KEYEXCHANGE_COMPLETE;
             }
+			
             break;
         }
         default:

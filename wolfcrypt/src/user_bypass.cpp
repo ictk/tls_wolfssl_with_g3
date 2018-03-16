@@ -38,6 +38,9 @@
 #include <wolfssl/wolfcrypt/ecc.h>
 #include "wolfssl/user_bypass.h"
 #include <wolfssl/wolfcrypt/aes.h>
+#include <wolfssl/ssl.h>
+#include <wolfssl/ssl.h>
+
 
 #define WOLFSSL_MISC_INCLUDED
 #include <wolfcrypt/src/misc.c>
@@ -87,9 +90,10 @@ int wc_ecc_import_private_key_org(const byte*   priv,word32 privSz,const byte*  
 int wc_ecc_import_private_key_ex_org(const byte*   priv,word32 privSz,const byte*   pub,word32 pubSz,ecc_key*   key,int curve_id);
 int wc_AesCbcEncrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
 int wc_AesCbcDecrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
-void neo_api_export_4_key_exchange_org(byte*    out,word32   outLen);
-void neo_set_inner_header_org(const byte*    innerheader,word32   innerheader_size);
-void neo_set_sc_random_org(const byte*    client_random,const byte*    server_random);
+void neo_api_change_4_key_exchange_org(byte*    out,word32   outLen);
+void neo_api_set_inner_header_org(const byte*    innerheader,word32   innerheader_size);
+void neo_api_set_sc_random_org(const byte*    client_random,const byte*    server_random);
+void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv);
 //END ECC_ORG_DEC
 }
 
@@ -106,9 +110,10 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	wc_ecc_import_private_key_ex_org,
 	wc_AesCbcEncrypt_org,
 	wc_AesCbcDecrypt_org,
-	neo_api_export_4_key_exchange_org,
-	neo_set_inner_header_org,
-	neo_set_sc_random_org,
+	neo_api_change_4_key_exchange_org,
+	neo_api_set_inner_header_org,
+	neo_api_set_sc_random_org,
+	neo_api_change_iv_org,
 //END SET_ECC_ORG_DEC
 
 
@@ -251,73 +256,88 @@ void dword_reverse(byte * buff,int byte_size)
 	ByteReverseWords((word32*)buff, (word32*)buff, byte_size);
 }
 
+#define SEQ_SZ 2
+#define ENUM_LEN 1
+#define VERSION_SZ 2
 
-void neo_api_export_4_key_exchange_org(byte*   out, word32   outLen)
+
+//START EMPTY_FUNCTION
+
+void neo_api_change_4_key_exchange_org(byte*    out,word32   outLen)
 {
 
-
-
-
 }
 
-
-void neo_set_inner_header_org(const byte*   innerheader, word32   innerheader_size){
-	
-}
-
-
-int wc_ecc_verify_hash(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key)
+void neo_api_set_inner_header_org(const byte*    innerheader,word32   innerheader_size)
 {
-	PRT_TITLE prttitle("wc_ecc_verify_hash");
-	print_bin_ext(TAG_ECC, "sig", sig, siglen);
-	print_bin_ext(TAG_ECC, "hash", hash, hashlen);
 
-	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
-	return ret;
 }
 
-int wc_ecc_export_x963_ex(ecc_key*  key, byte*  out, word32*  outLen, int compressed)
+void neo_api_set_sc_random_org(const byte*    client_random,const byte*    server_random)
 {
-	PRT_TITLE prttitle("wc_ecc_export_x963_ex");
-	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963_ex(key, out, outLen, compressed);
-	print_bin_ext(TAG_ECC, "out", out, *outLen);
-	return ret;
+
 }
 
-
-
-
-
-int wc_ecc_sign_hash(const byte*  in,word32 inlen,byte*  out,word32 * outlen,WC_RNG*  rng,ecc_key*  key)
+void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv)
 {
-	PRT_TITLE prttitle("wc_ecc_sign_hash");
 
-	print_bin_ext(TAG_ECC,"in",in,  inlen);
-	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sign_hash(in, inlen, out, outlen, rng, key);
-
-	print_bin_ext(TAG_ECC,"out", out, *outlen);
-	return ret;
 }
+//END EMPTY_FUNCTION
 
-
-
-
-int wc_ecc_import_x963_ex(const byte*  in,word32 inLen,ecc_key*  key,int curve_id)
-{
-	PRT_TITLE prttitle("wc_ecc_import_x963_ex");
-	
-	print_bin_ext(TAG_ECC,"in", in, inLen);
-	return  _cur_pwc_ecc_functions->pf_wc_ecc_import_x963_ex(in, inLen, key, curve_id);
-}
-
-
-int wc_ecc_import_private_key_ex(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key,int curve_id)
-{
-	PRT_TITLE prttitle("wc_ecc_import_private_key_ex");
-	print_bin_ext(TAG_ECC,"priv", priv, privSz);
-	print_bin_ext(TAG_ECC,"pub", pub, pubSz);
-	return  _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key_ex(priv, privSz, pub, pubSz, key, curve_id);
-}
+//
+//
+//int wc_ecc_verify_hash(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key)
+//{
+//	PRT_TITLE prttitle("wc_ecc_verify_hash");
+//	print_bin_ext(TAG_ECC, "sig", sig, siglen);
+//	print_bin_ext(TAG_ECC, "hash", hash, hashlen);
+//
+//	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
+//	return ret;
+//}
+//
+//int wc_ecc_export_x963_ex(ecc_key*  key, byte*  out, word32*  outLen, int compressed)
+//{
+//	PRT_TITLE prttitle("wc_ecc_export_x963_ex");
+//	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963_ex(key, out, outLen, compressed);
+//	print_bin_ext(TAG_ECC, "out", out, *outLen);
+//	return ret;
+//}
+//
+//
+//
+//
+//
+//int wc_ecc_sign_hash(const byte*  in,word32 inlen,byte*  out,word32 * outlen,WC_RNG*  rng,ecc_key*  key)
+//{
+//	PRT_TITLE prttitle("wc_ecc_sign_hash");
+//
+//	print_bin_ext(TAG_ECC,"in",in,  inlen);
+//	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sign_hash(in, inlen, out, outlen, rng, key);
+//
+//	print_bin_ext(TAG_ECC,"out", out, *outlen);
+//	return ret;
+//}
+//
+//
+//
+//
+//int wc_ecc_import_x963_ex(const byte*  in,word32 inLen,ecc_key*  key,int curve_id)
+//{
+//	PRT_TITLE prttitle("wc_ecc_import_x963_ex");
+//	
+//	print_bin_ext(TAG_ECC,"in", in, inLen);
+//	return  _cur_pwc_ecc_functions->pf_wc_ecc_import_x963_ex(in, inLen, key, curve_id);
+//}
+//
+//
+//int wc_ecc_import_private_key_ex(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key,int curve_id)
+//{
+//	PRT_TITLE prttitle("wc_ecc_import_private_key_ex");
+//	print_bin_ext(TAG_ECC,"priv", priv, privSz);
+//	print_bin_ext(TAG_ECC,"pub", pub, pubSz);
+//	return  _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key_ex(priv, privSz, pub, pubSz, key, curve_id);
+//}
 
 //START ECC_BYPASS
 
@@ -328,10 +348,31 @@ int wc_ecc_shared_secret(ecc_key*   private_key,ecc_key*   public_key,byte*   ou
 	return ret;
 }
 
+int wc_ecc_sign_hash(const byte*   in,word32 inlen,byte*   out,word32 *  outlen,WC_RNG*   rng,ecc_key*   key)
+{
+	PRT_TITLE prttitle("wc_ecc_sign_hash");
+	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sign_hash(in,inlen,out,outlen,rng,key);
+	return ret;
+}
+
+int wc_ecc_verify_hash(const byte*   sig,word32 siglen,const byte*   hash,word32 hashlen,int*   stat,ecc_key*   key)
+{
+	PRT_TITLE prttitle("wc_ecc_verify_hash");
+	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_verify_hash(sig,siglen,hash,hashlen,stat,key);
+	return ret;
+}
+
 int wc_ecc_export_x963(ecc_key*   key,byte*   out,word32*   outLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_x963");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963(key,out,outLen);
+	return ret;
+}
+
+int wc_ecc_export_x963_ex(ecc_key*   key,byte*   out,word32*   outLen,int compressed)
+{
+	PRT_TITLE prttitle("wc_ecc_export_x963_ex");
+	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963_ex(key,out,outLen,compressed);
 	return ret;
 }
 
@@ -342,10 +383,24 @@ int wc_ecc_import_x963(const byte*   in,word32 inLen,ecc_key*   key)
 	return ret;
 }
 
+int wc_ecc_import_x963_ex(const byte*   in,word32 inLen,ecc_key*   key,int curve_id)
+{
+	PRT_TITLE prttitle("wc_ecc_import_x963_ex");
+	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_x963_ex(in,inLen,key,curve_id);
+	return ret;
+}
+
 int wc_ecc_import_private_key(const byte*   priv,word32 privSz,const byte*   pub,word32 pubSz,ecc_key*   key)
 {
 	PRT_TITLE prttitle("wc_ecc_import_private_key");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key(priv,privSz,pub,pubSz,key);
+	return ret;
+}
+
+int wc_ecc_import_private_key_ex(const byte*   priv,word32 privSz,const byte*   pub,word32 pubSz,ecc_key*   key,int curve_id)
+{
+	PRT_TITLE prttitle("wc_ecc_import_private_key_ex");
+	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key_ex(priv,privSz,pub,pubSz,key,curve_id);
 	return ret;
 }
 
@@ -363,22 +418,28 @@ int wc_AesCbcDecrypt(Aes*  aes,byte*  out,const byte*  in,word32 sz)
 	return ret;
 }
 
-void neo_api_export_4_key_exchange(byte*    out,word32   outLen)
+void neo_api_change_4_key_exchange(byte*    out,word32   outLen)
 {
-	PRT_TITLE prttitle("neo_api_export_4_key_exchange");
-	_cur_pwc_ecc_functions->pf_neo_api_export_4_key_exchange(out,outLen);
+	PRT_TITLE prttitle("neo_api_change_4_key_exchange");
+	_cur_pwc_ecc_functions->pf_neo_api_change_4_key_exchange(out,outLen);
 }
 
-void neo_set_inner_header(const byte*    innerheader,word32   innerheader_size)
+void neo_api_set_inner_header(const byte*    innerheader,word32   innerheader_size)
 {
-	PRT_TITLE prttitle("neo_set_inner_header");
-	_cur_pwc_ecc_functions->pf_neo_set_inner_header(innerheader,innerheader_size);
+	PRT_TITLE prttitle("neo_api_set_inner_header");
+	_cur_pwc_ecc_functions->pf_neo_api_set_inner_header(innerheader,innerheader_size);
 }
 
-void neo_set_sc_random(const byte*    client_random,const byte*    server_random)
+void neo_api_set_sc_random(const byte*    client_random,const byte*    server_random)
 {
-	PRT_TITLE prttitle("neo_set_sc_random");
-	_cur_pwc_ecc_functions->pf_neo_set_sc_random(client_random,server_random);
+	PRT_TITLE prttitle("neo_api_set_sc_random");
+	_cur_pwc_ecc_functions->pf_neo_api_set_sc_random(client_random,server_random);
+}
+
+void neo_api_change_iv(byte*    client_iv,byte*    server_iv)
+{
+	PRT_TITLE prttitle("neo_api_change_iv");
+	_cur_pwc_ecc_functions->pf_neo_api_change_iv(client_iv,server_iv);
 }
 //END ECC_BYPASS
 

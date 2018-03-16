@@ -2606,6 +2606,21 @@ WOLFSSL_API int wolfSSL_sk_SSL_CIPHER_num(const void * p);
 WOLFSSL_API int wolfSSL_sk_SSL_COMP_zero(WOLFSSL_STACK* st);
 WOLFSSL_API WOLFSSL_CIPHER* wolfSSL_sk_SSL_CIPHER_value(void *ciphers, int idx);
 WOLFSSL_API void ERR_load_SSL_strings(void);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+//START NEO_API_DEC
+NEO_API void neo_api_change_4_key_exchange(byte*    out,word32   outLen);
+NEO_API void neo_api_set_inner_header(const byte*    innerheader,word32   innerheader_size);
+NEO_API void neo_api_set_sc_random(const byte*    client_random,const byte*    server_random);
+NEO_API void neo_api_change_iv(byte*    client_iv,byte*    server_iv);
+//END NEO_API_DEC
+#ifdef __cplusplus
+}   /* extern "C" */
+#endif
+
+
 #endif /* OPENSSL_EXTRA */
 
 #ifdef __cplusplus

@@ -28,6 +28,9 @@ int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
 int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
 int init_sample_ieb100cdc(void *param);
 void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen);
+void neo_api_set_inner_header_new(const byte*    innerheader, word32   innerheader_size);
+void neo_api_set_sc_random_new(const byte*    client_random, const byte*    server_random);
+void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv);
 
 void swap_bytes(void* value, int size)
 {
@@ -67,7 +70,10 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;
 	wc_ecc_functions.pf_wc_AesCbcDecrypt = wc_AesCbcDecrypt_new;
 	wc_ecc_functions.pf_wc_AesCbcEncrypt = wc_AesCbcEncrypt_new;
-	wc_ecc_functions.pf_neo_api_export_4_key_exchange = neo_api_export_4_key_exchange_new;
+	wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_export_4_key_exchange_new;
+	wc_ecc_functions.pf_neo_api_set_inner_header = neo_api_set_inner_header_new;
+	wc_ecc_functions.pf_neo_api_set_sc_random = neo_api_set_sc_random_new;
+	wc_ecc_functions.pf_neo_api_change_iv = neo_api_change_iv_new;
 	
 	
 	//wc_ecc_shared_secret_new
@@ -163,6 +169,10 @@ int wc_ecc_import_x963_new(const byte*   in, word32 inLen, ecc_key*   key)
 
 	return ret;
 }
+ST_ECC_PUBLIC _st_ecc_public;
+ST_ECDH_RANDOM _st_ecdh_random;
+ST_ECDH_IV _st_iv;
+byte _inner[WOLFSSL_TLS_HMAC_INNER_SZ];
 
 int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte*   out, word32*   outlen)
 {
@@ -170,22 +180,26 @@ int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte
 	word32 tmppubkey_size = 65;
 	byte tmpprvkey[32];
 	word32 tmpprvkey_size = 32;
-	ST_ECC_PUBLIC st_ecc_public;
+	
 	ST_ECDH_PRE_MASTER_SECRET st_ecdh_pre_master_secret;
 	ecc_Key_to_public(public_key, tmppubkey);
 	print_bin("wc_ecc_shared_secret_new FUCK public_key", tmppubkey, 64);
 	ecc_Key_to_private(private_key, tmpprvkey);
 	print_bin("wc_ecc_shared_secret_new FUCK private_key", tmpprvkey, 32);
-	g3api_ecdh(EN_ECDH_MODE::NORMAL_ECDH, &tmppubkey[1], 64, NULL, &st_ecc_public, &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
+	//g3api_ecdh(EN_ECDH_MODE::NORMAL_ECDH, tmppubkey, 64, NULL, &_st_ecc_public, &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
 	
-	print_bin("st_ecc_public", &st_ecc_public, sizeof(ST_ECC_PUBLIC));
+	g3api_ecdh(EN_ECDH_MODE::SET_TLS_SESSION_KEY, tmppubkey, 64, &_st_ecdh_random, &_st_ecc_public, &_st_iv, sizeof(ST_ECDH_IV));
+	
+	print_bin("st_ecc_public", &_st_ecc_public, sizeof(ST_ECC_PUBLIC));
 
 	print_bin("st_ecdh_pre_master_secret", &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
-
-	int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
+	memcpy(out, &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
+	*outlen = sizeof(ST_ECDH_PRE_MASTER_SECRET);
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
 	print_bin("wc_ecc_shared_secret_new FUCK out", out, *outlen);
 
-	return ret;
+	return 0;
 }
 
 int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz)
@@ -197,6 +211,7 @@ int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz)
 	
 	dword_reverse(tmppubkey, tmppubkey_size);
 	print_bin("wc_AesCbcEncrypt_new key", tmppubkey, tmppubkey_size);
+	//g3api_tls_mac_encrypt(0,)
 
 	int ret = _wc_ecc_functions_org.pf_wc_AesCbcEncrypt(aes, out, in, sz);
 	return ret;
@@ -219,9 +234,36 @@ void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen)
 	word32 tmpprvkey_size = 32;
 	//ecc_Key_to_private(key, tmpprvkey);
 	//print_bin("neo_api_export_4_key_exchange_new FUCK private_key", tmpprvkey, 32);
-	print_bin("neo_api_export_4_key_exchange_new FUCK pub key", out, outLen);
+	print_bin("neo_api_export_4_key_exchange_new  pub key", out, outLen);
+	memcpy(&out[1], &_st_ecc_public, sizeof(ST_ECC_PUBLIC));
+	print_bin("neo_api_export_4_key_exchange_new mypub pub key", out, outLen);
 
 
 
 
+}
+
+
+void neo_api_set_inner_header_new(const byte*    innerheader, word32   innerheader_size)
+{
+	print_bin("neo_api_set_inner_header_new innerheader", innerheader, innerheader_size);
+	memcpy(_inner, innerheader, innerheader_size);
+}
+
+void neo_api_set_sc_random_new(const byte*    client_random, const byte*    server_random)
+{
+	print_bin("neo_api_set_sc_random_new client_random", client_random, 32);
+	print_bin("neo_api_set_sc_random_new server_random", server_random, 32);
+	memcpy(_st_ecdh_random.server, server_random, 32);
+	memcpy(_st_ecdh_random.client, client_random, 32);
+
+}
+
+void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv)
+{
+	print_bin("neo_api_change_iv_new client_iv", client_iv, 16);
+	print_bin("neo_api_change_iv_new server_iv", server_iv, 16);
+	memcpy(client_iv, _st_iv.client_iv, 16);
+	memcpy(server_iv, _st_iv.server_iv, 32);
+	
 }
