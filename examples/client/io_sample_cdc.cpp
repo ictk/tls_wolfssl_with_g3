@@ -11,7 +11,7 @@
 //void print_value(const char * title, const  void *buff, int size);
 void swap_bytes(void* value, int size);
 
-FILE * _fp = stdout;
+FILE * _fp = stderr;
 
 #pragma pack(push, 1)   
 typedef struct _tagHEADER_WRITE_IEB100_PACKET{
@@ -82,6 +82,7 @@ LPWRITE_IEB100_PACKET make_write_ieb100_packet(char rom_inst, char res_size, con
 
 	return lp_write_packet;
 }
+#define TIME_OUT 1000
 
 extern "C" int send_n_recv(const unsigned char*snd, int snd_size, unsigned char*recv, int* recv_size, void*etcparam)
 {
@@ -125,7 +126,7 @@ extern "C" int send_n_recv(const unsigned char*snd, int snd_size, unsigned char*
 			fprintf(_fp,"first byte :%d\n", time_count);
 		}
 
-		if (time_count * unit_delay > 1000){
+		if (time_count * unit_delay > TIME_OUT){
 			fprintf(_fp,"TIME OUT!!!!!!!!!!!!");
 			return -1;
 		}
@@ -140,7 +141,7 @@ extern "C" int send_n_recv(const unsigned char*snd, int snd_size, unsigned char*
 		ressize = serreial->Read(buff, sizeof(buff));
 		if (ressize == 0) break;
 		NCL::AppendVector(vec_recv_byte, buff, ressize);
-		NCL::Sleep(10);
+		NCL::Sleep(1);
 	}
 
 	fprintf(_fp,"total ressize :%d\n", vec_recv_byte.size());

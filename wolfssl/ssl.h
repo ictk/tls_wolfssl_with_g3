@@ -2615,6 +2615,7 @@ NEO_API void neo_api_change_4_key_exchange(byte*    out,word32   outLen);
 NEO_API void neo_api_set_inner_header(const byte*    innerheader,word32   innerheader_size);
 NEO_API void neo_api_set_sc_random(const byte*    client_random,const byte*    server_random);
 NEO_API void neo_api_change_iv(byte*    client_iv,byte*    server_iv);
+NEO_API int neo_api_verify_mac(WOLFSSL* ssl,int ssl_ret);
 //END NEO_API_DEC
 #ifdef __cplusplus
 }   /* extern "C" */

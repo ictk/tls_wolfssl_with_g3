@@ -9765,6 +9765,10 @@ static int DoHandShakeMsg(WOLFSSL* ssl, byte* input, word32* inOutIdx,
     if (ssl->arrays->pendingMsgSz == 0) {
         byte   type;
         word32 size;
+		if (ssl->options.connectState == FINISHED_DONE){
+			int asd = 0;
+			print_bin("GetHandShakeHeader",input,32);
+		}
 
         if (GetHandShakeHeader(ssl,input, inOutIdx, &type, &size, totalSz) != 0)
             return PARSE_ERROR;
@@ -9793,7 +9797,10 @@ static int DoHandShakeMsg(WOLFSSL* ssl, byte* input, word32* inOutIdx,
             *inOutIdx += inputLength - HANDSHAKE_HEADER_SZ;
             return 0;
         }
-
+		if (ssl->options.connectState == FINISHED_DONE){
+			int asd = 0;
+			print_bin("DoHandShakeMsgType", input, 32);
+		}
         ret = DoHandShakeMsgType(ssl, input, inOutIdx, type, size, totalSz);
     }
     else {
@@ -11963,7 +11970,11 @@ int ProcessReply(WOLFSSL* ssl)
                 }
             }
 
-            ssl->options.processReply = verifyMessage;
+			ssl->options.processReply = verifyMessage;
+			//ssl->options.processReply = runProcessingOneMessage;
+			{
+				int asd = 0;
+			}
             FALL_THROUGH;
 
         /* verify digest of message */
@@ -11978,6 +11989,7 @@ int ProcessReply(WOLFSSL* ssl)
                                     ssl->buffers.inputBuffer.idx,
                                     ssl->curSize, ssl->curRL.type,
                                     &ssl->keys.padSz);
+					ret = neo_api_verify_mac(ssl,ret);
                 #ifdef WOLFSSL_ASYNC_CRYPT
                     if (ret == WC_PENDING_E)
                         return ret;

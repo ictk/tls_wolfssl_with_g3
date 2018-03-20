@@ -26,6 +26,7 @@ typedef void( * PF_NEO_API_CHANGE_4_KEY_EXCHANGE)(byte*    out,word32   outLen);
 typedef void( * PF_NEO_API_SET_INNER_HEADER)(const byte*    innerheader,word32   innerheader_size);
 typedef void( * PF_NEO_API_SET_SC_RANDOM)(const byte*    client_random,const byte*    server_random);
 typedef void( * PF_NEO_API_CHANGE_IV)(byte*    client_iv,byte*    server_iv);
+typedef int( * PF_NEO_API_VERIFY_MAC)(WOLFSSL* ssl,int ssl_ret);
 //END ECC_TYPEDEF
 
 
@@ -46,6 +47,7 @@ typedef struct _tagST_WC_ECC_FUNCTIONS{
 	PF_NEO_API_SET_INNER_HEADER pf_neo_api_set_inner_header;
 	PF_NEO_API_SET_SC_RANDOM pf_neo_api_set_sc_random;
 	PF_NEO_API_CHANGE_IV pf_neo_api_change_iv;
+	PF_NEO_API_VERIFY_MAC pf_neo_api_verify_mac;
 //END ECC_STR_COM
 }ST_WC_ECC_FUNCTIONS, *LPST_WC_ECC_FUNCTIONS;
 

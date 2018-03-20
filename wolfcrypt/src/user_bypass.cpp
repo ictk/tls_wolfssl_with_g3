@@ -94,6 +94,7 @@ void neo_api_change_4_key_exchange_org(byte*    out,word32   outLen);
 void neo_api_set_inner_header_org(const byte*    innerheader,word32   innerheader_size);
 void neo_api_set_sc_random_org(const byte*    client_random,const byte*    server_random);
 void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv);
+int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret);
 //END ECC_ORG_DEC
 }
 
@@ -114,6 +115,7 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_api_set_inner_header_org,
 	neo_api_set_sc_random_org,
 	neo_api_change_iv_org,
+	neo_api_verify_mac_org,
 //END SET_ECC_ORG_DEC
 
 
@@ -282,7 +284,17 @@ void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv)
 {
 
 }
+
+int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret)
+{
+	return 0;
+}
 //END EMPTY_FUNCTION
+int neo_api_verify_mac_org(int ssl_ret)
+{
+	return ssl_ret;
+}
+
 
 //
 //
@@ -441,6 +453,18 @@ void neo_api_change_iv(byte*    client_iv,byte*    server_iv)
 	PRT_TITLE prttitle("neo_api_change_iv");
 	_cur_pwc_ecc_functions->pf_neo_api_change_iv(client_iv,server_iv);
 }
+
+int neo_api_verify_mac(WOLFSSL* ssl,int ssl_ret)
+{
+	PRT_TITLE prttitle("neo_api_verify_mac");
+	int ret = _cur_pwc_ecc_functions->pf_neo_api_verify_mac(ssl,ssl_ret);
+	return ret;
+}
 //END ECC_BYPASS
+
+int neo_tls_init(WOLFSSL *ssl)
+{
+	return 0;
+}
 
 #endif /* HAVE_ECC */
