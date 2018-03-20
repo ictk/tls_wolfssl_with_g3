@@ -25,6 +25,7 @@ WOLFSSL* _ssl;
 int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key);
 int wc_ecc_sign_hash_new(const byte*  in, word32 inlen, byte*  out, word32 * outlen, WC_RNG*  rng, ecc_key*  key);
 int wc_ecc_import_x963_new(const byte*   in, word32 inLen, ecc_key*   key);
+int wc_ecc_import_x963_ex_new(const byte*  in, word32 inLen, ecc_key*  key, int curve_id);
 int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte*   out, word32*   outlen);
 int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
 int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
@@ -36,6 +37,18 @@ void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv);
 //int neo_api_verify_mac_new(int ssl_ret);
 int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret);
 //#define USE_ORG_DEC
+
+ST_ECC_PUBLIC _st_ecc_public;
+ST_ECDH_RANDOM _st_ecdh_random;
+ST_ECDH_IV _st_iv;
+byte _inner[WOLFSSL_TLS_HMAC_INNER_SZ];
+int _ret_verify = 0;
+int _pad_size = 0;
+ST_ECC_PUBLIC _st_ecc_public_4_verify;
+
+
+
+
 
 void swap_bytes(void* value, int size)
 {
@@ -72,6 +85,7 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_wc_ecc_verify_hash = wc_ecc_verify_hash_new;
 	wc_ecc_functions.pf_wc_ecc_sign_hash = wc_ecc_sign_hash_new;
 	wc_ecc_functions.pf_wc_ecc_import_x963 = wc_ecc_import_x963_new;
+	wc_ecc_functions.pf_wc_ecc_import_x963_ex = wc_ecc_import_x963_ex_new;
 	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;
 	wc_ecc_functions.pf_wc_AesCbcDecrypt = wc_AesCbcDecrypt_new;
 	wc_ecc_functions.pf_wc_AesCbcEncrypt = wc_AesCbcEncrypt_new;
@@ -109,25 +123,28 @@ int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, w
 	byte tmppubkey[65];
 	word32 tmppubkey_size = 65;
 
-	_wc_ecc_functions_org.pf_wc_ecc_export_x963(key, tmppubkey, &tmppubkey_size);
+	//_wc_ecc_functions_org.pf_wc_ecc_export_x963(key, tmppubkey, &tmppubkey_size);
+	//ecc_Key_to_public(key, tmppubkey);
 
 	print_bin("FUCK sig", sig, siglen);
 	print_bin("FUCK hash", hash, hashlen);
-	print_bin("FUCK tmppubkey", tmppubkey, tmppubkey_size);
+	print_bin("FUCK _st_ecc_public_4_verify", &_st_ecc_public_4_verify, sizeof(ST_ECC_PUBLIC));
 	byte sign64[64] = { 0, };
 	int err = make_sign_asn1_to_sign_64(sig, siglen, sign64);
 	print_bin("sign64 ", sign64, 64);
 	ST_DATA_32 st_data_32;
-	g3api_set_extern_public_key(tmppubkey + 1, tmppubkey_size - 1, &st_data_32);
+	g3api_set_extern_public_key(&_st_ecc_public_4_verify, sizeof(ST_ECC_PUBLIC), &st_data_32);
 
 
 	int ret_api = g3api_verify(KEY_SECTOR_DEVICE_PUB_KEY, EN_VERIFY_OPTION::VERYFY_EXT_PUB_ECDSA_EXT_SHA256, hash, hashlen, sign64, 64);
 
 	printf("0x%x \n", ret_api);
+	
+	*stat = (ret_api == 0);
 
 
-	int ret = _wc_ecc_functions_org.pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
-	return ret;
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
+	return ret_api <0 ? ret_api : 0 ;
 }
 
 
@@ -170,17 +187,16 @@ int wc_ecc_import_x963_new(const byte*   in, word32 inLen, ecc_key*   key)
 	print_bin("FUCK pubkey", in, inLen);
 	
 	
+	memcpy(&_st_ecc_public_4_verify, &in[1], inLen - 1);
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_import_x963(in, inLen, key);
 
-	int ret = _wc_ecc_functions_org.pf_wc_ecc_import_x963(in, inLen, key);
-
-	return ret;
+	return 0;
 }
-ST_ECC_PUBLIC _st_ecc_public;
-ST_ECDH_RANDOM _st_ecdh_random;
-ST_ECDH_IV _st_iv;
-byte _inner[WOLFSSL_TLS_HMAC_INNER_SZ];
-int _ret_verify = 0;
-int _pad_size = 0;
+int wc_ecc_import_x963_ex_new(const byte*  in, word32 inLen, ecc_key*  key, int curve_id)
+{
+	return wc_ecc_import_x963_new(in,inLen,key);
+
+}
 int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte*   out, word32*   outlen)
 {
 	byte tmppubkey[65];

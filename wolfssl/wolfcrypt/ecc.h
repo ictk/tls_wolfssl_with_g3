@@ -356,6 +356,8 @@ int wc_ecc_shared_secret_ex(ecc_key* private_key, ecc_point* point,
 #endif /* HAVE_ECC_DHE */
 
 #ifdef HAVE_ECC_SIGN
+
+
 WOLFSSL_API
 int wc_ecc_sign_hash(const byte* in, word32 inlen, byte* out, word32 *outlen,
                      WC_RNG* rng, ecc_key* key);
