@@ -89,11 +89,14 @@ int neo_api_verify_mac_new(WOLFSSL* ssl,int ssl_ret);
 int neo_ssl_init_new(WOLFSSL* ssl);
 int neo_ssl_client_hello_new(const byte * random);
 int neo_ssl_server_hello_new(const byte * random);
-int neo_ssl_server_certificate_new(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1);
-int neo_ssl_server_key_exchange_new(const byte* pubkey_asn1_4_ecdh);
+int neo_ssl_server_certificate_set_ecdsa_pubkey_new(const byte* pubkey_asn1,int size);
+int neo_ssl_server_certificate_verify_new(const byte* cert_pubkey_asn1,int pub_size,const byte * hash_cert,const byte * sign_asn1,int sign_size,int * pverify);
+int neo_ssl_server_key_exchange_set_peer_pubkey_new(const byte* peer_pubkey_asn1,int pub_size);
+int neo_ssl_server_key_exchange_verify_new(const byte* hash,const byte * sign_asn1,int sign_size,int* pverify);
 int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size);
-int neo_ssl_client_key_exchange_new(const byte * pubkey,byte* chip_pub_asn1_4_ecdh);
-int neo_ssl_client_certificate_verify_new(const byte * hash);
+int neo_ssl_client_key_exchange_new(byte* chip_peer_pubkey,int* ppub_key);
+int neo_ssl_client_key_exchange_export_premaster_key_new(byte* pre_master_key,int* pkey_size);
+int neo_ssl_client_certificate_verify_sign_new(const byte * hash,byte* sign,int* psign_size);
 int neo_ssl_client_encrypted_handshake_message_new(const byte * hash,byte* out,int* pout_size);
 int neo_ssl_server_encrypted_handshake_message_new(const byte * hash);
 int neo_ssl_client_application_data_new(const byte * orgmsg,byte* out,int* pout_size);
@@ -104,14 +107,17 @@ int neo_ssl_server_application_data_new(const byte * orgmsg,byte* out,int* pout_
 int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret);
 //#define USE_ORG_DEC
 
-ST_ECC_PUBLIC _st_ecc_public;
+
 ST_ECDH_RANDOM _st_ecdh_random;
 ST_ECDH_IV _st_iv;
 byte _inner[WOLFSSL_TLS_HMAC_INNER_SZ];
 int _ret_verify = 0;
 int _pad_size = 0;
-ST_ECC_PUBLIC _st_ecc_public_4_verify;
-
+//ST_ECC_PUBLIC _st_ecc_public_4_verify;
+ST_ECC_PUBLIC _st_public_ecdsa_key;
+ST_ECC_PUBLIC _st_chip_public_peer_key;
+ST_ECC_PUBLIC _st_public_peer_key;
+ST_ECDH_PRE_MASTER_SECRET _st_ecdh_pre_master_secret;;
 
 
 
@@ -148,14 +154,16 @@ void init_user_ecc(const char * st_com)
 	ST_WC_ECC_FUNCTIONS wc_ecc_functions;
 	get_user_wc_ecc_functions(&wc_ecc_functions);
 	memcpy(&_wc_ecc_functions_org, &wc_ecc_functions, sizeof(ST_WC_ECC_FUNCTIONS));
-	wc_ecc_functions.pf_wc_ecc_verify_hash = wc_ecc_verify_hash_new;
+	/*wc_ecc_functions.pf_wc_ecc_verify_hash = wc_ecc_verify_hash_new;
 	wc_ecc_functions.pf_wc_ecc_sign_hash = wc_ecc_sign_hash_new;
 	wc_ecc_functions.pf_wc_ecc_import_x963 = wc_ecc_import_x963_new;
 	wc_ecc_functions.pf_wc_ecc_import_x963_ex = wc_ecc_import_x963_ex_new;
-	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;
+	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;*/
+
 	wc_ecc_functions.pf_wc_AesCbcDecrypt = wc_AesCbcDecrypt_new;
 	wc_ecc_functions.pf_wc_AesCbcEncrypt = wc_AesCbcEncrypt_new;
-	wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_change_4_key_exchange_new;
+
+	//wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_change_4_key_exchange_new;
 	
 	wc_ecc_functions.pf_neo_api_set_inner_header = neo_api_set_inner_header_new;
 	wc_ecc_functions.pf_neo_api_set_sc_random = neo_api_set_sc_random_new;
@@ -165,11 +173,14 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_neo_ssl_init = neo_ssl_init_new;
 	wc_ecc_functions.pf_neo_ssl_client_hello = neo_ssl_client_hello_new;
 	wc_ecc_functions.pf_neo_ssl_server_hello = neo_ssl_server_hello_new;
-	wc_ecc_functions.pf_neo_ssl_server_certificate = neo_ssl_server_certificate_new;
-	wc_ecc_functions.pf_neo_ssl_server_key_exchange = neo_ssl_server_key_exchange_new;
+	wc_ecc_functions.pf_neo_ssl_server_certificate_set_ecdsa_pubkey = neo_ssl_server_certificate_set_ecdsa_pubkey_new;
+	wc_ecc_functions.pf_neo_ssl_server_certificate_verify = neo_ssl_server_certificate_verify_new;
+	wc_ecc_functions.pf_neo_ssl_server_key_exchange_set_peer_pubkey = neo_ssl_server_key_exchange_set_peer_pubkey_new;
+	wc_ecc_functions.pf_neo_ssl_server_key_exchange_verify = neo_ssl_server_key_exchange_verify_new;
 	wc_ecc_functions.pf_neo_ssl_client_certificate = neo_ssl_client_certificate_new;
 	wc_ecc_functions.pf_neo_ssl_client_key_exchange = neo_ssl_client_key_exchange_new;
-	wc_ecc_functions.pf_neo_ssl_client_certificate_verify = neo_ssl_client_certificate_verify_new;
+	wc_ecc_functions.pf_neo_ssl_client_key_exchange_export_premaster_key = neo_ssl_client_key_exchange_export_premaster_key_new;
+	wc_ecc_functions.pf_neo_ssl_client_certificate_verify_sign = neo_ssl_client_certificate_verify_sign_new;
 	wc_ecc_functions.pf_neo_ssl_client_encrypted_handshake_message = neo_ssl_client_encrypted_handshake_message_new;
 	wc_ecc_functions.pf_neo_ssl_server_encrypted_handshake_message = neo_ssl_server_encrypted_handshake_message_new;
 	wc_ecc_functions.pf_neo_ssl_client_application_data = neo_ssl_client_application_data_new;
@@ -195,9 +206,42 @@ void init_user_ecc(const char * st_com)
 
 }
 
+int verify_hash_with_extern_pubkey_with_g3(const ST_ECC_PUBLIC * pubkey, const byte*  hash,  const byte*  sig, word32 siglen, int*  stat)
+{
+
+	byte tmppubkey[65];
+	word32 tmppubkey_size = 65;
+
+	print_bin("FUCK sig", sig, siglen);
+	print_bin("FUCK hash", hash, 32);
+	print_bin("FUCK pubkey", pubkey, sizeof(ST_ECC_PUBLIC));
+
+	byte sign64[64] = { 0, };
+	int err = make_sign_asn1_to_sign_64(sig, siglen, sign64);
+	print_bin("sign64 ", sign64, 64);
+	ST_DATA_32 st_data_32;
+	g3api_set_extern_public_key(pubkey, sizeof(ST_ECC_PUBLIC), &st_data_32);
+
+
+	int ret_api = g3api_verify(KEY_SECTOR_DEVICE_PUB_KEY, EN_VERIFY_OPTION::VERYFY_EXT_PUB_ECDSA_EXT_SHA256, hash, 32, sign64, 64);
+
+	printf("0x%x \n", ret_api);
+
+	*stat = (ret_api == 0);
+	if (ret_api == 1) return -1;
+
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
+	return ret_api <0 ? ret_api : 0;
+}
+
+
+
+
 int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key)
 {
+	return 0;
 	//PRT_TITLE prttitle("wc_ecc_verify_hash");
+#if 0
 	key->pubkey;
 
 	byte tmppubkey[65];
@@ -225,6 +269,7 @@ int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, w
 
 	//int ret = _wc_ecc_functions_org.pf_wc_ecc_verify_hash(sig, siglen, hash, hashlen, stat, key);
 	return ret_api <0 ? ret_api : 0 ;
+#endif
 }
 
 
@@ -234,7 +279,8 @@ int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, w
 int wc_ecc_sign_hash_new(const byte*  in, word32 inlen, byte*  out, word32 * outlen, WC_RNG*  rng, ecc_key*  key)
 {
 
-
+	return 0;
+#if 0
 	print_bin( "FUCK hash in", in, inlen);
 
 	int ret = _wc_ecc_functions_org.pf_wc_ecc_sign_hash(in, inlen, out, outlen, rng, key);
@@ -259,6 +305,8 @@ int wc_ecc_sign_hash_new(const byte*  in, word32 inlen, byte*  out, word32 * out
 
 	print_bin("FUCK out", out, *outlen);
 	return ret;
+#endif
+
 }
 
 
@@ -267,7 +315,7 @@ int wc_ecc_import_x963_new(const byte*   in, word32 inLen, ecc_key*   key)
 	print_bin("FUCK pubkey", in, inLen);
 	
 	
-	memcpy(&_st_ecc_public_4_verify, &in[1], inLen - 1);
+	//memcpy(&_st_ecc_public_4_verify, &in[1], inLen - 1);
 	//int ret = _wc_ecc_functions_org.pf_wc_ecc_import_x963(in, inLen, key);
 
 	return 0;
@@ -277,26 +325,33 @@ int wc_ecc_import_x963_ex_new(const byte*  in, word32 inLen, ecc_key*  key, int 
 	return wc_ecc_import_x963_new(in,inLen,key);
 
 }
+
 int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte*   out, word32*   outlen)
 {
+	return 0;
+#if 0
+
 	byte tmppubkey[65];
 	word32 tmppubkey_size = 65;
 	byte tmpprvkey[32];
 	word32 tmpprvkey_size = 32;
-	
+
 	ST_ECDH_PRE_MASTER_SECRET st_ecdh_pre_master_secret;
 	ST_ECDH_KEY_BLOCK st_ecdh_key_block;
 	ecc_Key_to_public(public_key, tmppubkey);
 	print_bin("wc_ecc_shared_secret_new FUCK public_key", tmppubkey, 64);
 	ecc_Key_to_private(private_key, tmpprvkey);
 	print_bin("wc_ecc_shared_secret_new FUCK private_key", tmpprvkey, 32);
+
+
+
 	g3api_ecdh(EN_ECDH_MODE::NORMAL_ECDH, tmppubkey, 64, NULL, &_st_ecc_public, &st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
 	g3api_ecdh(EN_ECDH_MODE::GEN_TLS_BLOCK, tmppubkey, 64, &_st_ecdh_random, &_st_ecc_public, &st_ecdh_key_block, sizeof(ST_ECDH_KEY_BLOCK));
-	
+
 	g3api_ecdh(EN_ECDH_MODE::SET_TLS_SESSION_KEY, tmppubkey, 64, &_st_ecdh_random, &_st_ecc_public, &_st_iv, sizeof(ST_ECDH_IV));
 
 
-	
+
 	print_bin("st_ecc_public", &_st_ecc_public, sizeof(ST_ECC_PUBLIC));
 	print_bin("_st_iv", &_st_iv, sizeof(ST_ECDH_IV));
 	print_bin("st_ecdh_key_block", &st_ecdh_key_block, sizeof(ST_ECDH_KEY_BLOCK));
@@ -307,6 +362,8 @@ int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte
 	*outlen = sizeof(ST_ECDH_PRE_MASTER_SECRET);
 	//int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
 	print_bin("wc_ecc_shared_secret_new FUCK out", out, *outlen);
+
+#endif // 0
 
 	return 0;
 }
@@ -385,7 +442,7 @@ void neo_api_change_4_key_exchange_new(byte*   out, word32   outLen)
 	//ecc_Key_to_private(key, tmpprvkey);
 	//print_bin("neo_api_export_4_key_exchange_new FUCK private_key", tmpprvkey, 32);
 	print_bin("neo_api_export_4_key_exchange_new  pub key", out, outLen);
-	memcpy(&out[1], &_st_ecc_public, sizeof(ST_ECC_PUBLIC));
+	//memcpy(&out[1], &_st_ecc_public, sizeof(ST_ECC_PUBLIC));
 	print_bin("neo_api_export_4_key_exchange_new mypub pub key", out, outLen);
 
 
@@ -404,8 +461,8 @@ void neo_api_set_sc_random_new(const byte*    client_random, const byte*    serv
 {
 	print_bin("neo_api_set_sc_random_new client_random", client_random, 32);
 	print_bin("neo_api_set_sc_random_new server_random", server_random, 32);
-	memcpy(_st_ecdh_random.server, server_random, 32);
-	memcpy(_st_ecdh_random.client, client_random, 32);
+	//memcpy(_st_ecdh_random.server, server_random, 32);
+	//memcpy(_st_ecdh_random.client, client_random, 32);
 
 }
 
@@ -413,8 +470,8 @@ void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv)
 {
 	print_bin("neo_api_change_iv_new client_iv", client_iv, 16);
 	print_bin("neo_api_change_iv_new server_iv", server_iv, 16);
-	memcpy(client_iv, _st_iv.client_iv, 16);
-	memcpy(server_iv, _st_iv.server_iv, 32);
+	/*memcpy(client_iv, _st_iv.client_iv, 16);
+	memcpy(server_iv, _st_iv.server_iv, 32);*/
 	
 }
 
@@ -430,25 +487,126 @@ int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret)
 	return _ret_verify;
 }
 
-
-//START DEF_NEW_EMPTY
-int neo_ssl_init_new(WOLFSSL* ssl)
-{
-	return 0;
-}
 int neo_ssl_client_hello_new(const byte * random)
 {
+	print_bin("neo_ssl_client_hello_new random", random, 32);
+	
+	memcpy(_st_ecdh_random.client, random, 32);
 	return 0;
 }
 int neo_ssl_server_hello_new(const byte * random)
 {
+	print_bin("neo_ssl_server_hello_new random", random, 32);
+	memcpy(_st_ecdh_random.server, random, 32);
 	return 0;
 }
-int neo_ssl_server_certificate_new(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+int neo_ssl_server_certificate_set_ecdsa_pubkey_new(const byte* pubkey_asn1, int size)
 {
+	print_bin("neo_ssl_server_certificate_set_ecdsa_pubkey_new pubkey_asn1", pubkey_asn1, size);
+	
+	memcpy(&_st_public_ecdsa_key, &pubkey_asn1[1], size - 1);
+
 	return 0;
 }
-int neo_ssl_server_key_exchange_new(const byte* pubkey_asn1_4_ecdh)
+int neo_ssl_server_certificate_verify_new(const byte* cert_pubkey_asn1, int pub_size, const byte * hash_cert, const byte * sign_asn1, int sign_size, int * pverify)
+{
+	print_bin("neo_ssl_server_certificate_verify_new cert_pubkey_asn1", cert_pubkey_asn1, pub_size);
+	print_bin("neo_ssl_server_certificate_verify_new hash_cert", hash_cert, 32);
+	print_bin("neo_ssl_server_certificate_verify_new sign_asn1", sign_asn1, sign_size);
+	ST_ECC_PUBLIC st_ecc_public_4_verify;
+	memcpy(&st_ecc_public_4_verify, &cert_pubkey_asn1[1], pub_size - 1);
+
+	return verify_hash_with_extern_pubkey_with_g3(&st_ecc_public_4_verify, hash_cert, sign_asn1, sign_size, pverify);
+
+
+}
+
+int neo_ssl_server_key_exchange_set_peer_pubkey_new(const byte* peer_pubkey_asn1, int pub_size)
+{
+	print_bin("neo_ssl_server_certificate_verify_new peer_pubkey_asn1", peer_pubkey_asn1, pub_size);
+	memcpy(&_st_public_peer_key, &peer_pubkey_asn1[1], pub_size - 1);
+	return 0;
+}
+
+int neo_ssl_server_key_exchange_verify_new(const byte* hash, const byte * sign_asn1, int sign_size, int* pverify)
+{
+	print_bin("neo_ssl_server_key_exchange_verify_new hash", hash, 32);
+	print_bin("neo_ssl_server_key_exchange_verify_new sign_asn1", sign_asn1, sign_size);
+	print_bin("neo_ssl_server_key_exchange_verify_new _st_public_ecdsa_key", &_st_public_ecdsa_key, sizeof(ST_ECC_PUBLIC));
+
+	return verify_hash_with_extern_pubkey_with_g3(&_st_public_ecdsa_key, hash, sign_asn1, sign_size, pverify);
+}
+
+
+int neo_ssl_client_certificate_verify_sign_new(const byte * hash, byte* sign, int* psign_size)
+{
+	print_bin("neo_ssl_client_certificate_verify_sign_new hash", hash, 32);
+
+	ST_SIGN_ECDSA signecdsa = { 0, };
+	int ret = g3api_sign(KEY_SECTOR_DEVICE_PRV_KEY, EN_SIGN_OPTION::SIGN_ECDSA_EXT_SHA256, hash, 32, &signecdsa, sizeof(ST_SIGN_ECDSA));
+
+
+	//byte sign64[64] = { 0, };
+	byte signasn1[80] = { 0. };
+	word32 signasn1len = 80;
+
+	//int err = make_sign_asn1_to_sign_64(out, *outlen, sign64);
+	print_bin("sign64 ", (const unsigned char*)&signecdsa, sizeof(ST_SIGN_ECDSA));
+
+	int err = make_sign_64_to_sign_asn1((const byte*)&signecdsa, sign,(word32*) psign_size);
+
+	/*int err = make_sign_64_to_sign_asn1((const byte*)&signecdsa, out, outlen);
+	print_bin("signasn1 ", signasn1, signasn1len);*/
+
+
+	//int ret_api = g3api_verify(KEY_SECTOR_DEVICE_PUB_KEY, EN_VERIFY_OPTION::VERYFY_ECDSA_EXT_SHA256, in, inlen, sign64, 64);
+
+	//printf("0x%x \n", ret_api);
+	print_bin("neo_ssl_client_certificate_verify_sign_new sign", sign, *psign_size);
+
+
+
+	return ret;
+}
+int neo_ssl_client_key_exchange_new(byte* chip_peer_pubkey, int* ppub_key)
+{
+
+
+	
+	ST_ECDH_KEY_BLOCK st_ecdh_key_block;
+
+	//_st_public_ecdsa_key
+
+	g3api_ecdh(EN_ECDH_MODE::NORMAL_ECDH, &_st_public_peer_key, 64, NULL, &_st_chip_public_peer_key, &_st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
+	g3api_ecdh(EN_ECDH_MODE::GEN_TLS_BLOCK, &_st_public_peer_key, 64, &_st_ecdh_random, &_st_chip_public_peer_key, &st_ecdh_key_block, sizeof(ST_ECDH_KEY_BLOCK));
+	g3api_ecdh(EN_ECDH_MODE::SET_TLS_SESSION_KEY, &_st_public_peer_key, 64, &_st_ecdh_random, &_st_chip_public_peer_key, &_st_iv, sizeof(ST_ECDH_IV));
+
+
+
+	print_bin("_st_public_ecdsa_key", &_st_public_peer_key, sizeof(ST_ECC_PUBLIC));
+	print_bin("_st_chip_public_peer_key", &_st_chip_public_peer_key, sizeof(ST_ECC_PUBLIC));
+	print_bin("_st_iv", &_st_iv, sizeof(ST_ECDH_IV));
+	print_bin("st_ecdh_key_block", &st_ecdh_key_block, sizeof(ST_ECDH_KEY_BLOCK));
+
+	print_bin("st_ecdh_pre_master_secret", &_st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
+	chip_peer_pubkey[0] = 0x04;
+	memcpy(chip_peer_pubkey + 1, &_st_chip_public_peer_key, sizeof(ST_ECC_PUBLIC));
+	*ppub_key = sizeof(ST_ECC_PUBLIC)+1;
+	//int ret = _wc_ecc_functions_org.pf_wc_ecc_shared_secret(private_key, public_key, out, outlen);
+	print_bin("neo_ssl_client_key_exchange_new FUCK chip_peer_pubkey", chip_peer_pubkey, *ppub_key);
+
+
+	return 0;
+}
+int neo_ssl_client_key_exchange_export_premaster_key_new(byte* pre_master_key, int* pkey_size)
+{
+	memcpy(pre_master_key, &_st_ecdh_pre_master_secret, sizeof(ST_ECDH_PRE_MASTER_SECRET));
+	*pkey_size = sizeof(ST_ECDH_PRE_MASTER_SECRET);
+	return 0;
+}
+//START DEF_NEW_EMPTY
+int neo_ssl_init_new(WOLFSSL* ssl)
 {
 	return 0;
 }
@@ -456,14 +614,7 @@ int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int *
 {
 	return 0;
 }
-int neo_ssl_client_key_exchange_new(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
-{
-	return 0;
-}
-int neo_ssl_client_certificate_verify_new(const byte * hash)
-{
-	return 0;
-}
+
 int neo_ssl_client_encrypted_handshake_message_new(const byte * hash,byte* out,int* pout_size)
 {
 	return 0;

@@ -144,11 +144,14 @@ int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret);
 int neo_ssl_init_org(WOLFSSL* ssl);
 int neo_ssl_client_hello_org(const byte * random);
 int neo_ssl_server_hello_org(const byte * random);
-int neo_ssl_server_certificate_org(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1);
-int neo_ssl_server_key_exchange_org(const byte* pubkey_asn1_4_ecdh);
+int neo_ssl_server_certificate_set_ecdsa_pubkey_org(const byte* pubkey_asn1,int size);
+int neo_ssl_server_certificate_verify_org(const byte* cert_pubkey_asn1,int pub_size,const byte * hash_cert,const byte * sign_asn1,int sign_size,int * pverify);
+int neo_ssl_server_key_exchange_set_peer_pubkey_org(const byte* peer_pubkey_asn1,int pub_size);
+int neo_ssl_server_key_exchange_verify_org(const byte* hash,const byte * sign_asn1,int sign_size,int* pverify);
 int neo_ssl_client_certificate_org(const byte * hash_cert,byte * sign_asn1,int * psign_size);
-int neo_ssl_client_key_exchange_org(const byte * pubkey,byte* chip_pub_asn1_4_ecdh);
-int neo_ssl_client_certificate_verify_org(const byte * hash);
+int neo_ssl_client_key_exchange_org(byte* chip_peer_pubkey,int* ppub_key);
+int neo_ssl_client_key_exchange_export_premaster_key_org(byte* pre_master_key,int* pkey_size);
+int neo_ssl_client_certificate_verify_sign_org(const byte * hash,byte* sign,int* psign_size);
 int neo_ssl_client_encrypted_handshake_message_org(const byte * hash,byte* out,int* pout_size);
 int neo_ssl_server_encrypted_handshake_message_org(const byte * hash);
 int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
@@ -223,11 +226,14 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_ssl_init_org,
 	neo_ssl_client_hello_org,
 	neo_ssl_server_hello_org,
-	neo_ssl_server_certificate_org,
-	neo_ssl_server_key_exchange_org,
+	neo_ssl_server_certificate_set_ecdsa_pubkey_org,
+	neo_ssl_server_certificate_verify_org,
+	neo_ssl_server_key_exchange_set_peer_pubkey_org,
+	neo_ssl_server_key_exchange_verify_org,
 	neo_ssl_client_certificate_org,
 	neo_ssl_client_key_exchange_org,
-	neo_ssl_client_certificate_verify_org,
+	neo_ssl_client_key_exchange_export_premaster_key_org,
+	neo_ssl_client_certificate_verify_sign_org,
 	neo_ssl_client_encrypted_handshake_message_org,
 	neo_ssl_server_encrypted_handshake_message_org,
 	neo_ssl_client_application_data_org,
@@ -412,11 +418,19 @@ int neo_ssl_server_hello_org(const byte * random)
 {
 	return 0;
 }
-int neo_ssl_server_certificate_org(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+int neo_ssl_server_certificate_set_ecdsa_pubkey_org(const byte* pubkey_asn1,int size)
 {
 	return 0;
 }
-int neo_ssl_server_key_exchange_org(const byte* pubkey_asn1_4_ecdh)
+int neo_ssl_server_certificate_verify_org(const byte* cert_pubkey_asn1,int pub_size,const byte * hash_cert,const byte * sign_asn1,int sign_size,int * pverify)
+{
+	return 0;
+}
+int neo_ssl_server_key_exchange_set_peer_pubkey_org(const byte* peer_pubkey_asn1,int pub_size)
+{
+	return 0;
+}
+int neo_ssl_server_key_exchange_verify_org(const byte* hash,const byte * sign_asn1,int sign_size,int* pverify)
 {
 	return 0;
 }
@@ -424,11 +438,15 @@ int neo_ssl_client_certificate_org(const byte * hash_cert,byte * sign_asn1,int *
 {
 	return 0;
 }
-int neo_ssl_client_key_exchange_org(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
+int neo_ssl_client_key_exchange_org(byte* chip_peer_pubkey,int* ppub_key)
 {
 	return 0;
 }
-int neo_ssl_client_certificate_verify_org(const byte * hash)
+int neo_ssl_client_key_exchange_export_premaster_key_org(byte* pre_master_key,int* pkey_size)
+{
+	return 0;
+}
+int neo_ssl_client_certificate_verify_sign_org(const byte * hash,byte* sign,int* psign_size)
 {
 	return 0;
 }
@@ -894,16 +912,28 @@ int neo_ssl_server_hello(const byte * random)
 	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_hello(random);
 	return ret;
 }
-int neo_ssl_server_certificate(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+int neo_ssl_server_certificate_set_ecdsa_pubkey(const byte* pubkey_asn1,int size)
 {
-	PRT_TITLE prttitle("neo_ssl_server_certificate");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_certificate(hash_cert,sign_asn1,pubkey_asn1);
+	PRT_TITLE prttitle("neo_ssl_server_certificate_set_ecdsa_pubkey");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_certificate_set_ecdsa_pubkey(pubkey_asn1,size);
 	return ret;
 }
-int neo_ssl_server_key_exchange(const byte* pubkey_asn1_4_ecdh)
+int neo_ssl_server_certificate_verify(const byte* cert_pubkey_asn1,int pub_size,const byte * hash_cert,const byte * sign_asn1,int sign_size,int * pverify)
 {
-	PRT_TITLE prttitle("neo_ssl_server_key_exchange");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_key_exchange(pubkey_asn1_4_ecdh);
+	PRT_TITLE prttitle("neo_ssl_server_certificate_verify");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_certificate_verify(cert_pubkey_asn1,pub_size,hash_cert,sign_asn1,sign_size,pverify);
+	return ret;
+}
+int neo_ssl_server_key_exchange_set_peer_pubkey(const byte* peer_pubkey_asn1,int pub_size)
+{
+	PRT_TITLE prttitle("neo_ssl_server_key_exchange_set_peer_pubkey");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_key_exchange_set_peer_pubkey(peer_pubkey_asn1,pub_size);
+	return ret;
+}
+int neo_ssl_server_key_exchange_verify(const byte* hash,const byte * sign_asn1,int sign_size,int* pverify)
+{
+	PRT_TITLE prttitle("neo_ssl_server_key_exchange_verify");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_key_exchange_verify(hash,sign_asn1,sign_size,pverify);
 	return ret;
 }
 int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,int * psign_size)
@@ -912,16 +942,22 @@ int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,int * psi
 	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate(hash_cert,sign_asn1,psign_size);
 	return ret;
 }
-int neo_ssl_client_key_exchange(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
+int neo_ssl_client_key_exchange(byte* chip_peer_pubkey,int* ppub_key)
 {
 	PRT_TITLE prttitle("neo_ssl_client_key_exchange");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_key_exchange(pubkey,chip_pub_asn1_4_ecdh);
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_key_exchange(chip_peer_pubkey,ppub_key);
 	return ret;
 }
-int neo_ssl_client_certificate_verify(const byte * hash)
+int neo_ssl_client_key_exchange_export_premaster_key(byte* pre_master_key,int* pkey_size)
 {
-	PRT_TITLE prttitle("neo_ssl_client_certificate_verify");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate_verify(hash);
+	PRT_TITLE prttitle("neo_ssl_client_key_exchange_export_premaster_key");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_key_exchange_export_premaster_key(pre_master_key,pkey_size);
+	return ret;
+}
+int neo_ssl_client_certificate_verify_sign(const byte * hash,byte* sign,int* psign_size)
+{
+	PRT_TITLE prttitle("neo_ssl_client_certificate_verify_sign");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate_verify_sign(hash,sign,psign_size);
 	return ret;
 }
 int neo_ssl_client_encrypted_handshake_message(const byte * hash,byte* out,int* pout_size)

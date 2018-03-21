@@ -8634,9 +8634,12 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
                                               ssl->peerEccDsaKey);
                             ssl->peerEccDsaKeyPresent = 0;
                         }
+						neo_ssl_server_certificate_set_ecdsa_pubkey(args->dCert->publicKey, args->dCert->pubKeySize);
+
 
                         curveId = wc_ecc_get_oid(args->dCert->keyOID, NULL, NULL);
                         if (keyRet != 0 ||
+							
                             wc_ecc_import_x963_ex(args->dCert->publicKey,
                                     args->dCert->pubKeySize, ssl->peerEccDsaKey,
                                                             curveId) != 0) {
@@ -16495,7 +16498,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
             XMEMCPY(output + idx, ssl->arrays->clientRandom, RAN_LEN);
 #endif
         }
-		neo_ssl_client_hello(ssl, ssl->arrays->clientRandom);
+		neo_ssl_client_hello( ssl->arrays->clientRandom);
 
         idx += RAN_LEN;
 
@@ -16835,7 +16838,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
 
         /* random */
         XMEMCPY(ssl->arrays->serverRandom, input + i, RAN_LEN);
-		neo_ssl_server_hello(ssl, ssl->arrays->serverRandom);
+		neo_ssl_server_hello( ssl->arrays->serverRandom);
         i += RAN_LEN;
 
 #ifdef WOLFSSL_TLS13
@@ -17521,6 +17524,7 @@ static int DoServerKeyExchange(WOLFSSL* ssl, const byte* input,
                     }
 
                     curveId = wc_ecc_get_oid(curveOid, NULL, NULL);
+					neo_ssl_server_key_exchange_set_peer_pubkey(input + args->idx, length);
                     if (wc_ecc_import_x963_ex(input + args->idx, length,
                                         ssl->peerEccKey, curveId) != 0) {
                         ERROR_OUT(ECC_PEERKEY_ERROR, exit_dske);
@@ -17993,6 +17997,9 @@ static int DoServerKeyExchange(WOLFSSL* ssl, const byte* input,
                                 NULL, 0, NULL
                             #endif
                             );
+							int verify = 0;
+							ret = neo_ssl_server_key_exchange_verify(ssl->buffers.digest.buffer, args->verifySig, args->verifySigSz, &verify);
+
 
                             break;
                         }
@@ -18840,7 +18847,7 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                         goto exit_scke;
                     }
 
-                    ret = EccMakeKey(ssl, (ecc_key*)ssl->hsKey, peerKey);
+                    //ret = EccMakeKey(ssl, (ecc_key*)ssl->hsKey, peerKey);
                 #endif
 
                     break;
@@ -19298,7 +19305,9 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                 #ifdef HAVE_ECC
                     peerKey = (ssl->specs.static_ecdh) ?
                               ssl->peerEccDsaKey : ssl->peerEccKey;
-					neo_api_set_sc_random(ssl->arrays->clientRandom, ssl->arrays->serverRandom);
+
+
+					//neo_api_set_sc_random(ssl->arrays->clientRandom, ssl->arrays->serverRandom);
 
 
                     ret = EccSharedSecret(ssl,
@@ -19313,11 +19322,11 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                         NULL
                     #endif
                     );
-					
+
+					ret = neo_ssl_client_key_exchange(args->encSecret + OPAQUE8_LEN, (int*)&args->encSz);
 					
 
-
-					neo_api_change_4_key_exchange(args->encSecret + OPAQUE8_LEN, args->encSz);
+					neo_ssl_client_key_exchange_export_premaster_key(ssl->arrays->preMasterSecret, &ssl->arrays->preMasterSz);
                 #endif
 
                     break;
@@ -19999,6 +20008,7 @@ int SendCertificateVerify(WOLFSSL* ssl)
                     NULL, 0, NULL
             #endif
                 );
+				ret = neo_ssl_client_certificate_verify_sign(ssl->buffers.digest.buffer, ssl->buffers.sig.buffer, (int*)&ssl->buffers.sig.length);
             }
         #endif /* HAVE_ECC */
         #ifdef HAVE_ED25519

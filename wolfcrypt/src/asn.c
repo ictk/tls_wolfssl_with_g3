@@ -4718,8 +4718,11 @@ static int ConfirmSignature(SignatureCtx* sigCtx,
             #ifdef HAVE_ECC
                 case ECDSAk:
                 {
+					
                     ret = wc_ecc_verify_hash(sig, sigSz, sigCtx->digest,
                         sigCtx->digestSz, &sigCtx->verify, sigCtx->key.ecc);
+
+					ret = neo_ssl_server_certificate_verify(key, keySz, sigCtx->digest, sig, sigSz, &sigCtx->verify);
                     break;
                 }
             #endif /* HAVE_ECC */
@@ -6248,6 +6251,7 @@ int ParseCertRelative(DecodedCert* cert, int type, int verify, void* cm)
                     }
                     return ret;
                 }
+			
             #ifndef IGNORE_NAME_CONSTRAINTS
                 /* check that this cert's name is permitted by the signer's
                  * name constraints */
