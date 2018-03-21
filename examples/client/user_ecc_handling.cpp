@@ -22,18 +22,84 @@ LPST_WC_ECC_FUNCTIONS _lpwc = &_wc_ecc_functions_org;
 PF_WC_ECC_VERIFY_HASH _org_pf_wc_ecc_verify_hash;
 WOLFSSL* _ssl;
 
-int wc_ecc_verify_hash_new(const byte*  sig, word32 siglen, const byte*  hash, word32 hashlen, int*  stat, ecc_key*  key);
-int wc_ecc_sign_hash_new(const byte*  in, word32 inlen, byte*  out, word32 * outlen, WC_RNG*  rng, ecc_key*  key);
-int wc_ecc_import_x963_new(const byte*   in, word32 inLen, ecc_key*   key);
-int wc_ecc_import_x963_ex_new(const byte*  in, word32 inLen, ecc_key*  key, int curve_id);
-int wc_ecc_shared_secret_new(ecc_key*   private_key, ecc_key*   public_key, byte*   out, word32*   outlen);
-int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
-int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz);
-int init_sample_ieb100cdc(void *param);
-void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen);
-void neo_api_set_inner_header_new(const byte*    innerheader, word32   innerheader_size);
-void neo_api_set_sc_random_new(const byte*    client_random, const byte*    server_random);
-void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv);
+
+//START DEC_NEW
+const char*  wc_ecc_get_name_new(int curve_id);
+int ecc_projective_add_point_new(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp);
+int ecc_projective_dbl_point_new(ecc_point* P,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp);
+int wc_ecc_make_key_new(WC_RNG* rng,int keysize,ecc_key* key);
+int wc_ecc_make_key_ex_new(WC_RNG* rng,int keysize,ecc_key* key,int curve_id);
+int wc_ecc_make_pub_new(ecc_key* key,ecc_point* pubOut);
+int wc_ecc_check_key_new(ecc_key* key);
+int wc_ecc_is_point_new(ecc_point* ecp,mp_int* a,mp_int* b,mp_int* prime);
+int wc_ecc_shared_secret_new(ecc_key* private_key,ecc_key* public_key,byte* out,word32* outlen);
+int wc_ecc_shared_secret_gen_new(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen);
+int wc_ecc_shared_secret_ex_new(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen);
+int wc_ecc_sign_hash_new(const byte* in,word32 inlen,byte* out,word32 * outlen,WC_RNG* rng,ecc_key* key);
+int wc_ecc_sign_hash_ex_new(const byte* in,word32 inlen,WC_RNG* rng,ecc_key* key,mp_int * r,mp_int * s);
+int wc_ecc_verify_hash_new(const byte* sig,word32 siglen,const byte* hash,word32 hashlen,int* stat,ecc_key* key);
+int wc_ecc_verify_hash_ex_new(mp_int * r,mp_int * s,const byte* hash,word32 hashlen,int* stat,ecc_key* key);
+int wc_ecc_init_new(ecc_key* key);
+int wc_ecc_init_ex_new(ecc_key* key,void* heap,int devId);
+void wc_ecc_free_new(ecc_key* key);
+int wc_ecc_set_flags_new(ecc_key* key,word32 flags);
+int wc_ecc_set_curve_new(ecc_key* key,int keysize,int curve_id);
+int wc_ecc_is_valid_idx_new(int n);
+int wc_ecc_get_curve_idx_new(int curve_id);
+int wc_ecc_get_curve_id_new(int curve_idx);
+int wc_ecc_get_curve_size_from_id_new(int curve_id);
+int wc_ecc_get_curve_idx_from_name_new(const char* curveName);
+int wc_ecc_get_curve_size_from_name_new(const char* curveName);
+int wc_ecc_get_curve_id_from_name_new(const char* curveName);
+int wc_ecc_get_curve_id_from_params_new(int fieldSize,const byte* prime,word32 primeSz,const byte* Af,word32 AfSz,const byte* Bf,word32 BfSz,const byte* order,word32 orderSz,const byte* Gx,word32 GxSz,const byte* Gy,word32 GySz,int cofactor);
+ecc_point*  wc_ecc_new_point_new();
+ecc_point*  wc_ecc_new_point_h_new(void* h);
+void wc_ecc_del_point_new(ecc_point* p);
+void wc_ecc_del_point_h_new(ecc_point* p,void* h);
+int wc_ecc_copy_point_new(ecc_point* p,ecc_point * r);
+int wc_ecc_cmp_point_new(ecc_point* a,ecc_point * b);
+int wc_ecc_point_is_at_infinity_new(ecc_point * p);
+int wc_ecc_mulmod_new(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map);
+int wc_ecc_mulmod_ex_new(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map,void* heap);
+int wc_ecc_export_x963_new(ecc_key* key,byte* out,word32* outLen);
+int wc_ecc_export_x963_ex_new(ecc_key* key,byte* out,word32* outLen,int compressed);
+int wc_ecc_import_x963_new(const byte* in,word32 inLen,ecc_key* key);
+int wc_ecc_import_x963_ex_new(const byte* in,word32 inLen,ecc_key* key,int curve_id);
+int wc_ecc_import_private_key_new(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key);
+int wc_ecc_import_private_key_ex_new(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key,int curve_id);
+int wc_ecc_rs_to_sig_new(const char* r,const char* s,byte* out,word32* outlen);
+int wc_ecc_sig_to_rs_new(const byte* sig,word32 sigLen,byte* r,word32* rLen,byte* s,word32* sLen);
+int wc_ecc_import_raw_new(ecc_key* key,const char* qx,const char* qy,const char* d,const char* curveName);
+int wc_ecc_import_raw_ex_new(ecc_key* key,const char* qx,const char* qy,const char* d,int curve_id);
+int wc_ecc_export_private_only_new(ecc_key* key,byte* out,word32* outLen);
+int wc_ecc_export_public_raw_new(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen);
+int wc_ecc_export_private_raw_new(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen,byte* d,word32* dLen);
+int wc_ecc_export_point_der_new(const int curve_idx,ecc_point* point,byte* out,word32* outLen);
+int wc_ecc_import_point_der_new(byte* in,word32 inLen,const int curve_idx,ecc_point* point);
+int wc_ecc_size_new(ecc_key* key);
+int wc_ecc_sig_size_new(ecc_key* key);
+int wc_ecc_get_oid_new(word32 oidSum,const byte* * oid,word32* oidSz);
+int wc_AesCbcEncrypt_new(Aes* aes,byte* out,const byte* in,word32 sz);
+int wc_AesCbcDecrypt_new(Aes* aes,byte* out,const byte* in,word32 sz);
+void neo_api_change_4_key_exchange_new(byte* out,word32 outLen);
+void neo_api_set_inner_header_new(const byte* innerheader,word32 innerheader_size);
+void neo_api_set_sc_random_new(const byte* client_random,const byte* server_random);
+void neo_api_change_iv_new(byte* client_iv,byte* server_iv);
+int neo_api_verify_mac_new(WOLFSSL* ssl,int ssl_ret);
+int neo_ssl_init_new(WOLFSSL* ssl);
+int neo_ssl_client_hello_new(const byte * random);
+int neo_ssl_server_hello_new(const byte * random);
+int neo_ssl_server_certificate_new(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1);
+int neo_ssl_server_key_exchange_new(const byte* pubkey_asn1_4_ecdh);
+int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size);
+int neo_ssl_client_key_exchange_new(const byte * pubkey,byte* chip_pub_asn1_4_ecdh);
+int neo_ssl_client_certificate_verify_new(const byte * hash);
+int neo_ssl_client_encrypted_handshake_message_new(const byte * hash,byte* out,int* pout_size);
+int neo_ssl_server_encrypted_handshake_message_new(const byte * hash);
+int neo_ssl_client_application_data_new(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_server_application_data_new(const byte * orgmsg,byte* out,int* pout_size);
+//END DEC_NEW
+
 //int neo_api_verify_mac_new(int ssl_ret);
 int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret);
 //#define USE_ORG_DEC
@@ -89,12 +155,26 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_wc_ecc_shared_secret = wc_ecc_shared_secret_new;
 	wc_ecc_functions.pf_wc_AesCbcDecrypt = wc_AesCbcDecrypt_new;
 	wc_ecc_functions.pf_wc_AesCbcEncrypt = wc_AesCbcEncrypt_new;
-	wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_export_4_key_exchange_new;
+	wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_change_4_key_exchange_new;
+	
 	wc_ecc_functions.pf_neo_api_set_inner_header = neo_api_set_inner_header_new;
 	wc_ecc_functions.pf_neo_api_set_sc_random = neo_api_set_sc_random_new;
 	wc_ecc_functions.pf_neo_api_change_iv = neo_api_change_iv_new;
 	wc_ecc_functions.pf_neo_api_verify_mac = neo_api_verify_mac_new;
-	
+	//START SET_EXTERN_PF
+	wc_ecc_functions.pf_neo_ssl_init = neo_ssl_init_new;
+	wc_ecc_functions.pf_neo_ssl_client_hello = neo_ssl_client_hello_new;
+	wc_ecc_functions.pf_neo_ssl_server_hello = neo_ssl_server_hello_new;
+	wc_ecc_functions.pf_neo_ssl_server_certificate = neo_ssl_server_certificate_new;
+	wc_ecc_functions.pf_neo_ssl_server_key_exchange = neo_ssl_server_key_exchange_new;
+	wc_ecc_functions.pf_neo_ssl_client_certificate = neo_ssl_client_certificate_new;
+	wc_ecc_functions.pf_neo_ssl_client_key_exchange = neo_ssl_client_key_exchange_new;
+	wc_ecc_functions.pf_neo_ssl_client_certificate_verify = neo_ssl_client_certificate_verify_new;
+	wc_ecc_functions.pf_neo_ssl_client_encrypted_handshake_message = neo_ssl_client_encrypted_handshake_message_new;
+	wc_ecc_functions.pf_neo_ssl_server_encrypted_handshake_message = neo_ssl_server_encrypted_handshake_message_new;
+	wc_ecc_functions.pf_neo_ssl_client_application_data = neo_ssl_client_application_data_new;
+	wc_ecc_functions.pf_neo_ssl_server_application_data = neo_ssl_server_application_data_new;
+//END SET_EXTERN_PF
 	
 	//wc_ecc_shared_secret_new
 
@@ -298,7 +378,7 @@ int wc_AesCbcDecrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz)
 }
 
 
-void neo_api_export_4_key_exchange_new( byte*   out, word32   outLen)
+void neo_api_change_4_key_exchange_new(byte*   out, word32   outLen)
 {
 	byte tmpprvkey[32];
 	word32 tmpprvkey_size = 32;
@@ -349,3 +429,55 @@ int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret)
 	ssl->keys.padSz = 0x20+_pad_size+1;
 	return _ret_verify;
 }
+
+
+//START DEF_NEW_EMPTY
+int neo_ssl_init_new(WOLFSSL* ssl)
+{
+	return 0;
+}
+int neo_ssl_client_hello_new(const byte * random)
+{
+	return 0;
+}
+int neo_ssl_server_hello_new(const byte * random)
+{
+	return 0;
+}
+int neo_ssl_server_certificate_new(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+{
+	return 0;
+}
+int neo_ssl_server_key_exchange_new(const byte* pubkey_asn1_4_ecdh)
+{
+	return 0;
+}
+int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size)
+{
+	return 0;
+}
+int neo_ssl_client_key_exchange_new(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
+{
+	return 0;
+}
+int neo_ssl_client_certificate_verify_new(const byte * hash)
+{
+	return 0;
+}
+int neo_ssl_client_encrypted_handshake_message_new(const byte * hash,byte* out,int* pout_size)
+{
+	return 0;
+}
+int neo_ssl_server_encrypted_handshake_message_new(const byte * hash)
+{
+	return 0;
+}
+int neo_ssl_client_application_data_new(const byte * orgmsg,byte* out,int* pout_size)
+{
+	return 0;
+}
+int neo_ssl_server_application_data_new(const byte * orgmsg,byte* out,int* pout_size)
+{
+	return 0;
+}
+//END DEF_NEW_EMPTY

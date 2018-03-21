@@ -80,75 +80,85 @@ private:
 extern "C"{
 	//START ECC_ORG_DEC
 const char*  wc_ecc_get_name_org(int curve_id);
-int ecc_map_org();
-int ecc_projective_add_point_org(ecc_point*  P,ecc_point*  Q,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp);
-int ecc_projective_dbl_point_org(ecc_point*  P,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp);
-int wc_ecc_make_key_org(WC_RNG*  rng,int keysize,ecc_key*  key);
-int wc_ecc_make_key_ex_org(WC_RNG*  rng,int keysize,ecc_key*  key,int curve_id);
-int wc_ecc_make_pub_org(ecc_key*  key,ecc_point*  pubOut);
-int wc_ecc_check_key_org(ecc_key*  key);
-int wc_ecc_is_point_org(ecc_point*  ecp,mp_int*  a,mp_int*  b,mp_int*  prime);
-int wc_ecc_shared_secret_org(ecc_key*  private_key,ecc_key*  public_key,byte*  out,word32*  outlen);
-int wc_ecc_shared_secret_gen_org(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen);
-int wc_ecc_shared_secret_ex_org(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen);
-int wc_ecc_sign_hash_org(const byte*  in,word32 inlen,byte*  out,word32 * outlen,WC_RNG*  rng,ecc_key*  key);
-int wc_ecc_sign_hash_ex_org(const byte*  in,word32 inlen,WC_RNG*  rng,ecc_key*  key,mp_int * r,mp_int * s);
-int wc_ecc_verify_hash_org(const byte*  sig,word32 siglen,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key);
-int wc_ecc_verify_hash_ex_org(mp_int * r,mp_int * s,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key);
-int wc_ecc_init_org(ecc_key*  key);
-int wc_ecc_init_ex_org(ecc_key*  key,void*  heap,int devId);
-void wc_ecc_free_org(ecc_key*  key);
-int wc_ecc_set_flags_org(ecc_key*  key,word32 flags);
-int wc_ecc_set_curve_org(ecc_key*  key,int keysize,int curve_id);
+int ecc_projective_add_point_org(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp);
+int ecc_projective_dbl_point_org(ecc_point* P,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp);
+int wc_ecc_make_key_org(WC_RNG* rng,int keysize,ecc_key* key);
+int wc_ecc_make_key_ex_org(WC_RNG* rng,int keysize,ecc_key* key,int curve_id);
+int wc_ecc_make_pub_org(ecc_key* key,ecc_point* pubOut);
+int wc_ecc_check_key_org(ecc_key* key);
+int wc_ecc_is_point_org(ecc_point* ecp,mp_int* a,mp_int* b,mp_int* prime);
+int wc_ecc_shared_secret_org(ecc_key* private_key,ecc_key* public_key,byte* out,word32* outlen);
+int wc_ecc_shared_secret_gen_org(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen);
+int wc_ecc_shared_secret_ex_org(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen);
+int wc_ecc_sign_hash_org(const byte* in,word32 inlen,byte* out,word32 * outlen,WC_RNG* rng,ecc_key* key);
+int wc_ecc_sign_hash_ex_org(const byte* in,word32 inlen,WC_RNG* rng,ecc_key* key,mp_int * r,mp_int * s);
+int wc_ecc_verify_hash_org(const byte* sig,word32 siglen,const byte* hash,word32 hashlen,int* stat,ecc_key* key);
+int wc_ecc_verify_hash_ex_org(mp_int * r,mp_int * s,const byte* hash,word32 hashlen,int* stat,ecc_key* key);
+int wc_ecc_init_org(ecc_key* key);
+int wc_ecc_init_ex_org(ecc_key* key,void* heap,int devId);
+void wc_ecc_free_org(ecc_key* key);
+int wc_ecc_set_flags_org(ecc_key* key,word32 flags);
+int wc_ecc_set_curve_org(ecc_key* key,int keysize,int curve_id);
 int wc_ecc_is_valid_idx_org(int n);
 int wc_ecc_get_curve_idx_org(int curve_id);
 int wc_ecc_get_curve_id_org(int curve_idx);
 int wc_ecc_get_curve_size_from_id_org(int curve_id);
-int wc_ecc_get_curve_idx_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_size_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_id_from_name_org(const char*  curveName);
-int wc_ecc_get_curve_id_from_params_org(int fieldSize,const byte*  prime,word32 primeSz,const byte*  Af,word32 AfSz,const byte*  Bf,word32 BfSz,const byte*  order,word32 orderSz,const byte*  Gx,word32 GxSz,const byte*  Gy,word32 GySz,int cofactor);
+int wc_ecc_get_curve_idx_from_name_org(const char* curveName);
+int wc_ecc_get_curve_size_from_name_org(const char* curveName);
+int wc_ecc_get_curve_id_from_name_org(const char* curveName);
+int wc_ecc_get_curve_id_from_params_org(int fieldSize,const byte* prime,word32 primeSz,const byte* Af,word32 AfSz,const byte* Bf,word32 BfSz,const byte* order,word32 orderSz,const byte* Gx,word32 GxSz,const byte* Gy,word32 GySz,int cofactor);
 ecc_point*  wc_ecc_new_point_org();
-ecc_point*  wc_ecc_new_point_h_org(void*  h);
-void wc_ecc_del_point_org(ecc_point*  p);
-void wc_ecc_del_point_h_org(ecc_point*  p,void*  h);
-int wc_ecc_copy_point_org(ecc_point*  p,ecc_point * r);
-int wc_ecc_cmp_point_org(ecc_point*  a,ecc_point * b);
+ecc_point*  wc_ecc_new_point_h_org(void* h);
+void wc_ecc_del_point_org(ecc_point* p);
+void wc_ecc_del_point_h_org(ecc_point* p,void* h);
+int wc_ecc_copy_point_org(ecc_point* p,ecc_point * r);
+int wc_ecc_cmp_point_org(ecc_point* a,ecc_point * b);
 int wc_ecc_point_is_at_infinity_org(ecc_point * p);
-int wc_ecc_mulmod_org(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map);
-int wc_ecc_mulmod_ex_org(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map,void*  heap);
-int wc_ecc_export_x963_org(ecc_key*  key,byte*  out,word32*  outLen);
-int wc_ecc_export_x963_ex_org(ecc_key*  key,byte*  out,word32*  outLen,int compressed);
-int wc_ecc_import_x963_org(const byte*  in,word32 inLen,ecc_key*  key);
-int wc_ecc_import_x963_ex_org(const byte*  in,word32 inLen,ecc_key*  key,int curve_id);
-int wc_ecc_import_private_key_org(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key);
-int wc_ecc_import_private_key_ex_org(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key,int curve_id);
-int wc_ecc_rs_to_sig_org(const char*  r,const char*  s,byte*  out,word32*  outlen);
-int wc_ecc_sig_to_rs_org(const byte*  sig,word32 sigLen,byte*  r,word32*  rLen,byte*  s,word32*  sLen);
-int wc_ecc_import_raw_org(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,const char*  curveName);
-int wc_ecc_import_raw_ex_org(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,int curve_id);
-int wc_ecc_export_private_only_org(ecc_key*  key,byte*  out,word32*  outLen);
-int wc_ecc_export_public_raw_org(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen);
-int wc_ecc_export_private_raw_org(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen,byte*  d,word32*  dLen);
-int wc_ecc_export_point_der_org(const int curve_idx,ecc_point*  point,byte*  out,word32*  outLen);
-int wc_ecc_import_point_der_org(byte*  in,word32 inLen,const int curve_idx,ecc_point*  point);
-int wc_ecc_size_org(ecc_key*  key);
-int wc_ecc_sig_size_org(ecc_key*  key);
-int wc_ecc_get_oid_org(word32 oidSum,const byte* *  oid,word32*  oidSz);
-int wc_AesCbcEncrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
-int wc_AesCbcDecrypt_org(Aes*  aes,byte*  out,const byte*  in,word32 sz);
-void neo_api_change_4_key_exchange_org(byte*    out,word32   outLen);
-void neo_api_set_inner_header_org(const byte*    innerheader,word32   innerheader_size);
-void neo_api_set_sc_random_org(const byte*    client_random,const byte*    server_random);
-void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv);
+int wc_ecc_mulmod_org(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map);
+int wc_ecc_mulmod_ex_org(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map,void* heap);
+int wc_ecc_export_x963_org(ecc_key* key,byte* out,word32* outLen);
+int wc_ecc_export_x963_ex_org(ecc_key* key,byte* out,word32* outLen,int compressed);
+int wc_ecc_import_x963_org(const byte* in,word32 inLen,ecc_key* key);
+int wc_ecc_import_x963_ex_org(const byte* in,word32 inLen,ecc_key* key,int curve_id);
+int wc_ecc_import_private_key_org(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key);
+int wc_ecc_import_private_key_ex_org(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key,int curve_id);
+int wc_ecc_rs_to_sig_org(const char* r,const char* s,byte* out,word32* outlen);
+int wc_ecc_sig_to_rs_org(const byte* sig,word32 sigLen,byte* r,word32* rLen,byte* s,word32* sLen);
+int wc_ecc_import_raw_org(ecc_key* key,const char* qx,const char* qy,const char* d,const char* curveName);
+int wc_ecc_import_raw_ex_org(ecc_key* key,const char* qx,const char* qy,const char* d,int curve_id);
+int wc_ecc_export_private_only_org(ecc_key* key,byte* out,word32* outLen);
+int wc_ecc_export_public_raw_org(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen);
+int wc_ecc_export_private_raw_org(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen,byte* d,word32* dLen);
+int wc_ecc_export_point_der_org(const int curve_idx,ecc_point* point,byte* out,word32* outLen);
+int wc_ecc_import_point_der_org(byte* in,word32 inLen,const int curve_idx,ecc_point* point);
+int wc_ecc_size_org(ecc_key* key);
+int wc_ecc_sig_size_org(ecc_key* key);
+int wc_ecc_get_oid_org(word32 oidSum,const byte* * oid,word32* oidSz);
+int wc_AesCbcEncrypt_org(Aes* aes,byte* out,const byte* in,word32 sz);
+int wc_AesCbcDecrypt_org(Aes* aes,byte* out,const byte* in,word32 sz);
+void neo_api_change_4_key_exchange_org(byte* out,word32 outLen);
+void neo_api_set_inner_header_org(const byte* innerheader,word32 innerheader_size);
+void neo_api_set_sc_random_org(const byte* client_random,const byte* server_random);
+void neo_api_change_iv_org(byte* client_iv,byte* server_iv);
 int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret);
+int neo_ssl_init_org(WOLFSSL* ssl);
+int neo_ssl_client_hello_org(const byte * random);
+int neo_ssl_server_hello_org(const byte * random);
+int neo_ssl_server_certificate_org(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1);
+int neo_ssl_server_key_exchange_org(const byte* pubkey_asn1_4_ecdh);
+int neo_ssl_client_certificate_org(const byte * hash_cert,byte * sign_asn1,int * psign_size);
+int neo_ssl_client_key_exchange_org(const byte * pubkey,byte* chip_pub_asn1_4_ecdh);
+int neo_ssl_client_certificate_verify_org(const byte * hash);
+int neo_ssl_client_encrypted_handshake_message_org(const byte * hash,byte* out,int* pout_size);
+int neo_ssl_server_encrypted_handshake_message_org(const byte * hash);
+int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_server_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
 //END ECC_ORG_DEC
 }
 
 ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	//START SET_ECC_ORG_DEC
 	wc_ecc_get_name_org,
-	ecc_map_org,
 	ecc_projective_add_point_org,
 	ecc_projective_dbl_point_org,
 	wc_ecc_make_key_org,
@@ -210,6 +220,18 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_api_set_sc_random_org,
 	neo_api_change_iv_org,
 	neo_api_verify_mac_org,
+	neo_ssl_init_org,
+	neo_ssl_client_hello_org,
+	neo_ssl_server_hello_org,
+	neo_ssl_server_certificate_org,
+	neo_ssl_server_key_exchange_org,
+	neo_ssl_client_certificate_org,
+	neo_ssl_client_key_exchange_org,
+	neo_ssl_client_certificate_verify_org,
+	neo_ssl_client_encrypted_handshake_message_org,
+	neo_ssl_server_encrypted_handshake_message_org,
+	neo_ssl_client_application_data_org,
+	neo_ssl_server_application_data_org,
 //END SET_ECC_ORG_DEC
 
 
@@ -358,28 +380,71 @@ void dword_reverse(byte * buff,int byte_size)
 
 
 //START EMPTY_FUNCTION
-
-void neo_api_change_4_key_exchange_org(byte*    out,word32   outLen)
+void neo_api_change_4_key_exchange_org(byte* out,word32 outLen)
 {
 
 }
-
-void neo_api_set_inner_header_org(const byte*    innerheader,word32   innerheader_size)
+void neo_api_set_inner_header_org(const byte* innerheader,word32 innerheader_size)
 {
 
 }
-
-void neo_api_set_sc_random_org(const byte*    client_random,const byte*    server_random)
+void neo_api_set_sc_random_org(const byte* client_random,const byte* server_random)
 {
 
 }
-
-void neo_api_change_iv_org(byte*    client_iv,byte*    server_iv)
+void neo_api_change_iv_org(byte* client_iv,byte* server_iv)
 {
 
 }
-
 int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret)
+{
+	return 0;
+}
+int neo_ssl_init_org(WOLFSSL* ssl)
+{
+	return 0;
+}
+int neo_ssl_client_hello_org(const byte * random)
+{
+	return 0;
+}
+int neo_ssl_server_hello_org(const byte * random)
+{
+	return 0;
+}
+int neo_ssl_server_certificate_org(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+{
+	return 0;
+}
+int neo_ssl_server_key_exchange_org(const byte* pubkey_asn1_4_ecdh)
+{
+	return 0;
+}
+int neo_ssl_client_certificate_org(const byte * hash_cert,byte * sign_asn1,int * psign_size)
+{
+	return 0;
+}
+int neo_ssl_client_key_exchange_org(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
+{
+	return 0;
+}
+int neo_ssl_client_certificate_verify_org(const byte * hash)
+{
+	return 0;
+}
+int neo_ssl_client_encrypted_handshake_message_org(const byte * hash,byte* out,int* pout_size)
+{
+	return 0;
+}
+int neo_ssl_server_encrypted_handshake_message_org(const byte * hash)
+{
+	return 0;
+}
+int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size)
+{
+	return 0;
+}
+int neo_ssl_server_application_data_org(const byte * orgmsg,byte* out,int* pout_size)
 {
 	return 0;
 }
@@ -446,438 +511,441 @@ int neo_api_verify_mac_org(int ssl_ret)
 //}
 
 //START ECC_BYPASS
-
 const char*  wc_ecc_get_name(int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_get_name");
 	const char*  ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_name(curve_id);
 	return ret;
 }
-
-int ecc_map()
-{
-	PRT_TITLE prttitle("ecc_map");
-	int ret = _cur_pwc_ecc_functions->pf_ecc_map();
-	return ret;
-}
-
-int ecc_projective_add_point(ecc_point*  P,ecc_point*  Q,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp)
+int ecc_projective_add_point(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
 {
 	PRT_TITLE prttitle("ecc_projective_add_point");
 	int ret = _cur_pwc_ecc_functions->pf_ecc_projective_add_point(P,Q,R,a,modulus,mp);
 	return ret;
 }
-
-int ecc_projective_dbl_point(ecc_point*  P,ecc_point*  R,mp_int*  a,mp_int*  modulus,mp_digit mp)
+int ecc_projective_dbl_point(ecc_point* P,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
 {
 	PRT_TITLE prttitle("ecc_projective_dbl_point");
 	int ret = _cur_pwc_ecc_functions->pf_ecc_projective_dbl_point(P,R,a,modulus,mp);
 	return ret;
 }
-
-int wc_ecc_make_key(WC_RNG*  rng,int keysize,ecc_key*  key)
+int wc_ecc_make_key(WC_RNG* rng,int keysize,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_make_key");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_make_key(rng,keysize,key);
 	return ret;
 }
-
-int wc_ecc_make_key_ex(WC_RNG*  rng,int keysize,ecc_key*  key,int curve_id)
+int wc_ecc_make_key_ex(WC_RNG* rng,int keysize,ecc_key* key,int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_make_key_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_make_key_ex(rng,keysize,key,curve_id);
 	return ret;
 }
-
-int wc_ecc_make_pub(ecc_key*  key,ecc_point*  pubOut)
+int wc_ecc_make_pub(ecc_key* key,ecc_point* pubOut)
 {
 	PRT_TITLE prttitle("wc_ecc_make_pub");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_make_pub(key,pubOut);
 	return ret;
 }
-
-int wc_ecc_check_key(ecc_key*  key)
+int wc_ecc_check_key(ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_check_key");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_check_key(key);
 	return ret;
 }
-
-int wc_ecc_is_point(ecc_point*  ecp,mp_int*  a,mp_int*  b,mp_int*  prime)
+int wc_ecc_is_point(ecc_point* ecp,mp_int* a,mp_int* b,mp_int* prime)
 {
 	PRT_TITLE prttitle("wc_ecc_is_point");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_is_point(ecp,a,b,prime);
 	return ret;
 }
-
-int wc_ecc_shared_secret(ecc_key*  private_key,ecc_key*  public_key,byte*  out,word32*  outlen)
+int wc_ecc_shared_secret(ecc_key* private_key,ecc_key* public_key,byte* out,word32* outlen)
 {
 	PRT_TITLE prttitle("wc_ecc_shared_secret");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_shared_secret(private_key,public_key,out,outlen);
 	return ret;
 }
-
-int wc_ecc_shared_secret_gen(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen)
+int wc_ecc_shared_secret_gen(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
 {
 	PRT_TITLE prttitle("wc_ecc_shared_secret_gen");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_shared_secret_gen(private_key,point,out,outlen);
 	return ret;
 }
-
-int wc_ecc_shared_secret_ex(ecc_key*  private_key,ecc_point*  point,byte*  out,word32 * outlen)
+int wc_ecc_shared_secret_ex(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
 {
 	PRT_TITLE prttitle("wc_ecc_shared_secret_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_shared_secret_ex(private_key,point,out,outlen);
 	return ret;
 }
-
-int wc_ecc_sign_hash(const byte*  in,word32 inlen,byte*  out,word32 * outlen,WC_RNG*  rng,ecc_key*  key)
+int wc_ecc_sign_hash(const byte* in,word32 inlen,byte* out,word32 * outlen,WC_RNG* rng,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_sign_hash");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sign_hash(in,inlen,out,outlen,rng,key);
 	return ret;
 }
-
-int wc_ecc_sign_hash_ex(const byte*  in,word32 inlen,WC_RNG*  rng,ecc_key*  key,mp_int * r,mp_int * s)
+int wc_ecc_sign_hash_ex(const byte* in,word32 inlen,WC_RNG* rng,ecc_key* key,mp_int * r,mp_int * s)
 {
 	PRT_TITLE prttitle("wc_ecc_sign_hash_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sign_hash_ex(in,inlen,rng,key,r,s);
 	return ret;
 }
-
-int wc_ecc_verify_hash(const byte*  sig,word32 siglen,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key)
+int wc_ecc_verify_hash(const byte* sig,word32 siglen,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_verify_hash");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_verify_hash(sig,siglen,hash,hashlen,stat,key);
 	return ret;
 }
-
-int wc_ecc_verify_hash_ex(mp_int * r,mp_int * s,const byte*  hash,word32 hashlen,int*  stat,ecc_key*  key)
+int wc_ecc_verify_hash_ex(mp_int * r,mp_int * s,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_verify_hash_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_verify_hash_ex(r,s,hash,hashlen,stat,key);
 	return ret;
 }
-
-int wc_ecc_init(ecc_key*  key)
+int wc_ecc_init(ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_init");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_init(key);
 	return ret;
 }
-
-int wc_ecc_init_ex(ecc_key*  key,void*  heap,int devId)
+int wc_ecc_init_ex(ecc_key* key,void* heap,int devId)
 {
 	PRT_TITLE prttitle("wc_ecc_init_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_init_ex(key,heap,devId);
 	return ret;
 }
-
-void wc_ecc_free(ecc_key*  key)
+void wc_ecc_free(ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_free");
 	_cur_pwc_ecc_functions->pf_wc_ecc_free(key);
 }
-
-int wc_ecc_set_flags(ecc_key*  key,word32 flags)
+int wc_ecc_set_flags(ecc_key* key,word32 flags)
 {
 	PRT_TITLE prttitle("wc_ecc_set_flags");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_set_flags(key,flags);
 	return ret;
 }
-
-int wc_ecc_set_curve(ecc_key*  key,int keysize,int curve_id)
+int wc_ecc_set_curve(ecc_key* key,int keysize,int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_set_curve");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_set_curve(key,keysize,curve_id);
 	return ret;
 }
-
 int wc_ecc_is_valid_idx(int n)
 {
 	PRT_TITLE prttitle("wc_ecc_is_valid_idx");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_is_valid_idx(n);
 	return ret;
 }
-
 int wc_ecc_get_curve_idx(int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_idx");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_idx(curve_id);
 	return ret;
 }
-
 int wc_ecc_get_curve_id(int curve_idx)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_id");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_id(curve_idx);
 	return ret;
 }
-
 int wc_ecc_get_curve_size_from_id(int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_size_from_id");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_size_from_id(curve_id);
 	return ret;
 }
-
-int wc_ecc_get_curve_idx_from_name(const char*  curveName)
+int wc_ecc_get_curve_idx_from_name(const char* curveName)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_idx_from_name");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_idx_from_name(curveName);
 	return ret;
 }
-
-int wc_ecc_get_curve_size_from_name(const char*  curveName)
+int wc_ecc_get_curve_size_from_name(const char* curveName)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_size_from_name");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_size_from_name(curveName);
 	return ret;
 }
-
-int wc_ecc_get_curve_id_from_name(const char*  curveName)
+int wc_ecc_get_curve_id_from_name(const char* curveName)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_id_from_name");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_id_from_name(curveName);
 	return ret;
 }
-
-int wc_ecc_get_curve_id_from_params(int fieldSize,const byte*  prime,word32 primeSz,const byte*  Af,word32 AfSz,const byte*  Bf,word32 BfSz,const byte*  order,word32 orderSz,const byte*  Gx,word32 GxSz,const byte*  Gy,word32 GySz,int cofactor)
+int wc_ecc_get_curve_id_from_params(int fieldSize,const byte* prime,word32 primeSz,const byte* Af,word32 AfSz,const byte* Bf,word32 BfSz,const byte* order,word32 orderSz,const byte* Gx,word32 GxSz,const byte* Gy,word32 GySz,int cofactor)
 {
 	PRT_TITLE prttitle("wc_ecc_get_curve_id_from_params");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_curve_id_from_params(fieldSize,prime,primeSz,Af,AfSz,Bf,BfSz,order,orderSz,Gx,GxSz,Gy,GySz,cofactor);
 	return ret;
 }
-
 ecc_point*  wc_ecc_new_point()
 {
 	PRT_TITLE prttitle("wc_ecc_new_point");
 	ecc_point*  ret = _cur_pwc_ecc_functions->pf_wc_ecc_new_point();
 	return ret;
 }
-
-ecc_point*  wc_ecc_new_point_h(void*  h)
+ecc_point*  wc_ecc_new_point_h(void* h)
 {
 	PRT_TITLE prttitle("wc_ecc_new_point_h");
 	ecc_point*  ret = _cur_pwc_ecc_functions->pf_wc_ecc_new_point_h(h);
 	return ret;
 }
-
-void wc_ecc_del_point(ecc_point*  p)
+void wc_ecc_del_point(ecc_point* p)
 {
 	PRT_TITLE prttitle("wc_ecc_del_point");
 	_cur_pwc_ecc_functions->pf_wc_ecc_del_point(p);
 }
-
-void wc_ecc_del_point_h(ecc_point*  p,void*  h)
+void wc_ecc_del_point_h(ecc_point* p,void* h)
 {
 	PRT_TITLE prttitle("wc_ecc_del_point_h");
 	_cur_pwc_ecc_functions->pf_wc_ecc_del_point_h(p,h);
 }
-
-int wc_ecc_copy_point(ecc_point*  p,ecc_point * r)
+int wc_ecc_copy_point(ecc_point* p,ecc_point * r)
 {
 	PRT_TITLE prttitle("wc_ecc_copy_point");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_copy_point(p,r);
 	return ret;
 }
-
-int wc_ecc_cmp_point(ecc_point*  a,ecc_point * b)
+int wc_ecc_cmp_point(ecc_point* a,ecc_point * b)
 {
 	PRT_TITLE prttitle("wc_ecc_cmp_point");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_cmp_point(a,b);
 	return ret;
 }
-
 int wc_ecc_point_is_at_infinity(ecc_point * p)
 {
 	PRT_TITLE prttitle("wc_ecc_point_is_at_infinity");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_point_is_at_infinity(p);
 	return ret;
 }
-
-int wc_ecc_mulmod(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map)
+int wc_ecc_mulmod(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map)
 {
 	PRT_TITLE prttitle("wc_ecc_mulmod");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_mulmod(k,G,R,a,modulus,map);
 	return ret;
 }
-
-int wc_ecc_mulmod_ex(mp_int*  k,ecc_point * G,ecc_point * R,mp_int*  a,mp_int*  modulus,int map,void*  heap)
+int wc_ecc_mulmod_ex(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map,void* heap)
 {
 	PRT_TITLE prttitle("wc_ecc_mulmod_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_mulmod_ex(k,G,R,a,modulus,map,heap);
 	return ret;
 }
-
-int wc_ecc_export_x963(ecc_key*  key,byte*  out,word32*  outLen)
+int wc_ecc_export_x963(ecc_key* key,byte* out,word32* outLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_x963");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963(key,out,outLen);
 	return ret;
 }
-
-int wc_ecc_export_x963_ex(ecc_key*  key,byte*  out,word32*  outLen,int compressed)
+int wc_ecc_export_x963_ex(ecc_key* key,byte* out,word32* outLen,int compressed)
 {
 	PRT_TITLE prttitle("wc_ecc_export_x963_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_x963_ex(key,out,outLen,compressed);
 	return ret;
 }
-
-int wc_ecc_import_x963(const byte*  in,word32 inLen,ecc_key*  key)
+int wc_ecc_import_x963(const byte* in,word32 inLen,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_import_x963");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_x963(in,inLen,key);
 	return ret;
 }
-
-int wc_ecc_import_x963_ex(const byte*  in,word32 inLen,ecc_key*  key,int curve_id)
+int wc_ecc_import_x963_ex(const byte* in,word32 inLen,ecc_key* key,int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_import_x963_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_x963_ex(in,inLen,key,curve_id);
 	return ret;
 }
-
-int wc_ecc_import_private_key(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key)
+int wc_ecc_import_private_key(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_import_private_key");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key(priv,privSz,pub,pubSz,key);
 	return ret;
 }
-
-int wc_ecc_import_private_key_ex(const byte*  priv,word32 privSz,const byte*  pub,word32 pubSz,ecc_key*  key,int curve_id)
+int wc_ecc_import_private_key_ex(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key,int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_import_private_key_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_private_key_ex(priv,privSz,pub,pubSz,key,curve_id);
 	return ret;
 }
-
-int wc_ecc_rs_to_sig(const char*  r,const char*  s,byte*  out,word32*  outlen)
+int wc_ecc_rs_to_sig(const char* r,const char* s,byte* out,word32* outlen)
 {
 	PRT_TITLE prttitle("wc_ecc_rs_to_sig");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_rs_to_sig(r,s,out,outlen);
 	return ret;
 }
-
-int wc_ecc_sig_to_rs(const byte*  sig,word32 sigLen,byte*  r,word32*  rLen,byte*  s,word32*  sLen)
+int wc_ecc_sig_to_rs(const byte* sig,word32 sigLen,byte* r,word32* rLen,byte* s,word32* sLen)
 {
 	PRT_TITLE prttitle("wc_ecc_sig_to_rs");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sig_to_rs(sig,sigLen,r,rLen,s,sLen);
 	return ret;
 }
-
-int wc_ecc_import_raw(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,const char*  curveName)
+int wc_ecc_import_raw(ecc_key* key,const char* qx,const char* qy,const char* d,const char* curveName)
 {
 	PRT_TITLE prttitle("wc_ecc_import_raw");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_raw(key,qx,qy,d,curveName);
 	return ret;
 }
-
-int wc_ecc_import_raw_ex(ecc_key*  key,const char*  qx,const char*  qy,const char*  d,int curve_id)
+int wc_ecc_import_raw_ex(ecc_key* key,const char* qx,const char* qy,const char* d,int curve_id)
 {
 	PRT_TITLE prttitle("wc_ecc_import_raw_ex");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_raw_ex(key,qx,qy,d,curve_id);
 	return ret;
 }
-
-int wc_ecc_export_private_only(ecc_key*  key,byte*  out,word32*  outLen)
+int wc_ecc_export_private_only(ecc_key* key,byte* out,word32* outLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_private_only");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_private_only(key,out,outLen);
 	return ret;
 }
-
-int wc_ecc_export_public_raw(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen)
+int wc_ecc_export_public_raw(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_public_raw");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_public_raw(key,qx,qxLen,qy,qyLen);
 	return ret;
 }
-
-int wc_ecc_export_private_raw(ecc_key*  key,byte*  qx,word32*  qxLen,byte*  qy,word32*  qyLen,byte*  d,word32*  dLen)
+int wc_ecc_export_private_raw(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen,byte* d,word32* dLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_private_raw");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_private_raw(key,qx,qxLen,qy,qyLen,d,dLen);
 	return ret;
 }
-
-int wc_ecc_export_point_der(const int curve_idx,ecc_point*  point,byte*  out,word32*  outLen)
+int wc_ecc_export_point_der(const int curve_idx,ecc_point* point,byte* out,word32* outLen)
 {
 	PRT_TITLE prttitle("wc_ecc_export_point_der");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_export_point_der(curve_idx,point,out,outLen);
 	return ret;
 }
-
-int wc_ecc_import_point_der(byte*  in,word32 inLen,const int curve_idx,ecc_point*  point)
+int wc_ecc_import_point_der(byte* in,word32 inLen,const int curve_idx,ecc_point* point)
 {
 	PRT_TITLE prttitle("wc_ecc_import_point_der");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_import_point_der(in,inLen,curve_idx,point);
 	return ret;
 }
-
-int wc_ecc_size(ecc_key*  key)
+int wc_ecc_size(ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_size");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_size(key);
 	return ret;
 }
-
-int wc_ecc_sig_size(ecc_key*  key)
+int wc_ecc_sig_size(ecc_key* key)
 {
 	PRT_TITLE prttitle("wc_ecc_sig_size");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_sig_size(key);
 	return ret;
 }
-
-int wc_ecc_get_oid(word32 oidSum,const byte* *  oid,word32*  oidSz)
+int wc_ecc_get_oid(word32 oidSum,const byte* * oid,word32* oidSz)
 {
 	PRT_TITLE prttitle("wc_ecc_get_oid");
 	int ret = _cur_pwc_ecc_functions->pf_wc_ecc_get_oid(oidSum,oid,oidSz);
 	return ret;
 }
-
-int wc_AesCbcEncrypt(Aes*  aes,byte*  out,const byte*  in,word32 sz)
+int wc_AesCbcEncrypt(Aes* aes,byte* out,const byte* in,word32 sz)
 {
 	PRT_TITLE prttitle("wc_AesCbcEncrypt");
 	int ret = _cur_pwc_ecc_functions->pf_wc_AesCbcEncrypt(aes,out,in,sz);
 	return ret;
 }
-
-int wc_AesCbcDecrypt(Aes*  aes,byte*  out,const byte*  in,word32 sz)
+int wc_AesCbcDecrypt(Aes* aes,byte* out,const byte* in,word32 sz)
 {
 	PRT_TITLE prttitle("wc_AesCbcDecrypt");
 	int ret = _cur_pwc_ecc_functions->pf_wc_AesCbcDecrypt(aes,out,in,sz);
 	return ret;
 }
-
-void neo_api_change_4_key_exchange(byte*    out,word32   outLen)
+void neo_api_change_4_key_exchange(byte* out,word32 outLen)
 {
 	PRT_TITLE prttitle("neo_api_change_4_key_exchange");
 	_cur_pwc_ecc_functions->pf_neo_api_change_4_key_exchange(out,outLen);
 }
-
-void neo_api_set_inner_header(const byte*    innerheader,word32   innerheader_size)
+void neo_api_set_inner_header(const byte* innerheader,word32 innerheader_size)
 {
 	PRT_TITLE prttitle("neo_api_set_inner_header");
 	_cur_pwc_ecc_functions->pf_neo_api_set_inner_header(innerheader,innerheader_size);
 }
-
-void neo_api_set_sc_random(const byte*    client_random,const byte*    server_random)
+void neo_api_set_sc_random(const byte* client_random,const byte* server_random)
 {
 	PRT_TITLE prttitle("neo_api_set_sc_random");
 	_cur_pwc_ecc_functions->pf_neo_api_set_sc_random(client_random,server_random);
 }
-
-void neo_api_change_iv(byte*    client_iv,byte*    server_iv)
+void neo_api_change_iv(byte* client_iv,byte* server_iv)
 {
 	PRT_TITLE prttitle("neo_api_change_iv");
 	_cur_pwc_ecc_functions->pf_neo_api_change_iv(client_iv,server_iv);
 }
-
 int neo_api_verify_mac(WOLFSSL* ssl,int ssl_ret)
 {
 	PRT_TITLE prttitle("neo_api_verify_mac");
 	int ret = _cur_pwc_ecc_functions->pf_neo_api_verify_mac(ssl,ssl_ret);
+	return ret;
+}
+int neo_ssl_init(WOLFSSL* ssl)
+{
+	PRT_TITLE prttitle("neo_ssl_init");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_init(ssl);
+	return ret;
+}
+int neo_ssl_client_hello(const byte * random)
+{
+	PRT_TITLE prttitle("neo_ssl_client_hello");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_hello(random);
+	return ret;
+}
+int neo_ssl_server_hello(const byte * random)
+{
+	PRT_TITLE prttitle("neo_ssl_server_hello");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_hello(random);
+	return ret;
+}
+int neo_ssl_server_certificate(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1)
+{
+	PRT_TITLE prttitle("neo_ssl_server_certificate");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_certificate(hash_cert,sign_asn1,pubkey_asn1);
+	return ret;
+}
+int neo_ssl_server_key_exchange(const byte* pubkey_asn1_4_ecdh)
+{
+	PRT_TITLE prttitle("neo_ssl_server_key_exchange");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_key_exchange(pubkey_asn1_4_ecdh);
+	return ret;
+}
+int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,int * psign_size)
+{
+	PRT_TITLE prttitle("neo_ssl_client_certificate");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate(hash_cert,sign_asn1,psign_size);
+	return ret;
+}
+int neo_ssl_client_key_exchange(const byte * pubkey,byte* chip_pub_asn1_4_ecdh)
+{
+	PRT_TITLE prttitle("neo_ssl_client_key_exchange");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_key_exchange(pubkey,chip_pub_asn1_4_ecdh);
+	return ret;
+}
+int neo_ssl_client_certificate_verify(const byte * hash)
+{
+	PRT_TITLE prttitle("neo_ssl_client_certificate_verify");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate_verify(hash);
+	return ret;
+}
+int neo_ssl_client_encrypted_handshake_message(const byte * hash,byte* out,int* pout_size)
+{
+	PRT_TITLE prttitle("neo_ssl_client_encrypted_handshake_message");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_encrypted_handshake_message(hash,out,pout_size);
+	return ret;
+}
+int neo_ssl_server_encrypted_handshake_message(const byte * hash)
+{
+	PRT_TITLE prttitle("neo_ssl_server_encrypted_handshake_message");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_encrypted_handshake_message(hash);
+	return ret;
+}
+int neo_ssl_client_application_data(const byte * orgmsg,byte* out,int* pout_size)
+{
+	PRT_TITLE prttitle("neo_ssl_client_application_data");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_application_data(orgmsg,out,pout_size);
+	return ret;
+}
+int neo_ssl_server_application_data(const byte * orgmsg,byte* out,int* pout_size)
+{
+	PRT_TITLE prttitle("neo_ssl_server_application_data");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_application_data(orgmsg,out,pout_size);
 	return ret;
 }
 //END ECC_BYPASS

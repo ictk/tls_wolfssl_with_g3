@@ -16495,6 +16495,8 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
             XMEMCPY(output + idx, ssl->arrays->clientRandom, RAN_LEN);
 #endif
         }
+		neo_ssl_client_hello(ssl, ssl->arrays->clientRandom);
+
         idx += RAN_LEN;
 
         /* then session id */
@@ -16833,6 +16835,7 @@ void PickHashSigAlgo(WOLFSSL* ssl, const byte* hashSigAlgo,
 
         /* random */
         XMEMCPY(ssl->arrays->serverRandom, input + i, RAN_LEN);
+		neo_ssl_server_hello(ssl, ssl->arrays->serverRandom);
         i += RAN_LEN;
 
 #ifdef WOLFSSL_TLS13

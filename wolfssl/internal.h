@@ -3832,6 +3832,22 @@ int BuildTls13Message(WOLFSSL* ssl, byte* output, int outSz, const byte* input,
 WOLFSSL_LOCAL int AllocKey(WOLFSSL* ssl, int type, void** pKey);
 WOLFSSL_LOCAL void FreeKey(WOLFSSL* ssl, int type, void** pKey);
 
+
+//START NEO_SSL_DEC
+NEO_SSL int neo_ssl_init(WOLFSSL* ssl);
+NEO_SSL int neo_ssl_client_hello(const byte * random);
+NEO_SSL int neo_ssl_server_hello(const byte * random);
+NEO_SSL int neo_ssl_server_certificate(const byte * hash_cert,const byte * sign_asn1,const byte* pubkey_asn1);
+NEO_SSL int neo_ssl_server_key_exchange(const byte* pubkey_asn1_4_ecdh);
+NEO_SSL int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,int * psign_size);
+NEO_SSL int neo_ssl_client_key_exchange(const byte * pubkey,byte* chip_pub_asn1_4_ecdh);
+NEO_SSL int neo_ssl_client_certificate_verify(const byte * hash);
+NEO_SSL int neo_ssl_client_encrypted_handshake_message(const byte * hash,byte* out,int* pout_size);
+NEO_SSL int neo_ssl_server_encrypted_handshake_message(const byte * hash);
+NEO_SSL int neo_ssl_client_application_data(const byte * orgmsg,byte* out,int* pout_size);
+NEO_SSL int neo_ssl_server_application_data(const byte * orgmsg,byte* out,int* pout_size);
+//END NEO_SSL_DEC
+
 #ifdef WOLFSSL_ASYNC_CRYPT
     WOLFSSL_LOCAL int wolfSSL_AsyncInit(WOLFSSL* ssl, WC_ASYNC_DEV* asyncDev, word32 flags);
     WOLFSSL_LOCAL int wolfSSL_AsyncPop(WOLFSSL* ssl, byte* state);
