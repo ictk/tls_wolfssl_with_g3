@@ -12968,6 +12968,8 @@ int SendFinished(WOLFSSL* ssl)
     hashes = (Hashes*)&input[headerSz];
     ret = BuildFinished(ssl, hashes,
                      ssl->options.side == WOLFSSL_CLIENT_END ? client : server);
+
+	//ret = neo_ssl_client_encrypted_handshake_message();
     if (ret != 0) return ret;
 
 #ifdef HAVE_SECURE_RENEGOTIATION
@@ -12987,9 +12989,13 @@ int SendFinished(WOLFSSL* ssl)
                 return ret;
         }
     #endif
+		
+		print_bin("BuildFinished input", input, headerSz + finishedSz);
 
     sendSz = BuildMessage(ssl, output, outputSz, input, headerSz + finishedSz,
                                                           handshake, 1, 0, 0);
+
+	print_bin("BuildFinished output", output, sendSz);
     if (sendSz < 0)
         return BUILD_MSG_ERROR;
 

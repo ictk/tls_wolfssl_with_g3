@@ -81,7 +81,8 @@
 #include "wolfssl/debug_util.h"
 
 /* compute p_hash for MD5, SHA-1, SHA-256, or SHA-384 for TLSv1 PRF */
-static int p_hash(byte* result, word32 resLen, const byte* secret,
+	//static neo1seok temprary erase static
+ int p_hash(byte* result, word32 resLen, const byte* secret,
                   word32 secLen, const byte* seed, word32 seedLen, int hash,
                   void* heap, int devId)
 {
@@ -420,6 +421,10 @@ int BuildTlsFinished(WOLFSSL* ssl, Hashes* hashes, const byte* sender)
         return MEMORY_E;
 
     ret = BuildTlsHandshakeHash(ssl, handshake_hash, &hashSz);
+
+	
+
+
     if (ret == 0) {
         if ( XSTRNCMP((const char*)sender, (const char*)client, SIZEOF_SENDER) == 0)
             side = tls_client;
@@ -431,7 +436,12 @@ int BuildTlsFinished(WOLFSSL* ssl, Hashes* hashes, const byte* sender)
                    IsAtLeastTLSv1_2(ssl), ssl->specs.mac_algorithm,
                    ssl->heap, ssl->devId);
     }
+	int outhashsz = TLS_FINISHED_SZ;
+	ret = neo_ssl_do_finish_get_prf(side, handshake_hash, hashes, &outhashsz);
 
+	if (outhashsz != TLS_FINISHED_SZ){
+		return -1;
+	}
     XFREE(handshake_hash, ssl->heap, DYNAMIC_TYPE_DIGEST);
 
     return ret;

@@ -152,8 +152,7 @@ int neo_ssl_client_certificate_org(const byte * hash_cert,byte * sign_asn1,int *
 int neo_ssl_client_key_exchange_org(byte* chip_peer_pubkey,int* ppub_key);
 int neo_ssl_client_key_exchange_export_premaster_key_org(byte* pre_master_key,int* pkey_size);
 int neo_ssl_client_certificate_verify_sign_org(const byte * hash,byte* sign,int* psign_size);
-int neo_ssl_client_encrypted_handshake_message_org(const byte * hash,byte* out,int* pout_size);
-int neo_ssl_server_encrypted_handshake_message_org(const byte * hash);
+int neo_ssl_do_finish_get_prf_org(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
 int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
 int neo_ssl_server_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
 //END ECC_ORG_DEC
@@ -234,8 +233,7 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_ssl_client_key_exchange_org,
 	neo_ssl_client_key_exchange_export_premaster_key_org,
 	neo_ssl_client_certificate_verify_sign_org,
-	neo_ssl_client_encrypted_handshake_message_org,
-	neo_ssl_server_encrypted_handshake_message_org,
+	neo_ssl_do_finish_get_prf_org,
 	neo_ssl_client_application_data_org,
 	neo_ssl_server_application_data_org,
 //END SET_ECC_ORG_DEC
@@ -450,11 +448,7 @@ int neo_ssl_client_certificate_verify_sign_org(const byte * hash,byte* sign,int*
 {
 	return 0;
 }
-int neo_ssl_client_encrypted_handshake_message_org(const byte * hash,byte* out,int* pout_size)
-{
-	return 0;
-}
-int neo_ssl_server_encrypted_handshake_message_org(const byte * hash)
+int neo_ssl_do_finish_get_prf_org(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size)
 {
 	return 0;
 }
@@ -960,16 +954,10 @@ int neo_ssl_client_certificate_verify_sign(const byte * hash,byte* sign,int* psi
 	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_certificate_verify_sign(hash,sign,psign_size);
 	return ret;
 }
-int neo_ssl_client_encrypted_handshake_message(const byte * hash,byte* out,int* pout_size)
+int neo_ssl_do_finish_get_prf(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size)
 {
-	PRT_TITLE prttitle("neo_ssl_client_encrypted_handshake_message");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_encrypted_handshake_message(hash,out,pout_size);
-	return ret;
-}
-int neo_ssl_server_encrypted_handshake_message(const byte * hash)
-{
-	PRT_TITLE prttitle("neo_ssl_server_encrypted_handshake_message");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_encrypted_handshake_message(hash);
+	PRT_TITLE prttitle("neo_ssl_do_finish_get_prf");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_do_finish_get_prf(label,hand_shake_hash,prf,pprf_size);
 	return ret;
 }
 int neo_ssl_client_application_data(const byte * orgmsg,byte* out,int* pout_size)

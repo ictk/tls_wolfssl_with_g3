@@ -2684,8 +2684,7 @@ NEO_API int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,i
 NEO_API int neo_ssl_client_key_exchange(byte* chip_peer_pubkey,int* ppub_key);
 NEO_API int neo_ssl_client_key_exchange_export_premaster_key(byte* pre_master_key,int* pkey_size);
 NEO_API int neo_ssl_client_certificate_verify_sign(const byte * hash,byte* sign,int* psign_size);
-NEO_API int neo_ssl_client_encrypted_handshake_message(const byte * hash,byte* out,int* pout_size);
-NEO_API int neo_ssl_server_encrypted_handshake_message(const byte * hash);
+NEO_API int neo_ssl_do_finish_get_prf(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
 NEO_API int neo_ssl_client_application_data(const byte * orgmsg,byte* out,int* pout_size);
 NEO_API int neo_ssl_server_application_data(const byte * orgmsg,byte* out,int* pout_size);
 //END NEO_API_DEC
