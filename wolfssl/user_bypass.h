@@ -74,6 +74,7 @@ typedef void( * PF_NEO_API_SET_SC_RANDOM)(const byte* client_random,const byte* 
 typedef void( * PF_NEO_API_CHANGE_IV)(byte* client_iv,byte* server_iv);
 typedef int( * PF_NEO_API_VERIFY_MAC)(WOLFSSL* ssl,int ssl_ret);
 typedef int( * PF_NEO_SSL_INIT)(WOLFSSL* ssl);
+typedef int( * PF_NEO_SSL_IMPORT_CERT)(int cert_type,byte* cert,int* pcert_size);
 typedef int( * PF_NEO_SSL_CLIENT_HELLO)(const byte * random);
 typedef int( * PF_NEO_SSL_SERVER_HELLO)(const byte * random);
 typedef int( * PF_NEO_SSL_SERVER_CERTIFICATE_SET_ECDSA_PUBKEY)(const byte* pubkey_asn1,int size);
@@ -155,6 +156,7 @@ typedef struct _tagST_WC_ECC_FUNCTIONS{
 	PF_NEO_API_CHANGE_IV pf_neo_api_change_iv;
 	PF_NEO_API_VERIFY_MAC pf_neo_api_verify_mac;
 	PF_NEO_SSL_INIT pf_neo_ssl_init;
+	PF_NEO_SSL_IMPORT_CERT pf_neo_ssl_import_cert;
 	PF_NEO_SSL_CLIENT_HELLO pf_neo_ssl_client_hello;
 	PF_NEO_SSL_SERVER_HELLO pf_neo_ssl_server_hello;
 	PF_NEO_SSL_SERVER_CERTIFICATE_SET_ECDSA_PUBKEY pf_neo_ssl_server_certificate_set_ecdsa_pubkey;

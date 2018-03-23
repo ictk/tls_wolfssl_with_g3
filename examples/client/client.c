@@ -1609,11 +1609,11 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 #ifdef HAVE_ECC
         /* load ecc verify too, echoserver uses it by default w/ ecc */
 #if !defined(NO_FILESYSTEM)
-        if (wolfSSL_CTX_load_verify_locations(ctx, eccCertFile, 0)
-                                                           != WOLFSSL_SUCCESS) {
-            wolfSSL_CTX_free(ctx);
-            err_sys("can't load ecc ca file, Please run from wolfSSL home dir");
-        }
+        //if (wolfSSL_CTX_load_verify_locations(ctx, eccCertFile, 0)
+        //                                                   != WOLFSSL_SUCCESS) {
+        //    wolfSSL_CTX_free(ctx);
+        //    err_sys("can't load ecc ca file, Please run from wolfSSL home dir");
+        //}
 #else
         load_buffer(ctx, eccCertFile, WOLFSSL_CA);
 #endif  /* !defined(NO_FILESYSTEM) */

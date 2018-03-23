@@ -86,6 +86,7 @@ void neo_api_set_sc_random_new(const byte* client_random,const byte* server_rand
 void neo_api_change_iv_new(byte* client_iv,byte* server_iv);
 int neo_api_verify_mac_new(WOLFSSL* ssl,int ssl_ret);
 int neo_ssl_init_new(WOLFSSL* ssl);
+int neo_ssl_import_cert_new(int cert_type,byte* cert,int* pcert_size);
 int neo_ssl_client_hello_new(const byte * random);
 int neo_ssl_server_hello_new(const byte * random);
 int neo_ssl_server_certificate_set_ecdsa_pubkey_new(const byte* pubkey_asn1,int size);
@@ -118,8 +119,16 @@ ST_ECC_PUBLIC _st_public_peer_key;
 ST_ECDH_PRE_MASTER_SECRET _st_ecdh_pre_master_secret;;
 ST_DATA_32 hand_shake_hash;
 
+#pragma pack(push, 1)
 
 
+
+typedef struct _CERTINFO {
+	byte type;
+	byte stindex;
+	word size;
+}CERTINFO;
+#pragma pack(pop)  
 void swap_bytes(void* value, int size)
 {
 	unsigned char * pvalue = (unsigned char *)value;
@@ -169,6 +178,7 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_neo_api_verify_mac = neo_api_verify_mac_new;
 	//START SET_EXTERN_PF
 	wc_ecc_functions.pf_neo_ssl_init = neo_ssl_init_new;
+	wc_ecc_functions.pf_neo_ssl_import_cert = neo_ssl_import_cert_new;
 	wc_ecc_functions.pf_neo_ssl_client_hello = neo_ssl_client_hello_new;
 	wc_ecc_functions.pf_neo_ssl_server_hello = neo_ssl_server_hello_new;
 	wc_ecc_functions.pf_neo_ssl_server_certificate_set_ecdsa_pubkey = neo_ssl_server_certificate_set_ecdsa_pubkey_new;
@@ -577,12 +587,66 @@ int neo_ssl_do_finish_get_prf_new(const char* label, const byte * hand_shake_has
 	
 	return ret;
 }
+int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
+{
+	int cert_index = -1;
+	switch (cert_type)
+	{
+	case CERT_TYPE:
+		cert_index = 1;
+		break;
+	case CA_TYPE:
+		cert_index = 0;
+		break;
 
+	default:
+		return -1;
+
+	}
+	
+	ST_RW_DATA st_rwdata;
+	g3api_read_key_value(0, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, &st_rwdata, sizeof(ST_RW_DATA));
+	print_bin("neo_ssl_import_cert_new st_rwdata", &st_rwdata, sizeof(ST_RW_DATA));
+	CERTINFO *certinfo = (CERTINFO *)&st_rwdata;
+
+	fprintf(stderr, "CERTINFO %d \n", sizeof(CERTINFO));
+	for (int i = 0; i < 8; i++){
+		
+		fprintf(stderr, "CERT %d %d %d \n", certinfo[i].type, certinfo[i].stindex, certinfo[i].size);
+	}
+	CERTINFO *pcertinfo = &certinfo[cert_index];
+
+	*pcert_size = pcertinfo->size;
+	if (!cert) return 0;
+	;
+	int slot_size = (int)(pcertinfo->size / 32) +1;
+
+
+	byte *pbytre = cert;
+	int remain_size = pcertinfo->size;
+	for (int i = 0; i < slot_size; i++){
+
+		ST_RW_DATA st_temptdata;
+		int realdata = min(remain_size, 32);
+		if (realdata <= 0) break;
+		g3api_read_key_value(pcertinfo->stindex+i, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, &st_temptdata, sizeof(ST_RW_DATA));
+		memcpy(pbytre, &st_temptdata, realdata);
+		print_bin("neo_ssl_import_cert_new st_temptdata", &st_temptdata, sizeof(ST_RW_DATA));
+		pbytre += 32;
+		remain_size -=32 ;
+	}
+	print_bin("neo_ssl_import_cert_new cert", cert, pcertinfo->size);
+
+
+
+	return 0;
+}
 //START DEF_NEW_EMPTY
 int neo_ssl_init_new(WOLFSSL* ssl)
 {
 	return 0;
 }
+
 int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size)
 {
 	return 0;

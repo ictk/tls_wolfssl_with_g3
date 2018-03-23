@@ -273,7 +273,8 @@
 #endif
 #else
 #define caCertFile     "./certs/ca-cert.pem"
-#define eccCertFile    "./certs/server-ecc.pem"
+#define eccCertFile    "./certs/server-ecc.der"
+
 #define eccKeyFile     "./certs/ecc-key.pem"
 #define svrCertFile    "./certs/server-cert.pem"
 #define svrKeyFile     "./certs/server-key.pem"

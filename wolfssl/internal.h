@@ -3835,6 +3835,7 @@ WOLFSSL_LOCAL void FreeKey(WOLFSSL* ssl, int type, void** pKey);
 
 //START NEO_SSL_DEC
 NEO_SSL int neo_ssl_init(WOLFSSL* ssl);
+NEO_SSL int neo_ssl_import_cert(int cert_type,byte* cert,int* pcert_size);
 NEO_SSL int neo_ssl_client_hello(const byte * random);
 NEO_SSL int neo_ssl_server_hello(const byte * random);
 NEO_SSL int neo_ssl_server_certificate_set_ecdsa_pubkey(const byte* pubkey_asn1,int size);

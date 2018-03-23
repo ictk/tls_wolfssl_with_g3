@@ -161,7 +161,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../;../../IDE/WIN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;DEBUG_WOLFSSL;HAVE_ECC;BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256;HAVE_COMP_KEY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;DEBUG_WOLFSSL;HAVE_ECC;BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256;HAVE_COMP_KEY;NO_OLD_TLS;NO_DH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>

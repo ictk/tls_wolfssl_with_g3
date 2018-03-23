@@ -2674,6 +2674,7 @@ NEO_API void neo_api_set_sc_random(const byte* client_random,const byte* server_
 NEO_API void neo_api_change_iv(byte* client_iv,byte* server_iv);
 NEO_API int neo_api_verify_mac(WOLFSSL* ssl,int ssl_ret);
 NEO_API int neo_ssl_init(WOLFSSL* ssl);
+NEO_API int neo_ssl_import_cert(int cert_type,byte* cert,int* pcert_size);
 NEO_API int neo_ssl_client_hello(const byte * random);
 NEO_API int neo_ssl_server_hello(const byte * random);
 NEO_API int neo_ssl_server_certificate_set_ecdsa_pubkey(const byte* pubkey_asn1,int size);

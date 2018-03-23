@@ -5029,6 +5029,22 @@ void FreeSSL(WOLFSSL* ssl, void* heap)
 }
 
 
+// 신원석(neo1seok) 2018-03-15 : 
+static INLINE void GetSEQ(WOLFSSL* ssl, int verify, word32 seq[2])
+{
+	if (verify) {
+		seq[0] = ssl->keys.peer_sequence_number_hi;
+		seq[1] = ssl->keys.peer_sequence_number_lo;
+
+	}
+	else {
+		seq[0] = ssl->keys.sequence_number_hi;
+		seq[1] = ssl->keys.sequence_number_lo;
+
+	}
+}
+// 신원석(neo1seok) 2018-03-15 : 
+
 #if !defined(NO_OLD_TLS) || defined(HAVE_CHACHA) || defined(HAVE_AESCCM) \
     || defined(HAVE_AESGCM) || defined(WOLFSSL_DTLS)
 static INLINE void GetSEQIncrement(WOLFSSL* ssl, int verify, word32 seq[2])
@@ -5051,21 +5067,6 @@ static INLINE void GetSEQIncrement(WOLFSSL* ssl, int verify, word32 seq[2])
     }
 }
 
-// 신원석(neo1seok) 2018-03-15 : 
-static INLINE void GetSEQ(WOLFSSL* ssl, int verify, word32 seq[2])
-{
-	if (verify) {
-		seq[0] = ssl->keys.peer_sequence_number_hi;
-		seq[1] = ssl->keys.peer_sequence_number_lo;
-	
-	}
-	else {
-		seq[0] = ssl->keys.sequence_number_hi;
-		seq[1] = ssl->keys.sequence_number_lo;
-	
-	}
-}
-// 신원석(neo1seok) 2018-03-15 : 
 
 
 

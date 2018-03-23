@@ -6051,6 +6051,48 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
     (void)crl;
     (void)heapHint;
 
+	int cert_index = -1;
+	if (type == CERT_TYPE || type == CA_TYPE)
+	{
+		neo_ssl_import_cert(type, NULL, &sz);
+
+		ret = neo_ssl_import_cert(type, myBuffer, &sz);
+		if (sz > (long)sizeof(staticBuffer)) {
+			WOLFSSL_MSG("Getting dynamic buffer");
+			myBuffer = (byte*)XMALLOC(sz, heapHint, DYNAMIC_TYPE_FILE);
+			if (myBuffer == NULL) {
+				XFCLOSE(file);
+				return WOLFSSL_BAD_FILE;
+			}
+			dynamic = 1;
+		}
+
+		ret = ProcessChainBuffer(ctx, myBuffer, sz, format, type, ssl);
+
+		if (dynamic)
+			XFREE(myBuffer, heapHint, DYNAMIC_TYPE_FILE);
+
+
+		return ret;
+	}
+
+	if (type == PRIVATEKEY_TYPE)
+	{
+#if 0
+		ctx->privateKey
+			ctx->privateKey->length = 0x79;
+		ctx->privateKey->buffer = (byte*)XMALLOC(ctx->privateKey->length, heapHint, DYNAMIC_TYPE_FILE);
+		ctx->privateKey->dynType = 3;
+		ctx->privateKey->type = 1;
+#endif // 0
+		void*         heap = wolfSSL_CTX_GetHeap(ctx, ssl);
+		ret = AllocDer(&ctx->privateKey, (word32)0x79, type, heap);
+
+
+
+		return 1;
+	}
+
     if (fname == NULL) return WOLFSSL_BAD_FILE;
 
     file = XFOPEN(fname, "rb");
@@ -6072,10 +6114,15 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
         XFCLOSE(file);
         return WOLFSSL_BAD_FILE;
     }
+	
+
+
+	
 
     if ( (ret = (int)XFREAD(myBuffer, 1, sz, file)) != sz)
         ret = WOLFSSL_BAD_FILE;
-    else {
+    else 
+	{
         if ((type == CA_TYPE || type == TRUSTED_PEER_TYPE)
                                                   && format == WOLFSSL_FILETYPE_PEM)
             ret = ProcessChainBuffer(ctx, myBuffer, sz, format, type, ssl);
@@ -6089,6 +6136,7 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
     }
 
     XFCLOSE(file);
+END:
     if (dynamic)
         XFREE(myBuffer, heapHint, DYNAMIC_TYPE_FILE);
 
@@ -6111,7 +6159,7 @@ int wolfSSL_CTX_load_verify_locations(WOLFSSL_CTX* ctx, const char* file,
         return WOLFSSL_FAILURE;
 
     if (file)
-        ret = ProcessFile(ctx, file, WOLFSSL_FILETYPE_PEM, CA_TYPE, NULL, 0, NULL);
+		ret = ProcessFile(ctx, file, WOLFSSL_FILETYPE_ASN1, CA_TYPE, NULL, 0, NULL);
 
     if (ret == WOLFSSL_SUCCESS && path) {
 #ifndef NO_WOLFSSL_DIR
@@ -6129,7 +6177,7 @@ int wolfSSL_CTX_load_verify_locations(WOLFSSL_CTX* ctx, const char* file,
         /* try to load each regular file in path */
         fileRet = wc_ReadDirFirst(readCtx, path, &name);
         while (fileRet == 0 && name) {
-            ret = ProcessFile(ctx, name, WOLFSSL_FILETYPE_PEM, CA_TYPE,
+			ret = ProcessFile(ctx, name, WOLFSSL_FILETYPE_ASN1, CA_TYPE,
                                                           NULL, 0, NULL);
             if (ret != WOLFSSL_SUCCESS)
                 break;
@@ -6727,7 +6775,7 @@ int wolfSSL_CTX_use_certificate_chain_file(WOLFSSL_CTX* ctx, const char* file)
 {
    /* process up to MAX_CHAIN_DEPTH plus subject cert */
    WOLFSSL_ENTER("wolfSSL_CTX_use_certificate_chain_file");
-   if (ProcessFile(ctx, file, WOLFSSL_FILETYPE_PEM,CERT_TYPE,NULL,1, NULL)
+   if (ProcessFile(ctx, file, WOLFSSL_FILETYPE_ASN1, CERT_TYPE, NULL, 1, NULL)
                    == WOLFSSL_SUCCESS)
        return WOLFSSL_SUCCESS;
 

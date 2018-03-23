@@ -142,6 +142,7 @@ void neo_api_set_sc_random_org(const byte* client_random,const byte* server_rand
 void neo_api_change_iv_org(byte* client_iv,byte* server_iv);
 int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret);
 int neo_ssl_init_org(WOLFSSL* ssl);
+int neo_ssl_import_cert_org(int cert_type,byte* cert,int* pcert_size);
 int neo_ssl_client_hello_org(const byte * random);
 int neo_ssl_server_hello_org(const byte * random);
 int neo_ssl_server_certificate_set_ecdsa_pubkey_org(const byte* pubkey_asn1,int size);
@@ -223,6 +224,7 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_api_change_iv_org,
 	neo_api_verify_mac_org,
 	neo_ssl_init_org,
+	neo_ssl_import_cert_org,
 	neo_ssl_client_hello_org,
 	neo_ssl_server_hello_org,
 	neo_ssl_server_certificate_set_ecdsa_pubkey_org,
@@ -405,6 +407,10 @@ int neo_api_verify_mac_org(WOLFSSL* ssl,int ssl_ret)
 	return 0;
 }
 int neo_ssl_init_org(WOLFSSL* ssl)
+{
+	return 0;
+}
+int neo_ssl_import_cert_org(int cert_type,byte* cert,int* pcert_size)
 {
 	return 0;
 }
@@ -892,6 +898,12 @@ int neo_ssl_init(WOLFSSL* ssl)
 {
 	PRT_TITLE prttitle("neo_ssl_init");
 	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_init(ssl);
+	return ret;
+}
+int neo_ssl_import_cert(int cert_type,byte* cert,int* pcert_size)
+{
+	PRT_TITLE prttitle("neo_ssl_import_cert");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_import_cert(cert_type,cert,pcert_size);
 	return ret;
 }
 int neo_ssl_client_hello(const byte * random)

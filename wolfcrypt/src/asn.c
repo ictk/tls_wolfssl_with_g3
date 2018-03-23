@@ -10083,7 +10083,7 @@ int wc_EccPrivateKeyDecode(const byte* input, word32* inOutIdx, ecc_key* key,
     byte pub[2*(ECC_MAXSIZE+1)]; /* public key has two parts plus header */
 #endif
     byte* pubData = NULL;
-
+	return 0;
     if (input == NULL || inOutIdx == NULL || key == NULL || inSz == 0)
         return BAD_FUNC_ARG;
 

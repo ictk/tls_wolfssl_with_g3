@@ -62,6 +62,7 @@ obj/
 bin/
 old/
 temp/
+backup/
 /adts/mapScriptPerScenarioAndMethodLine.json
 /dlltest/libeay32.dll
 /businfo/json/station.json
