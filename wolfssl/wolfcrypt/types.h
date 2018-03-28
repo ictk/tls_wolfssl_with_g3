@@ -27,6 +27,11 @@
 	#include <wolfssl/wolfcrypt/settings.h>
 	#include <wolfssl/wolfcrypt/wc_port.h>
 
+
+#define NEO_API
+#define NEO_SSL
+
+
 	#ifdef __cplusplus
 	    extern "C" {
 	#endif

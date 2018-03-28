@@ -69,8 +69,6 @@
         #define WOLFSSL_API
         #define WOLFSSL_LOCAL
     #endif
-	#define NEO_API
-	#define NEO_SSL
 #endif /* BUILDING_WOLFSSL */
 
 #endif /* HAVE_FIPS */

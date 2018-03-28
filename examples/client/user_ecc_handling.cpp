@@ -98,8 +98,8 @@ int neo_ssl_client_key_exchange_new(byte* chip_peer_pubkey,int* ppub_key);
 int neo_ssl_client_key_exchange_export_premaster_key_new(byte* pre_master_key,int* pkey_size);
 int neo_ssl_client_certificate_verify_sign_new(const byte * hash,byte* sign,int* psign_size);
 int neo_ssl_do_finish_get_prf_new(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
-int neo_ssl_client_application_data_new(const byte * orgmsg,byte* out,int* pout_size);
-int neo_ssl_server_application_data_new(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_client_encrypt_new(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_server_decrypt_new(const byte * orgmsg,byte* out,int* pout_size);
 //END DEC_NEW
 
 //int neo_api_verify_mac_new(int ssl_ret);
@@ -190,8 +190,8 @@ void init_user_ecc(const char * st_com)
 	wc_ecc_functions.pf_neo_ssl_client_key_exchange_export_premaster_key = neo_ssl_client_key_exchange_export_premaster_key_new;
 	wc_ecc_functions.pf_neo_ssl_client_certificate_verify_sign = neo_ssl_client_certificate_verify_sign_new;
 	wc_ecc_functions.pf_neo_ssl_do_finish_get_prf = neo_ssl_do_finish_get_prf_new;
-	wc_ecc_functions.pf_neo_ssl_client_application_data = neo_ssl_client_application_data_new;
-	wc_ecc_functions.pf_neo_ssl_server_application_data = neo_ssl_server_application_data_new;
+	wc_ecc_functions.pf_neo_ssl_client_encrypt = neo_ssl_client_encrypt_new;
+	wc_ecc_functions.pf_neo_ssl_server_decrypt = neo_ssl_server_decrypt_new;
 //END SET_EXTERN_PF
 	
 	//wc_ecc_shared_secret_new
@@ -646,16 +646,15 @@ int neo_ssl_init_new(WOLFSSL* ssl)
 {
 	return 0;
 }
-
 int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size)
 {
 	return 0;
 }
-int neo_ssl_client_application_data_new(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_client_encrypt_new(const byte * orgmsg,byte* out,int* pout_size)
 {
 	return 0;
 }
-int neo_ssl_server_application_data_new(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_server_decrypt_new(const byte * orgmsg,byte* out,int* pout_size)
 {
 	return 0;
 }

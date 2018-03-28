@@ -103,7 +103,7 @@ HAVE_ECC_KOBLITZ
     }
 #endif
 
-	void test_ecc();
+	//void test_ecc();
 	
 static int NonBlockingSSL_Connect(WOLFSSL* ssl)
 {
@@ -1282,7 +1282,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
                 #endif
                 break;	
 			case '2':
-				test_ecc();
+				//test_ecc();
 				return 0;
 				break;
 

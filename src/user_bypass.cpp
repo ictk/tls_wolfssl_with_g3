@@ -78,6 +78,30 @@ private:
 
 
 extern "C"{
+
+//START NEO_API_DEC
+void neo_api_change_4_key_exchange(byte* out,word32 outLen);
+void neo_api_set_inner_header(const byte* innerheader,word32 innerheader_size);
+void neo_api_set_sc_random(const byte* client_random,const byte* server_random);
+void neo_api_change_iv(byte* client_iv,byte* server_iv);
+int neo_api_verify_mac(WOLFSSL* ssl,int ssl_ret);
+int neo_ssl_init(WOLFSSL* ssl);
+int neo_ssl_import_cert(int cert_type,byte* cert,int* pcert_size);
+int neo_ssl_client_hello(const byte * random);
+int neo_ssl_server_hello(const byte * random);
+int neo_ssl_server_certificate_set_ecdsa_pubkey(const byte* pubkey_asn1,int size);
+int neo_ssl_server_certificate_verify(const byte* cert_pubkey_asn1,int pub_size,const byte * hash_cert,const byte * sign_asn1,int sign_size,int * pverify);
+int neo_ssl_server_key_exchange_set_peer_pubkey(const byte* peer_pubkey_asn1,int pub_size);
+int neo_ssl_server_key_exchange_verify(const byte* hash,const byte * sign_asn1,int sign_size,int* pverify);
+int neo_ssl_client_certificate(const byte * hash_cert,byte * sign_asn1,int * psign_size);
+int neo_ssl_client_key_exchange(byte* chip_peer_pubkey,int* ppub_key);
+int neo_ssl_client_key_exchange_export_premaster_key(byte* pre_master_key,int* pkey_size);
+int neo_ssl_client_certificate_verify_sign(const byte * hash,byte* sign,int* psign_size);
+int neo_ssl_do_finish_get_prf(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
+int neo_ssl_client_encrypt(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_server_decrypt(const byte * orgmsg,byte* out,int* pout_size);
+//END NEO_API_DEC
+	
 	//START ECC_ORG_DEC
 const char*  wc_ecc_get_name_org(int curve_id);
 int ecc_projective_add_point_org(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp);
@@ -154,8 +178,8 @@ int neo_ssl_client_key_exchange_org(byte* chip_peer_pubkey,int* ppub_key);
 int neo_ssl_client_key_exchange_export_premaster_key_org(byte* pre_master_key,int* pkey_size);
 int neo_ssl_client_certificate_verify_sign_org(const byte * hash,byte* sign,int* psign_size);
 int neo_ssl_do_finish_get_prf_org(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
-int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
-int neo_ssl_server_application_data_org(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_client_encrypt_org(const byte * orgmsg,byte* out,int* pout_size);
+int neo_ssl_server_decrypt_org(const byte * orgmsg,byte* out,int* pout_size);
 //END ECC_ORG_DEC
 }
 
@@ -236,8 +260,8 @@ ST_WC_ECC_FUNCTIONS _wc_ecc_functions = {
 	neo_ssl_client_key_exchange_export_premaster_key_org,
 	neo_ssl_client_certificate_verify_sign_org,
 	neo_ssl_do_finish_get_prf_org,
-	neo_ssl_client_application_data_org,
-	neo_ssl_server_application_data_org,
+	neo_ssl_client_encrypt_org,
+	neo_ssl_server_decrypt_org,
 //END SET_ECC_ORG_DEC
 
 
@@ -458,11 +482,11 @@ int neo_ssl_do_finish_get_prf_org(const char* label,const byte * hand_shake_hash
 {
 	return 0;
 }
-int neo_ssl_client_application_data_org(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_client_encrypt_org(const byte * orgmsg,byte* out,int* pout_size)
 {
 	return 0;
 }
-int neo_ssl_server_application_data_org(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_server_decrypt_org(const byte * orgmsg,byte* out,int* pout_size)
 {
 	return 0;
 }
@@ -972,16 +996,16 @@ int neo_ssl_do_finish_get_prf(const char* label,const byte * hand_shake_hash,byt
 	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_do_finish_get_prf(label,hand_shake_hash,prf,pprf_size);
 	return ret;
 }
-int neo_ssl_client_application_data(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_client_encrypt(const byte * orgmsg,byte* out,int* pout_size)
 {
-	PRT_TITLE prttitle("neo_ssl_client_application_data");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_application_data(orgmsg,out,pout_size);
+	PRT_TITLE prttitle("neo_ssl_client_encrypt");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_client_encrypt(orgmsg,out,pout_size);
 	return ret;
 }
-int neo_ssl_server_application_data(const byte * orgmsg,byte* out,int* pout_size)
+int neo_ssl_server_decrypt(const byte * orgmsg,byte* out,int* pout_size)
 {
-	PRT_TITLE prttitle("neo_ssl_server_application_data");
-	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_application_data(orgmsg,out,pout_size);
+	PRT_TITLE prttitle("neo_ssl_server_decrypt");
+	int ret = _cur_pwc_ecc_functions->pf_neo_ssl_server_decrypt(orgmsg,out,pout_size);
 	return ret;
 }
 //END ECC_BYPASS

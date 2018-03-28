@@ -86,8 +86,8 @@ typedef int( * PF_NEO_SSL_CLIENT_KEY_EXCHANGE)(byte* chip_peer_pubkey,int* ppub_
 typedef int( * PF_NEO_SSL_CLIENT_KEY_EXCHANGE_EXPORT_PREMASTER_KEY)(byte* pre_master_key,int* pkey_size);
 typedef int( * PF_NEO_SSL_CLIENT_CERTIFICATE_VERIFY_SIGN)(const byte * hash,byte* sign,int* psign_size);
 typedef int( * PF_NEO_SSL_DO_FINISH_GET_PRF)(const char* label,const byte * hand_shake_hash,byte* prf,int* pprf_size);
-typedef int( * PF_NEO_SSL_CLIENT_APPLICATION_DATA)(const byte * orgmsg,byte* out,int* pout_size);
-typedef int( * PF_NEO_SSL_SERVER_APPLICATION_DATA)(const byte * orgmsg,byte* out,int* pout_size);
+typedef int( * PF_NEO_SSL_CLIENT_ENCRYPT)(const byte * orgmsg,byte* out,int* pout_size);
+typedef int( * PF_NEO_SSL_SERVER_DECRYPT)(const byte * orgmsg,byte* out,int* pout_size);
 //END ECC_TYPEDEF
 
 
@@ -168,8 +168,8 @@ typedef struct _tagST_WC_ECC_FUNCTIONS{
 	PF_NEO_SSL_CLIENT_KEY_EXCHANGE_EXPORT_PREMASTER_KEY pf_neo_ssl_client_key_exchange_export_premaster_key;
 	PF_NEO_SSL_CLIENT_CERTIFICATE_VERIFY_SIGN pf_neo_ssl_client_certificate_verify_sign;
 	PF_NEO_SSL_DO_FINISH_GET_PRF pf_neo_ssl_do_finish_get_prf;
-	PF_NEO_SSL_CLIENT_APPLICATION_DATA pf_neo_ssl_client_application_data;
-	PF_NEO_SSL_SERVER_APPLICATION_DATA pf_neo_ssl_server_application_data;
+	PF_NEO_SSL_CLIENT_ENCRYPT pf_neo_ssl_client_encrypt;
+	PF_NEO_SSL_SERVER_DECRYPT pf_neo_ssl_server_decrypt;
 //END ECC_STR_COM
 }ST_WC_ECC_FUNCTIONS, *LPST_WC_ECC_FUNCTIONS;
 
