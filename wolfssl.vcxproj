@@ -149,7 +149,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>./;./IDE/WIN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WOLFSSL_LIB;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;HAVE_ECC;BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256;DEBUG_WOLFSSL;HAVE_COMP_KEY;NO_RSA;NO_MD4;NO_OLD_TLS;NO_DH;NO_DSA;NO_MD5;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WOLFSSL_LIB;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;HAVE_ECC;BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256;DEBUG_WOLFSSL;HAVE_COMP_KEY;NO_RSA;NO_MD4;NO_OLD_TLS;NO_DH;NO_DSA;NO_MD5;NO_PWDBASED;NO_RABBIT;NO_SHA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -284,7 +284,6 @@
     <ClCompile Include="src\keys.c" />
     <ClCompile Include="src\ssl.c" />
     <ClCompile Include="src\tls.c" />
-    <ClCompile Include="src\tls13.c" />
     <ClCompile Include="wolfcrypt\src\aes.c" />
     <ClCompile Include="wolfcrypt\src\arc4.c" />
     <ClCompile Include="wolfcrypt\src\asn.c" />
@@ -297,15 +296,10 @@
     <ClCompile Include="wolfcrypt\src\integer.c" />
     <ClCompile Include="wolfcrypt\src\logging.c" />
     <ClCompile Include="wolfcrypt\src\memory.c" />
-    <ClCompile Include="wolfcrypt\src\pkcs12.c" />
-    <ClCompile Include="wolfcrypt\src\pwdbased.c" />
     <ClCompile Include="wolfcrypt\src\rabbit.c" />
     <ClCompile Include="wolfcrypt\src\random.c" />
     <ClCompile Include="wolfcrypt\src\ripemd.c" />
-    <ClCompile Include="wolfcrypt\src\rsa.c" />
-    <ClCompile Include="wolfcrypt\src\sha.c" />
     <ClCompile Include="wolfcrypt\src\sha256.c" />
-    <ClCompile Include="wolfcrypt\src\sha512.c" />
     <ClCompile Include="wolfcrypt\src\signature.c" />
     <ClCompile Include="wolfcrypt\src\wc_encrypt.c" />
     <ClCompile Include="wolfcrypt\src\wc_port.c" />

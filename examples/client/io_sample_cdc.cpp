@@ -1,4 +1,5 @@
 #define NULL 0
+#include<stdlib.h>
 #include "CSerialRS232.h"
 #include "neoCoLib.h"
 #include "neoDebug.h"
