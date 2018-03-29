@@ -84,7 +84,9 @@ LPWRITE_IEB100_PACKET make_write_ieb100_packet(char rom_inst, char res_size, con
 	return lp_write_packet;
 }
 #define TIME_OUT 1000
-
+#ifndef min
+#define min(a,b)    (((a) < (b)) ? (a) : (b))
+#endif
 extern "C" int send_n_recv(const unsigned char*snd, int snd_size, unsigned char*recv, int* recv_size, void*etcparam)
 {
 
