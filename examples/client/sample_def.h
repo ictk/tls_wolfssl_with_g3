@@ -1,4 +1,5 @@
 
+
 typedef int (*PF_INIT_SAMPLE)(void *param);
 typedef int(*PF_WAKE_UP_AND_CONVERT_MODE)();
 typedef void(*PF_END_SAMPLE)();
