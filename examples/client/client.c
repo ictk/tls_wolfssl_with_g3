@@ -60,6 +60,8 @@ HAVE_ECC_KOBLITZ
 
 #include <examples/client/client.h>
 
+
+void csleep(unsigned int msec);
 #ifndef NO_WOLFSSL_CLIENT
 
 #ifdef WOLFSSL_ASYNC_CRYPT
@@ -2086,7 +2088,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 		ClientWrite(ssl, msg, msgSz);
 
 		ClientRead(ssl, reply, sizeof(reply)-1, 1);
-		Sleep(500);
+		csleep(500);
 
 	}
 
@@ -2456,7 +2458,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 		//test_g3_api();
 	
 	
-		FILE *fp = freopen("out.txt", "wb", stderr);
+		//FILE *fp = freopen("out.txt", "wb", stderr);
 
 		fprintf(stderr, "@@@@@@@@@@START@@@@@@@@@@\n");
 
