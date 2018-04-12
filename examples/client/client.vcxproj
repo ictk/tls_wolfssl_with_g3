@@ -161,13 +161,14 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../;../../IDE/WIN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;DEBUG_WOLFSSL;HAVE_ECC;BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256;HAVE_COMP_KEY;NO_OLD_TLS;NO_DH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <AdditionalDependencies>neoCoreStaticLibd.lib;Ws2_32.lib;g3_api_library.lib;%(AdditionalDependencies)</AdditionalDependencies>

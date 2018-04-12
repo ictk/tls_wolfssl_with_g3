@@ -60,6 +60,8 @@ HAVE_ECC_KOBLITZ
 
 #include <examples/client/client.h>
 
+
+void csleep(unsigned int msec);
 #ifndef NO_WOLFSSL_CLIENT
 
 #ifdef WOLFSSL_ASYNC_CRYPT
@@ -652,7 +654,7 @@ static void ClientRead(WOLFSSL* ssl, char* reply, int replyLen, int mustRead)
     } while (err == WC_PENDING_E || (mustRead && err == WOLFSSL_ERROR_WANT_READ));
     if (ret > 0) {
         reply[ret] = 0;
-        printf("%s\n", reply);
+        //printf("%s\n", reply);
     }
 }
 
@@ -790,14 +792,14 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 
 #ifndef WOLFSSL_ALT_TEST_STRINGS
     //char msg[] = "hello!!!! neo!0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789";   /* GET may make bigger */
-	char msg[] = "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF01";   /* GET may make bigger */
+	char msg[] = "IS THERE any NICE SOLUTION for SECURITY ????";   /* GET may make bigger */
     char resumeMsg[32] = "resuming wolfssl!";
 #else
     char msg[32] = "hello wolfssl!\n";
     char resumeMsg[32] = "resuming wolfssl!\n";
 #endif
 
-    char reply[80];
+    char reply[255];
     int  msgSz = (int)XSTRLEN(msg);
     int  resumeSz = (int)XSTRLEN(resumeMsg);
 
@@ -2080,13 +2082,15 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
         wolfSSL_update_keys(ssl);
 #endif
 
-	//while (1)
+	for (int i = 0; i < 10;i++)
 	{
-
+		
 		ClientWrite(ssl, msg, msgSz);
 
 		ClientRead(ssl, reply, sizeof(reply)-1, 1);
-		Sleep(500);
+		printf("SEND:%s \n", msg);
+		printf("RECV:%s \n\n", reply);
+		csleep(500);
 
 	}
 
@@ -2096,9 +2100,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
     if (postHandAuth)
         ClientWrite(ssl, msg, msgSz);
 #endif
-    if (sendGET) {  /* get html */
-        ClientRead(ssl, reply, sizeof(reply)-1, 0);
-    }
+  
 
 #ifndef NO_SESSION_CACHE
     if (resumeSession) {

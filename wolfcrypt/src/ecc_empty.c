@@ -523,226 +523,226 @@ ECC_PRIME239V3_OID,                                             /* oid sum    */
 
 
 //START DEC_ALL
-const char*  wc_ecc_get_name_org(int curve_id)
+const char*  wc_ecc_get_name(int curve_id)
 {
 	return 0;
 }
-int ecc_projective_add_point_org(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
+int ecc_projective_add_point(ecc_point* P,ecc_point* Q,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
 {
 	return 0;
 }
-int ecc_projective_dbl_point_org(ecc_point* P,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
+int ecc_projective_dbl_point(ecc_point* P,ecc_point* R,mp_int* a,mp_int* modulus,mp_digit mp)
 {
 	return 0;
 }
-int wc_ecc_make_key_org(WC_RNG* rng,int keysize,ecc_key* key)
+int wc_ecc_make_key(WC_RNG* rng,int keysize,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_make_key_ex_org(WC_RNG* rng,int keysize,ecc_key* key,int curve_id)
+int wc_ecc_make_key_ex(WC_RNG* rng,int keysize,ecc_key* key,int curve_id)
 {
 	return 0;
 }
-int wc_ecc_make_pub_org(ecc_key* key,ecc_point* pubOut)
+int wc_ecc_make_pub(ecc_key* key,ecc_point* pubOut)
 {
 	return 0;
 }
-int wc_ecc_check_key_org(ecc_key* key)
+int wc_ecc_check_key(ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_is_point_org(ecc_point* ecp,mp_int* a,mp_int* b,mp_int* prime)
+int wc_ecc_is_point(ecc_point* ecp,mp_int* a,mp_int* b,mp_int* prime)
 {
 	return 0;
 }
-int wc_ecc_shared_secret_org(ecc_key* private_key,ecc_key* public_key,byte* out,word32* outlen)
+int wc_ecc_shared_secret(ecc_key* private_key,ecc_key* public_key,byte* out,word32* outlen)
 {
 	return 0;
 }
-int wc_ecc_shared_secret_gen_org(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
+int wc_ecc_shared_secret_gen(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
 {
 	return 0;
 }
-int wc_ecc_shared_secret_ex_org(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
+int wc_ecc_shared_secret_ex(ecc_key* private_key,ecc_point* point,byte* out,word32 * outlen)
 {
 	return 0;
 }
-int wc_ecc_sign_hash_org(const byte* in,word32 inlen,byte* out,word32 * outlen,WC_RNG* rng,ecc_key* key)
+int wc_ecc_sign_hash(const byte* in,word32 inlen,byte* out,word32 * outlen,WC_RNG* rng,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_sign_hash_ex_org(const byte* in,word32 inlen,WC_RNG* rng,ecc_key* key,mp_int * r,mp_int * s)
+int wc_ecc_sign_hash_ex(const byte* in,word32 inlen,WC_RNG* rng,ecc_key* key,mp_int * r,mp_int * s)
 {
 	return 0;
 }
-int wc_ecc_verify_hash_org(const byte* sig,word32 siglen,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
+int wc_ecc_verify_hash(const byte* sig,word32 siglen,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_verify_hash_ex_org(mp_int * r,mp_int * s,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
+int wc_ecc_verify_hash_ex(mp_int * r,mp_int * s,const byte* hash,word32 hashlen,int* stat,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_init_org(ecc_key* key)
+int wc_ecc_init(ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_init_ex_org(ecc_key* key,void* heap,int devId)
+int wc_ecc_init_ex(ecc_key* key,void* heap,int devId)
 {
 	return 0;
 }
-void wc_ecc_free_org(ecc_key* key)
+void wc_ecc_free(ecc_key* key)
 {
 
 }
-int wc_ecc_set_flags_org(ecc_key* key,word32 flags)
+int wc_ecc_set_flags(ecc_key* key,word32 flags)
 {
 	return 0;
 }
-int wc_ecc_set_curve_org(ecc_key* key,int keysize,int curve_id)
+int wc_ecc_set_curve(ecc_key* key,int keysize,int curve_id)
 {
 	return 0;
 }
-int wc_ecc_is_valid_idx_org(int n)
+int wc_ecc_is_valid_idx(int n)
 {
 	return 0;
 }
-int wc_ecc_get_curve_idx_org(int curve_id)
+int wc_ecc_get_curve_idx(int curve_id)
 {
 	return 0;
 }
-int wc_ecc_get_curve_id_org(int curve_idx)
+int wc_ecc_get_curve_id(int curve_idx)
 {
 	return 0;
 }
-int wc_ecc_get_curve_size_from_id_org(int curve_id)
+int wc_ecc_get_curve_size_from_id(int curve_id)
 {
 	return 0;
 }
-int wc_ecc_get_curve_idx_from_name_org(const char* curveName)
+int wc_ecc_get_curve_idx_from_name(const char* curveName)
 {
 	return 0;
 }
-int wc_ecc_get_curve_size_from_name_org(const char* curveName)
+int wc_ecc_get_curve_size_from_name(const char* curveName)
 {
 	return 0;
 }
-int wc_ecc_get_curve_id_from_name_org(const char* curveName)
+int wc_ecc_get_curve_id_from_name(const char* curveName)
 {
 	return 0;
 }
-int wc_ecc_get_curve_id_from_params_org(int fieldSize,const byte* prime,word32 primeSz,const byte* Af,word32 AfSz,const byte* Bf,word32 BfSz,const byte* order,word32 orderSz,const byte* Gx,word32 GxSz,const byte* Gy,word32 GySz,int cofactor)
+int wc_ecc_get_curve_id_from_params(int fieldSize,const byte* prime,word32 primeSz,const byte* Af,word32 AfSz,const byte* Bf,word32 BfSz,const byte* order,word32 orderSz,const byte* Gx,word32 GxSz,const byte* Gy,word32 GySz,int cofactor)
 {
 	return 0;
 }
-ecc_point*  wc_ecc_new_point_org()
+ecc_point*  wc_ecc_new_point()
 {
 	return 0;
 }
-ecc_point*  wc_ecc_new_point_h_org(void* h)
+ecc_point*  wc_ecc_new_point_h(void* h)
 {
 	return 0;
 }
-void wc_ecc_del_point_org(ecc_point* p)
+void wc_ecc_del_point(ecc_point* p)
 {
 
 }
-void wc_ecc_del_point_h_org(ecc_point* p,void* h)
+void wc_ecc_del_point_h(ecc_point* p,void* h)
 {
 
 }
-int wc_ecc_copy_point_org(ecc_point* p,ecc_point * r)
+int wc_ecc_copy_point(ecc_point* p,ecc_point * r)
 {
 	return 0;
 }
-int wc_ecc_cmp_point_org(ecc_point* a,ecc_point * b)
+int wc_ecc_cmp_point(ecc_point* a,ecc_point * b)
 {
 	return 0;
 }
-int wc_ecc_point_is_at_infinity_org(ecc_point * p)
+int wc_ecc_point_is_at_infinity(ecc_point * p)
 {
 	return 0;
 }
-int wc_ecc_mulmod_org(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map)
+int wc_ecc_mulmod(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map)
 {
 	return 0;
 }
-int wc_ecc_mulmod_ex_org(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map,void* heap)
+int wc_ecc_mulmod_ex(mp_int* k,ecc_point * G,ecc_point * R,mp_int* a,mp_int* modulus,int map,void* heap)
 {
 	return 0;
 }
-int wc_ecc_export_x963_org(ecc_key* key,byte* out,word32* outLen)
+int wc_ecc_export_x963(ecc_key* key,byte* out,word32* outLen)
 {
 	return 0;
 }
-int wc_ecc_export_x963_ex_org(ecc_key* key,byte* out,word32* outLen,int compressed)
+int wc_ecc_export_x963_ex(ecc_key* key,byte* out,word32* outLen,int compressed)
 {
 	return 0;
 }
-int wc_ecc_import_x963_org(const byte* in,word32 inLen,ecc_key* key)
+int wc_ecc_import_x963(const byte* in,word32 inLen,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_import_x963_ex_org(const byte* in,word32 inLen,ecc_key* key,int curve_id)
+int wc_ecc_import_x963_ex(const byte* in,word32 inLen,ecc_key* key,int curve_id)
 {
 	return 0;
 }
-int wc_ecc_import_private_key_org(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key)
+int wc_ecc_import_private_key(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key)
 {
 	return 0;
 }
-int wc_ecc_import_private_key_ex_org(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key,int curve_id)
+int wc_ecc_import_private_key_ex(const byte* priv,word32 privSz,const byte* pub,word32 pubSz,ecc_key* key,int curve_id)
 {
 	return 0;
 }
-int wc_ecc_rs_to_sig_org(const char* r,const char* s,byte* out,word32* outlen)
+int wc_ecc_rs_to_sig(const char* r,const char* s,byte* out,word32* outlen)
 {
 	return 0;
 }
-int wc_ecc_sig_to_rs_org(const byte* sig,word32 sigLen,byte* r,word32* rLen,byte* s,word32* sLen)
+int wc_ecc_sig_to_rs(const byte* sig,word32 sigLen,byte* r,word32* rLen,byte* s,word32* sLen)
 {
 	return 0;
 }
-int wc_ecc_import_raw_org(ecc_key* key,const char* qx,const char* qy,const char* d,const char* curveName)
+int wc_ecc_import_raw(ecc_key* key,const char* qx,const char* qy,const char* d,const char* curveName)
 {
 	return 0;
 }
-int wc_ecc_import_raw_ex_org(ecc_key* key,const char* qx,const char* qy,const char* d,int curve_id)
+int wc_ecc_import_raw_ex(ecc_key* key,const char* qx,const char* qy,const char* d,int curve_id)
 {
 	return 0;
 }
-int wc_ecc_export_private_only_org(ecc_key* key,byte* out,word32* outLen)
+int wc_ecc_export_private_only(ecc_key* key,byte* out,word32* outLen)
 {
 	return 0;
 }
-int wc_ecc_export_public_raw_org(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen)
+int wc_ecc_export_public_raw(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen)
 {
 	return 0;
 }
-int wc_ecc_export_private_raw_org(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen,byte* d,word32* dLen)
+int wc_ecc_export_private_raw(ecc_key* key,byte* qx,word32* qxLen,byte* qy,word32* qyLen,byte* d,word32* dLen)
 {
 	return 0;
 }
-int wc_ecc_export_point_der_org(const int curve_idx,ecc_point* point,byte* out,word32* outLen)
+int wc_ecc_export_point_der(const int curve_idx,ecc_point* point,byte* out,word32* outLen)
 {
 	return 0;
 }
-int wc_ecc_import_point_der_org(byte* in,word32 inLen,const int curve_idx,ecc_point* point)
+int wc_ecc_import_point_der(byte* in,word32 inLen,const int curve_idx,ecc_point* point)
 {
 	return 0;
 }
-int wc_ecc_sig_size_org(ecc_key* key)
+int wc_ecc_sig_size(ecc_key* key)
 {
 	return 0;
 }
 //END DEC_ALL
 
-int wc_ecc_size_org(ecc_key*  key)
+int wc_ecc_size(ecc_key*  key)
 {
 	return 28;
 }
 
-int wc_ecc_get_oid_org(word32 oidSum, const byte* *  oid, word32*  oidSz)
+int wc_ecc_get_oid(word32 oidSum, const byte* *  oid, word32*  oidSz)
 {
 	if(oidSz) *oidSz = 10;
 	return 0;

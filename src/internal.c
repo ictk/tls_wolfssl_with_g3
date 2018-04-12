@@ -11994,6 +11994,8 @@ int ProcessReply(WOLFSSL* ssl)
                                     ssl->curSize, ssl->curRL.type,
                                     &ssl->keys.padSz);
 					ret = neo_api_verify_mac(ssl,ret);
+
+					neo_api_get_padsize(&ssl->keys.padSz);
                 #ifdef WOLFSSL_ASYNC_CRYPT
                     if (ret == WC_PENDING_E)
                         return ret;
@@ -19625,7 +19627,7 @@ int SendClientKeyExchange(WOLFSSL* ssl)
                     ret = tmpRet;   /* save WANT_WRITE unless more serious */
                 }
 				
-				neo_api_change_iv(ssl->keys.client_write_IV, ssl->keys.server_write_IV);
+				//neo_api_change_iv(ssl->keys.client_write_IV, ssl->keys.server_write_IV);
                 ssl->options.clientState = CLIENT_KEYEXCHANGE_COMPLETE;
             }
 			

@@ -15,6 +15,8 @@ const unsigned char passwd[] = {
 };
 
 
+
+
 extern "C" void init_user_ecc(const char * st_com);
 ST_WC_ECC_FUNCTIONS _wc_ecc_functions_org;
 LPST_WC_ECC_FUNCTIONS _lpwc = &_wc_ecc_functions_org;
@@ -84,7 +86,8 @@ void neo_api_change_4_key_exchange_new(byte* out,word32 outLen);
 void neo_api_set_inner_header_new(const byte* innerheader,word32 innerheader_size);
 void neo_api_set_sc_random_new(const byte* client_random,const byte* server_random);
 void neo_api_change_iv_new(byte* client_iv,byte* server_iv);
-int neo_api_verify_mac_new(WOLFSSL* ssl,int ssl_ret);
+int neo_api_verify_mac_new(int ssl_ret);
+int neo_api_get_padsize_new(int * pad_size);
 int neo_ssl_init_new(WOLFSSL* ssl);
 int neo_ssl_import_cert_new(int cert_type,byte* cert,int* pcert_size);
 int neo_ssl_client_hello_new(const byte * random);
@@ -103,7 +106,7 @@ int neo_ssl_server_decrypt_new(const byte * orgmsg,byte* out,int* pout_size);
 //END DEC_NEW
 
 //int neo_api_verify_mac_new(int ssl_ret);
-int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret);
+//int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret);
 //#define USE_ORG_DEC
 
 
@@ -172,12 +175,12 @@ void init_user_ecc(const char * st_com)
 
 	//wc_ecc_functions.pf_neo_api_change_4_key_exchange = neo_api_change_4_key_exchange_new;
 	
+
 	wc_ecc_functions.pf_neo_api_set_inner_header = neo_api_set_inner_header_new;
-	wc_ecc_functions.pf_neo_api_set_sc_random = neo_api_set_sc_random_new;
-	wc_ecc_functions.pf_neo_api_change_iv = neo_api_change_iv_new;
 	wc_ecc_functions.pf_neo_api_verify_mac = neo_api_verify_mac_new;
+	wc_ecc_functions.pf_neo_api_get_padsize = neo_api_get_padsize_new;
+
 	//START SET_EXTERN_PF
-	wc_ecc_functions.pf_neo_ssl_init = neo_ssl_init_new;
 	wc_ecc_functions.pf_neo_ssl_import_cert = neo_ssl_import_cert_new;
 	wc_ecc_functions.pf_neo_ssl_client_hello = neo_ssl_client_hello_new;
 	wc_ecc_functions.pf_neo_ssl_server_hello = neo_ssl_server_hello_new;
@@ -258,11 +261,13 @@ int wc_AesCbcEncrypt_new(Aes*  aes, byte*  out, const byte*  in, word32 sz)
 	int paddsize = in[sz - 1];
 	ST_DATA_16 randome = {0,};
 	print_bin("real in in ", in + 16, sz - 16 - 1 - paddsize - 32);
+
 	int reta = g3api_tls_mac_encrypt((ST_TLS_INTER_HEADER_WITHOUT_SIZE*)_inner, (ST_IV*)_st_iv.client_iv, 
 		(ST_DATA_16*)&randome, in + 16, sz - 16 - 1 - paddsize - 32, ptempbuff, &outsize);
 	
-	print_bin("g3api_tls_mac_encrypt ptempbuff key", ptempbuff, outsize);
+	//print_bin("g3api_tls_mac_encrypt out", ptempbuff, outsize);
 	memcpy(out, ptempbuff, outsize);
+	print_bin("g3api_tls_mac_encrypt out", out, outsize);
 
 	memcpy(&_st_iv.client_iv, &ptempbuff[outsize-1-16],16);
 	return reta;
@@ -356,17 +361,28 @@ void neo_api_change_iv_new(byte*    client_iv, byte*    server_iv)
 	
 }
 
+//
+//int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret)
+//{
+//	fprintf(stderr, "ssl->keys.padSz:%d\n", ssl->keys.padSz);
+//
+//#ifdef USE_ORG_DEC
+//	return ssl_ret;
+//#endif
+//	ssl->keys.padSz = 0x20+_pad_size+1;
+//	return _ret_verify;
+//}
 
-int neo_api_verify_mac_new(WOLFSSL* ssl, int ssl_ret)
+int neo_api_verify_mac_new(int ssl_ret)
 {
-	fprintf(stderr, "ssl->keys.padSz:%d\n", ssl->keys.padSz);
-
-#ifdef USE_ORG_DEC
-	return ssl_ret;
-#endif
-	ssl->keys.padSz = 0x20+_pad_size+1;
 	return _ret_verify;
 }
+int neo_api_get_padsize_new(int * pad_size)
+{
+	*pad_size = 0x20 + _pad_size + 1;;
+	return 0;
+}
+
 
 int neo_ssl_client_hello_new(const byte * random)
 {
@@ -642,9 +658,9 @@ int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
 	return 0;
 }
 //START DEF_NEW_EMPTY
-int neo_ssl_init_new(WOLFSSL* ssl)
+void neo_api_set_inner_header__new(const byte* innerheader,word32 innerheader_size)
 {
-	return 0;
+
 }
 int neo_ssl_client_certificate_new(const byte * hash_cert,byte * sign_asn1,int * psign_size)
 {
