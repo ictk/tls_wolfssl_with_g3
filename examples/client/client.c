@@ -807,8 +807,9 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
     char* host   = (char*)wolfSSLIP;
     const char* domain = "localhost";  /* can't default to www.wolfssl.com
                                           because can't tell if we're really
-                                          going there to detect old chacha-poly
+												  going there to detect old chacha-poly
                                        */
+	int i = 0;
 	const char * uart_port = "\\\\.\\COM10";
     int    ch;
     int    version = CLIENT_INVALID_VERSION;
@@ -2082,7 +2083,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
         wolfSSL_update_keys(ssl);
 #endif
 
-	for (int i = 0; i < 10;i++)
+	for ( i = 0; i < 10;i++)
 	{
 		
 		ClientWrite(ssl, msg, msgSz);
