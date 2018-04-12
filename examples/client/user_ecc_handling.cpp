@@ -147,10 +147,19 @@ void swap_bytes(void* value, int size)
 
 SAMPLE_FUNCTIONS _cursamplefunction;
 void get_functions_ieb100cdc(LPSAMPLE_FUNCTIONS lpsamplefunction);
+void get_functions_i2c(LPSAMPLE_FUNCTIONS lpsamplefunction);
+
+
 void init_user_ecc(const char * st_com)
 {
-
+	//NEO_START;
+#ifndef __USEI2C__
 	get_functions_ieb100cdc(&_cursamplefunction);
+#else
+
+	get_functions_i2c(&_cursamplefunction);
+
+#endif
 
 	_cursamplefunction.init_sample((void*)st_com);
 	_cursamplefunction.wake_up_and_convert_mode();

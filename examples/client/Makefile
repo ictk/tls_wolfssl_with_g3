@@ -42,13 +42,13 @@ OUT_EXE = $(OUT_DIR)/$(TITLE)
 INC = -I../../ -I$(HOME)/project/include/g3_api_lib -I$(HOME)/project/include/neo_wolf_ssl -Ineo_c_lib -I.
 #example : -IAAA -IBBB
 
-CDEFINE=-D_USE_UTF8_ -DNEOUSEMBCS -DNEODEBUG -DNEO_STATIC -DLSA_EXPORTS_NOUSE  -DCYASSL_USER_SETTINGS -DDEBUG_WOLFSSL -DHAVE_ECC -DBUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 -DHAVE_COMP_KEY -DNO_OLD_TLS -DNO_DH
+CDEFINE=-D_USE_UTF8_ -DNEOUSEMBCS -DNEODEBUG -DNEO_STATIC -DLSA_EXPORTS_NOUSE  -DCYASSL_USER_SETTINGS -DDEBUG_WOLFSSL -DHAVE_ECC -DBUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 -DHAVE_COMP_KEY -DNO_OLD_TLS -DNO_DH -D__USEI2C__
 #example -DBBBB -DCCCCCC
 
 CFLAGS=-Wall -O2 -fPIC -Wl,-Bsymbolic -std=gnu++11
 #example -Wall -O2 -fPIC -Wl,-Bsymbolic -std=gnu++11
 
-LDFLAGS = -fPIC  -L$(HOME)/project/lib  -ldl -lneo_c_lib -lneo_wolf_ssl -lg3_api_lib
+LDFLAGS = -fPIC  -L$(HOME)/project/lib  -ldl -lneo_c_lib -lneo_wolf_ssl -lg3_api_lib -lwiringPi
 #example -shared -fPIC  -L../lib/gnu -ldl
 
 CFLAG_ALL = $(INC) $(CDEFINE) $(CFLAGS)
@@ -74,7 +74,7 @@ DEF_RELEASE_INC= ../include
 
 OBJ_SET___C =  $(OBJDIR___C)/client.o 
 
-OBJ_SET___CPP =  $(OBJDIR___CPP)/io_sample_cdc.o  $(OBJDIR___CPP)/user_ecc_handling.o  $(OBJDIR___CPP)/util.o 
+OBJ_SET___CPP =  $(OBJDIR___CPP)/io_sample_cdc.o  $(OBJDIR___CPP)/io_sample_i2c.o  $(OBJDIR___CPP)/user_ecc_handling.o  $(OBJDIR___CPP)/util.o 
 
 #example OBJ_SET_OBJ0 =  $(OBJDIR)/CSerialRS232.o  $(OBJDIR)/EtcModule.o  $(OBJDIR)/MemoryNode.o  $(OBJDIR)/NeoCoLib.o 
 
