@@ -29,8 +29,8 @@
 	#define BUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
 	#define HAVE_ECC
 	#define DEBUG_WOLFSSL
-	#define NO_OLD_TLS
-	#define NO_DH
+	//#define NO_OLD_TLS
+	//#define NO_DH
 	
 
 
@@ -47,15 +47,15 @@
         #define WOLFSSL_SNIFFER
         #define HAVE_TLS_EXTENSIONS
         #define HAVE_SECURE_RENEGOTIATION
-		#define NO_RSA
-		#define NO_MD4
+		//#define NO_RSA
+		//#define NO_MD4
 		#define NO_DSA
-		#define NO_MD5
+		//#define NO_MD5
 		#define NO_PWDBASED
-		#define NO_RABBIT
-		#define NO_SHA
-		#define NO_RC4
-		#define NO_DES3
+		//#define NO_RABBIT
+		//#define NO_SHA
+		//#define NO_RC4
+		//#define NO_DES3
 
 
     #else
