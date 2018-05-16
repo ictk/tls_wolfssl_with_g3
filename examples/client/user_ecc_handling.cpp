@@ -213,7 +213,11 @@ void init_user_ecc(const char * st_com)
 	
 	unsigned char buff[32];
 	int res_chall_size = 32;
+#ifndef __V080__
+	g3api_get_challenge(32, buff, &res_chall_size);
+#else
 	g3api_get_chellange(32, buff, &res_chall_size);
+#endif
 	print_bin("g3api_get_chellange", buff, res_chall_size);
 
 	dword_reverse(buff, res_chall_size);
@@ -630,7 +634,11 @@ int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
 	}
 	
 	ST_RW_DATA st_rwdata;
-	g3api_read_key_value(0, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, &st_rwdata, sizeof(ST_RW_DATA));
+#ifndef __V080__
+	g3api_read_key_value(0, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, NULL, 0 ,& st_rwdata, sizeof(ST_RW_DATA));
+#else
+	g3api_read_key_value(0, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT,  &st_rwdata, sizeof(ST_RW_DATA));
+#endif
 	print_bin("neo_ssl_import_cert_new st_rwdata", &st_rwdata, sizeof(ST_RW_DATA));
 	CERTINFO *certinfo = (CERTINFO *)&st_rwdata;
 
@@ -654,7 +662,11 @@ int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
 		ST_RW_DATA st_temptdata;
 		int realdata = min(remain_size, 32);
 		if (realdata <= 0) break;
-		g3api_read_key_value(pcertinfo->stindex+i, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, &st_temptdata, sizeof(ST_RW_DATA));
+#ifndef __V080__
+		g3api_read_key_value(pcertinfo->stindex + i, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT,  NULL, 0 ,& st_temptdata, sizeof(ST_RW_DATA));
+#else
+		g3api_read_key_value(pcertinfo->stindex + i, EN_AREA_TYPE::DATA_AREA_1, EN_RW_INST_OPTION::PLAIN_TEXT, &st_temptdata, sizeof(ST_RW_DATA));
+#endif
 		memcpy(pbytre, &st_temptdata, realdata);
 		print_bin("neo_ssl_import_cert_new st_temptdata", &st_temptdata, sizeof(ST_RW_DATA));
 		pbytre += 32;
