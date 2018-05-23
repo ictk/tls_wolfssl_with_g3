@@ -148,18 +148,26 @@ void swap_bytes(void* value, int size)
 SAMPLE_FUNCTIONS _cursamplefunction;
 void get_functions_ieb100cdc(LPSAMPLE_FUNCTIONS lpsamplefunction);
 void get_functions_i2c(LPSAMPLE_FUNCTIONS lpsamplefunction);
+void get_functions_ft4222(LPSAMPLE_FUNCTIONS lpsamplefunction);
+
+
+#ifdef __USE_CDC__
+#define GET_FUCNTION get_functions_ieb100cdc
+#elif  __USE_FT4222__
+
+#define GET_FUCNTION get_functions_ft4222
+#elif __USE_I2CDEV__
+#define GET_FUCNTION get_functions_i2c
+#endif
+
+
 
 
 void init_user_ecc(const char * st_com)
 {
 	//NEO_START;
-#ifndef __USEI2C__
-	get_functions_ieb100cdc(&_cursamplefunction);
-#else
 
-	get_functions_i2c(&_cursamplefunction);
-
-#endif
+	GET_FUCNTION(&_cursamplefunction);
 
 	_cursamplefunction.init_sample((void*)st_com);
 	_cursamplefunction.wake_up_and_convert_mode();
@@ -623,8 +631,10 @@ int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
 	{
 	case CERT_TYPE:
 		cert_index = 1;
+		fprintf(stderr, "CERT_TYPE");
 		break;
 	case CA_TYPE:
+		fprintf(stderr, "CA_TYPE");
 		cert_index = 0;
 		break;
 
@@ -672,6 +682,7 @@ int neo_ssl_import_cert_new(int cert_type, byte* cert, int* pcert_size)
 		pbytre += 32;
 		remain_size -=32 ;
 	}
+
 	print_bin("neo_ssl_import_cert_new cert", cert, pcertinfo->size);
 
 

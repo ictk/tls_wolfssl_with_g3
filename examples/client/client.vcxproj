@@ -119,7 +119,7 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>..\lib\win32;D:\PROJECT\GIANT_3\SRC\g3_api\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\lib\win32;D:\PROJECT\GIANT_3\SRC\g3_api\Debug;./;$(LibraryPath)</LibraryPath>
     <IncludePath>D:\PROJECT\toolrnd\BASE\include;D:\PROJECT\GIANT_3\SRC\g3_api\console_g3_api;D:\PROJECT\GIANT_3\SRC\g3_api\g3_api_library\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
@@ -161,7 +161,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../;../../IDE/WIN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;__USE_FT4222__;__USE_CDC__0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -171,7 +171,7 @@
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>neoCoreStaticLibd.lib;Ws2_32.lib;g3_api_library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>neoCoreStaticLibd.lib;Ws2_32.lib;g3_api_library.lib;LibFT4222.lib;ftd2xx.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -325,6 +325,7 @@
     <ClCompile Include="client.c" />
     <ClCompile Include="ecc_test.cpp" />
     <ClCompile Include="io_sample_cdc.cpp" />
+    <ClCompile Include="io_sample_ft4222.cpp" />
     <ClCompile Include="user_ecc_handling.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
