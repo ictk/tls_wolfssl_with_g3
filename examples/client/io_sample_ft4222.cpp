@@ -558,13 +558,14 @@ extern "C" int send_n_recv_4_ft4222(const unsigned char*snd, int snd_size, unsig
 
 
 	}
-	if (FT4222_OK != ft4222Status)
+	if (FT4222_OK != ft4222Status || recv[0] == 0xff)
 	{
 		printf("FT4222_I2CMaster_Read failed (error %d)\n",
 			(int)ft4222Status);
 		success = -1;
 		goto exit;
 	}
+
 
 	*recv_size = bytesRead;
 	//print_value("recv", recv, 255);

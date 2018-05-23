@@ -251,7 +251,7 @@ int verify_hash_with_extern_pubkey_with_g3(const ST_ECC_PUBLIC * pubkey, const b
 	int err = make_sign_asn1_to_sign_64(sig, siglen, sign64);
 	print_bin("sign64 ", sign64, 64);
 	ST_DATA_32 st_data_32;
-	g3api_set_extern_public_key(pubkey, sizeof(ST_ECC_PUBLIC), &st_data_32);
+	int ret = g3api_set_extern_public_key(pubkey, sizeof(ST_ECC_PUBLIC), &st_data_32);
 
 
 	int ret_api = g3api_verify(KEY_SECTOR_DEVICE_PUB_KEY, EN_VERIFY_OPTION::VERYFY_EXT_PUB_ECDSA_EXT_SHA256, hash, 32, sign64, 64);
