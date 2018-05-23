@@ -512,8 +512,8 @@ extern "C" int send_n_recv_4_ft4222(const unsigned char*snd, int snd_size, unsig
 	uint16               bytesToWrite;
 	uint16               bytesWritten = 0;
 	char                *writeBuffer;
-	uint8              pageBuffer[255];
-	uint8              newContent[255];
+	//uint8              pageBuffer[255];
+	//uint8              newContent[255];
 
 	int                  page;
 	
@@ -551,7 +551,7 @@ extern "C" int send_n_recv_4_ft4222(const unsigned char*snd, int snd_size, unsig
 			break;
 		}
 
-		cur_sleep(10);
+		cur_sleep(100);
 			
 		//if (recv[0] == 0xff &&   
 		//cur_sleep(10);
