@@ -4,7 +4,8 @@
 #include "wolfssl/debug_util.h"
 #include "wolfssl/user_bypass.h"
 #include "sample_def.h"
-#include"g3_api.h"
+#include "g3_api.h"
+#include "g3_io_lib.h"
 
 
 #define KEY_SECTOR_DEVICE_PUB_KEY 8
@@ -145,10 +146,10 @@ void swap_bytes(void* value, int size)
 
 }
 
-SAMPLE_FUNCTIONS _cursamplefunction;
-void get_functions_ieb100cdc(LPSAMPLE_FUNCTIONS lpsamplefunction);
-void get_functions_i2c(LPSAMPLE_FUNCTIONS lpsamplefunction);
-void get_functions_ft4222(LPSAMPLE_FUNCTIONS lpsamplefunction);
+ST_G3_IO_LIB_FUNCTIONS _cursamplefunction;
+//void get_functions_ieb100cdc(LPSAMPLE_FUNCTIONS lpsamplefunction);
+//void get_functions_i2c(LPSAMPLE_FUNCTIONS lpsamplefunction);
+//void get_functions_ft4222(LPSAMPLE_FUNCTIONS lpsamplefunction);
 
 
 #ifdef __USE_CDC__
@@ -167,7 +168,11 @@ void init_user_ecc(const char * st_com)
 {
 	//NEO_START;
 
-	GET_FUCNTION(&_cursamplefunction);
+//	GET_FUCNTION(&_cursamplefunction);
+
+	//PF_G3_IO_LIB_FUNCTIONS samplefunction;
+	//get_functions(G3_IO_IEVB100_FT4222, &samplefunction);
+	get_functions(G3_IO_IEVB100_FT4222, &_cursamplefunction);
 
 	_cursamplefunction.init_sample((void*)st_com);
 	_cursamplefunction.wake_up_and_convert_mode();

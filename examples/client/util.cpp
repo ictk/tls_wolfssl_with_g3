@@ -1,11 +1,11 @@
 #include "neoCoLib.h"
-
+#include "stdio.h"
 extern "C" void csleep(unsigned int msec)
 {
 	NCL::Sleep(msec);
 }
 
-extern FILE * _fp;
+FILE * _fp = stderr;
 
 void print_result(const char * title,int ret)
 {

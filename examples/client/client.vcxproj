@@ -119,8 +119,8 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>..\lib\win32;D:\PROJECT\GIANT_3\SRC\g3_api\Debug;./;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\PROJECT\toolrnd\BASE\include;D:\PROJECT\GIANT_3\SRC\g3_api\console_g3_api;D:\PROJECT\GIANT_3\SRC\g3_api\g3_api_library\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\publish;../lib/win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>../publish/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -171,7 +171,7 @@
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>neoCoreStaticLibd.lib;Ws2_32.lib;g3_api_library.lib;LibFT4222.lib;ftd2xx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>neo_c_libd.lib;Ws2_32.lib;g3_api_library.lib;LibFT4222.lib;ftd2xx.lib;g3_io_lib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -324,8 +324,6 @@
   <ItemGroup>
     <ClCompile Include="client.c" />
     <ClCompile Include="ecc_test.cpp" />
-    <ClCompile Include="io_sample_cdc.cpp" />
-    <ClCompile Include="io_sample_ft4222.cpp" />
     <ClCompile Include="user_ecc_handling.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
