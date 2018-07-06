@@ -63,6 +63,8 @@ bin/
 old/
 temp/
 backup/
+Debug/
+wolfcrypt/user-crypto/
 /adts/mapScriptPerScenarioAndMethodLine.json
 /dlltest/libeay32.dll
 /businfo/json/station.json
