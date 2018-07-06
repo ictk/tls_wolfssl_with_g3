@@ -2083,6 +2083,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
         wolfSSL_update_keys(ssl);
 #endif
 
+//ICTK MARK
 	for ( i = 0; i < 10;i++)
 	{
 		
@@ -2095,7 +2096,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 
 	}
 
-    
+//END ICTK MARK    
 
 #if defined(WOLFSSL_TLS13) && defined(WOLFSSL_POST_HANDSHAKE_AUTH)
     if (postHandAuth)
