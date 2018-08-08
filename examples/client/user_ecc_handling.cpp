@@ -1,6 +1,6 @@
 #include <wolfssl/wolfcrypt/ecc.h>
-#include "neoDebug.h"
-#include "neoCoLib.h"
+//#include "neoDebug.h"
+//#include "neoCoLib.h"
 #include "wolfssl/debug_util.h"
 #include "wolfssl/user_bypass.h"
 #include "sample_def.h"
