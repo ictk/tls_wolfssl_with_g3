@@ -7,26 +7,33 @@
 #------------------------------------------------------------------------#
 # main definition
 #------------------------------------------------------------------------#
+#CC = gcc
+#CXX = g++
+#AR = ar
+
 CC = gcc
 CXX = g++
 AR = ar
+
+
 LD = $(CXX)
 
 TITLE=neo_wolf_ssl
 
-
+PLATFORM=
 
 #------------------------------------------------------------------------#
 # directory definition
 #------------------------------------------------------------------------#
-OUT_DIR = ../lib/gnu
+OUT_DIR = examples/reflib/gnu-armhf
 #example : ../lib/gnu
-
+REF_DIR = 
 DST_DIR = $(HOME)/project
 #example : /usr/local
 
 DST_DIR_LIB = $(DST_DIR)/lib
-DST_DIR_INC = $(DST_DIR)/include/$(TITLE)
+DST_DIR_INC = $(DST_DIR)/include
+#/$(TITLE)
 
 #------------------------------------------------------------------------#
 # result definition

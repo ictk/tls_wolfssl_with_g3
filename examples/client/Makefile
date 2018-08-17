@@ -1,32 +1,39 @@
 
 ###############################################
-# neo_wolf_ssl
+# console_neo_wolf_ssl
 ###############################################
 
 
 #------------------------------------------------------------------------#
 # main definition
 #------------------------------------------------------------------------#
+#CC = gcc
+#CXX = g++
+#AR = ar
+
 CC = gcc
 CXX = g++
 AR = ar
+
+
 LD = $(CXX)
 
-TITLE=neo_wolf_ssl
+TITLE=console_neo_wolf_ssl
 
-
+PLATFORM=gnu-armhf
 
 #------------------------------------------------------------------------#
 # directory definition
 #------------------------------------------------------------------------#
 OUT_DIR = ../../bin
 #example : ../lib/gnu
-
+REF_DIR = ../reflib/$(PLATFORM)
 DST_DIR = /usr/local
 #example : /usr/local
 
 DST_DIR_LIB = $(DST_DIR)/lib
-DST_DIR_INC = $(DST_DIR)/include/$(TITLE)
+DST_DIR_INC = $(DST_DIR)/include
+#/$(TITLE)
 
 #------------------------------------------------------------------------#
 # result definition
@@ -39,7 +46,7 @@ OUT_EXE = $(OUT_DIR)/$(TITLE)
 #------------------------------------------------------------------------#
 # flag definition
 #------------------------------------------------------------------------#
-INC = -I../../ -I../publish/include -I$(HOME)/project/include/neo_wolf_ssl -Ineo_c_lib -I.
+INC = -I../../  -I. -I../reflib/include
 #example : -IAAA -IBBB
 
 CDEFINE=-D_DEFNEODEF_ -DNEODEBUG  -DCYASSL_USER_SETTINGS -DDEBUG_WOLFSSL -DHAVE_ECC -DBUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 -DHAVE_COMP_KEY -DNO_OLD_TLS -DNO_DH -D__USEI2C__0 -D__USE_FT4222__
@@ -48,7 +55,7 @@ CDEFINE=-D_DEFNEODEF_ -DNEODEBUG  -DCYASSL_USER_SETTINGS -DDEBUG_WOLFSSL -DHAVE_
 CFLAGS=-Wall -O2 -fPIC -Wl,-Bsymbolic -std=gnu++11 -g -ggdb
 #example -Wall -O2 -fPIC -Wl,-Bsymbolic -std=gnu++11
 
-LDFLAGS = -fPIC  -L$(HOME)/project/lib  -ldl -lneo_c_lib -lneo_wolf_ssl -lg3_api_lib -lg3_io_lib -lwiringPi -lft4222 -g -ggdb
+LDFLAGS = -fPIC  -L$(REF_DIR)  -ldl -lneo_c_lib -lneo_wolf_ssl -lg3_api_lib -lg3_io_lib -lwiringPi -lft4222 -g -ggdb
 #example -shared -fPIC  -L../lib/gnu -ldl
 
 CFLAG_ALL = $(INC) $(CDEFINE) $(CFLAGS)
