@@ -19,7 +19,7 @@ AR = ar
 LD = $(CXX)
 
 TITLE=neo_wolf_ssl
-
+BIN_NAME=neo_wolf_ssl
 PLATFORM=
 
 #------------------------------------------------------------------------#
@@ -38,9 +38,9 @@ DST_DIR_INC = $(DST_DIR)/include
 #------------------------------------------------------------------------#
 # result definition
 #------------------------------------------------------------------------#
-OUT_STATIC_LIB = $(OUT_DIR)/lib$(TITLE).a
-OUT_SHARED_LIB = $(OUT_DIR)/lib$(TITLE).so
-OUT_EXE = $(OUT_DIR)/$(TITLE)
+OUT_STATIC_LIB = $(OUT_DIR)/lib$(BIN_NAME).a
+OUT_SHARED_LIB = $(OUT_DIR)/lib$(BIN_NAME).so
+OUT_EXE = $(OUT_DIR)/$(BIN_NAME)
 
 
 #------------------------------------------------------------------------#
