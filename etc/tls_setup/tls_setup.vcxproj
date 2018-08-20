@@ -42,8 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>../reflib/include;$(IncludePath)</IncludePath>
-    <LibraryPath>../reflib/win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../reflib/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../../reflib/win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

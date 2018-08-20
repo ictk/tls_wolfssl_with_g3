@@ -120,7 +120,7 @@
     <IntDir>$(Configuration)\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>../reflib/win32;$(LibraryPath)</LibraryPath>
-    <IncludePath>../reflib/include;$(IncludePath)</IncludePath>
+    <IncludePath>./;../libneo_wolf_ssl/IDE/WIN;../reflib/include;../libneo_wolf_ssl;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -160,7 +160,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../;../../IDE/WIN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WOLFSSL_USER_SETTINGS;CYASSL_USER_SETTINGS;__USE_FT4222__;__USE_CDC__0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -171,7 +171,7 @@
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>neo_c_libd.lib;Ws2_32.lib;g3_api_libraryd.lib;LibFT4222.lib;ftd2xx.lib;g3_io_libd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wolfssld.lib;neo_c_libd.lib;Ws2_32.lib;g3_api_libraryd.lib;LibFT4222.lib;ftd2xx.lib;g3_io_libd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -334,7 +334,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\IDE\WIN\user_settings.h" />
+    <ClInclude Include="..\libneo_wolf_ssl\IDE\WIN\user_settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -185,7 +185,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\IDE\WIN\user_settings.h"
+				RelativePath="..\libneo_wolf_ssl\IDE\WIN\user_settings.h"
 				>
 			</File>
 		</Filter>
