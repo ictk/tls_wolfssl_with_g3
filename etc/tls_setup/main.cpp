@@ -42,10 +42,6 @@ int main(int argc, char* argv[])
 	NEO_START;
 
 	NEO_TITLE(main);
-	if (argc < 2){
-		printf("\n1st argument must be serial port name\n");
-		return -1;
-	}
 	const char *pchar = g3api_get_lib_version();
 
 

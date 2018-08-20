@@ -1,0 +1,14 @@
+server start
+port: 8883
+cert_path: ./certs
+root_ca: ./certs/ca.crt
+cert: ./certs/server.crt
+key: ./certs/server.key
+cert_request: 2
+server bindingg
+Traceback (most recent call last):
+  File "./tls_server.py", line 100, in <module>
+    main()
+  File "./tls_server.py", line 62, in main
+    bindsocket.bind(('0.0.0.0', port))
+OSError: [Errno 98] Address already in use
