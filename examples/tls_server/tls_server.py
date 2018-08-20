@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import socket, ssl, pprint
 import argparse
 #from neolib.hexstr_util import *

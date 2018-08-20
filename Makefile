@@ -20,12 +20,12 @@ LD = $(CXX)
 
 TITLE=neo_wolf_ssl
 BIN_NAME=neo_wolf_ssl
-PLATFORM=
+PLATFORM=gnu-armhf
 
 #------------------------------------------------------------------------#
 # directory definition
 #------------------------------------------------------------------------#
-OUT_DIR = examples/reflib/gnu-armhf
+OUT_DIR = examples/reflib/$(PLATFORM)
 #example : ../lib/gnu
 REF_DIR = 
 DST_DIR = $(HOME)/project
