@@ -3,12 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wolfssl", "wolfssl.vcxproj", "{73973223-5EE8-41CA-8E88-1D60E89A237B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wolfssl", "libneo_wolf_ssl\wolfssl.vcxproj", "{73973223-5EE8-41CA-8E88-1D60E89A237B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "examples\client\client.vcxproj", "{3ADE9549-582D-4D8E-9826-B172197A7959}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "console_neo_wolf_ssl\client.vcxproj", "{3ADE9549-582D-4D8E-9826-B172197A7959}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "examples\server\server.vcxproj", "{E9FB0BA5-BA46-4A59-A953-39C18CD1DCB1}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
