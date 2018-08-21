@@ -46,7 +46,7 @@ OUT_EXE = $(OUT_DIR)/$(BIN_NAME)
 #------------------------------------------------------------------------#
 # flag definition
 #------------------------------------------------------------------------#
-INC = -Iinclude -I.
+INC = -Iinclude -I. -I../reflib/include
 #example : -IAAA -IBBB
 
 CDEFINE=-D_USE_UTF8_ -DNEOUSEMBCS -DNEO_STATIC -DLSA_EXPORTS_NOUSE -DWOLFSSL_USER_SETTINGS_ -DCYASSL_USER_SETTINGS -DHAVE_ECC -DBUILD_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 -DDEBUG_WOLFSSL -DHAVE_COMP_KEY -DNO_RSA -DNO_MD4 -DNO_OLD_TLS -DNO_DH -DNO_DSA -DNO_MD5 -DNO_PWDBASED -DNO_RABBIT -DNO_SHA
