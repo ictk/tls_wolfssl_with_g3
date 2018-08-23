@@ -324,6 +324,7 @@
   <ItemGroup>
     <ClCompile Include="client.c" />
     <ClCompile Include="ecc_test.cpp" />
+    <ClCompile Include="io_custom.cpp" />
     <ClCompile Include="user_ecc_handling.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>

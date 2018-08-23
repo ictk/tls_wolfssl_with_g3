@@ -2460,7 +2460,7 @@ THREAD_RETURN WOLFSSL_THREAD client_test(void* args)
 		//test_g3_api();
 	
 	
-		FILE *fp = freopen("out.txt", "wb", stderr);
+//		FILE *fp = freopen("out.txt", "wb", stderr);
 
 		fprintf(stderr, "@@@@@@@@@@START@@@@@@@@@@\n");
 

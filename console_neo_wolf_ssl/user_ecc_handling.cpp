@@ -156,7 +156,7 @@ ST_G3_IO_LIB_FUNCTIONS _cursamplefunction;
 //void get_functions_ieb100cdc(LPSAMPLE_FUNCTIONS lpsamplefunction);
 //void get_functions_i2c(LPSAMPLE_FUNCTIONS lpsamplefunction);
 //void get_functions_ft4222(LPSAMPLE_FUNCTIONS lpsamplefunction);
-
+extern "C" void get_functions_custome(LPST_G3_IO_LIB_FUNCTIONS lpsamplefunction);
 
 #ifdef __USE_CDC__
 #define GET_FUCNTION get_functions_ieb100cdc
@@ -178,7 +178,8 @@ void init_user_ecc(const char * st_com)
 
 	//PF_G3_IO_LIB_FUNCTIONS samplefunction;
 	//get_functions(G3_IO_IEVB100_FT4222, &samplefunction);
-	get_functions(G3_IO_IEVB100_FT4222, &_cursamplefunction);
+	//get_functions(G3_IO_IEVB100_FT4222, &_cursamplefunction);
+	get_functions_custome(&_cursamplefunction);
 
 	_cursamplefunction.init_sample((void*)st_com);
 	_cursamplefunction.wake_up_and_convert_mode();
@@ -191,6 +192,7 @@ void init_user_ecc(const char * st_com)
 
 	ST_WC_ECC_FUNCTIONS wc_ecc_functions;
 	get_user_wc_ecc_functions(&wc_ecc_functions);
+	
 	memcpy(&_wc_ecc_functions_org, &wc_ecc_functions, sizeof(ST_WC_ECC_FUNCTIONS));
 	/*wc_ecc_functions.pf_wc_ecc_verify_hash = wc_ecc_verify_hash_new;
 	wc_ecc_functions.pf_wc_ecc_sign_hash = wc_ecc_sign_hash_new;
@@ -244,6 +246,7 @@ void init_user_ecc(const char * st_com)
 	
 
 	int ret = g3api_verify_passwd(3, passwd, sizeof(passwd));
+	//exit(0);
 
 
 }
@@ -367,6 +370,7 @@ void neo_api_change_4_key_exchange_new(byte*   out, word32   outLen)
 
 
 }
+
 
 
 void neo_api_set_inner_header_new(const byte*    innerheader, word32   innerheader_size)
