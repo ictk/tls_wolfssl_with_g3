@@ -174,12 +174,12 @@ void init_user_ecc(const char * st_com)
 {
 	//NEO_START;
 
-//	GET_FUCNTION(&_cursamplefunction);
+	//GET_FUCNTION(&_cursamplefunction);
 
 	//PF_G3_IO_LIB_FUNCTIONS samplefunction;
 	//get_functions(G3_IO_IEVB100_FT4222, &samplefunction);
-	//get_functions(G3_IO_IEVB100_FT4222, &_cursamplefunction);
-	get_functions_custome(&_cursamplefunction);
+	get_functions(G3_IO_IEVB100_FT4222, &_cursamplefunction);
+	//get_functions_custome(&_cursamplefunction);
 
 	_cursamplefunction.init_sample((void*)st_com);
 	_cursamplefunction.wake_up_and_convert_mode();
